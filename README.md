@@ -39,6 +39,8 @@ Returns all the tracks.
                 "artist_name": "Sekai no Owari",
                 "duration": 230,
                 "album_title": "Tree",
+                "total_likes": 20000,
+                "liked": True,
                 "url": "song url",
                 "preview_image_url": "preview image url"
             }
@@ -74,6 +76,8 @@ Returns all the tracks uploaded by the current user
                 "artist_name": "Sekai no Owari",
                 "duration": 230,
                 "album_title": "Tree",
+                "total_likes": 20000,
+                "liked": True,
                 "url": "song url",
                 "preview_image_url": "preview image url"
             }
@@ -107,10 +111,11 @@ Returns the details of a track specified by its id.
         "artist_name": "Sekai no Owari",
         "duration": 230,
         "genre": "Pop",
+        "total_likes": 20000,
+        "liked": True,
         "url": "song url",
         "preview_image_url": "preview image url",
-        "num_playlists": 3,
-        "likes": 10000
+        "num_playlists": 3
     }
 
     ```
@@ -456,7 +461,20 @@ Updates and returns an existing album.
       "release_date": "2021-11-19",
       "genre": "Pop",
       "album_cover_url": "album cover url",
-      "single": False
+      "single": False,
+      "tracks": [
+        {
+          "id": 1,
+          "artist_id": 1,
+          "album_id": 1,
+          "album_title": "Tree",
+          "title": "Dragon Night",
+          "artist_name": "Sekai no Owari",
+          "duration": 230,
+          "url": "song url",
+          "preview_image_url": "preview image url"
+        }
+      ]
     }
     ```
 
@@ -474,7 +492,20 @@ Updates and returns an existing album.
       "release_date": "2021-11-19",
       "genre": "Pop",
       "album_cover_url": "album cover url",
-      "single": False
+      "single": False,
+      "tracks": [
+        {
+          "id": 1,
+          "artist_id": 1,
+          "album_id": 1,
+          "album_title": "Tree",
+          "title": "Dragon Night",
+          "artist_name": "Sekai no Owari",
+          "duration": 230,
+          "url": "song url",
+          "preview_image_url": "preview image url"
+        }
+      ]
     }
     ```
 
@@ -543,7 +574,7 @@ Deletes an existing album.
     ```
 
 ### PLAYLISTS
-    
+
 ### Get all Playlists created by the Current User
 
 Returns all the playlists created by the current user
@@ -564,7 +595,8 @@ Returns all the playlists created by the current user
     {
         "Playlists": [
             {
-                "name": "Awesome Mix"
+                "name": "Awesome Mix",
+                "preview_image": "preview image url"
             }
         ]
     }
@@ -589,6 +621,7 @@ Returns the details of a playlist specified by its id.
     ```json
     {
       "name": "Awesome Mix",
+      "preview_image": "preview image url",
       "tracks": [
         {
             "id": 1,
@@ -632,7 +665,8 @@ Creates and returns a new playlist.
 
     ```json
     {
-      "name": "Awesome Mix"
+      "name": "Awesome Mix",
+      "preview_image": "preview image url"
     }
 
     ```
@@ -668,6 +702,7 @@ Updates and returns an existing playlist.
     ```json
     {
       "name": "Awesome Mix",
+      "preview_image": "preview image url",
       "tracks": [
         {
           "id": 1,
@@ -780,7 +815,7 @@ Returns the number of likes by track id
 * Request
   * Method: GET
   * URL: /api/tracks/:trackId/likes
-  * Body: 
+  * Body:
     ```json
     {
       "track_id": 1
@@ -795,6 +830,7 @@ Returns the number of likes by track id
 
   ```json
   {
+    "track_id": 1,
     "likes": 5
   }
   ```
@@ -807,7 +843,7 @@ Likes a track by its id
 * Request
   * Method: POST
   * URL: /api/tracks/:trackId/like
-  * Body: 
+  * Body:
     ```json
     {
       "user_id": 1,
@@ -835,7 +871,7 @@ Unlikes a track by its id
 * Request
   * Method: DELETE
   * URL: /api/tracks/:trackId/unlike
-  * Body: 
+  * Body:
     ```json
     {
       "user_id": 1,
@@ -854,4 +890,3 @@ Unlikes a track by its id
     "message": "Successfully deleted!"
   }
   ```
-
