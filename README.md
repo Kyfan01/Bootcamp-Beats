@@ -38,7 +38,7 @@ Returns all the tracks.
                 "title": "Dragon Night",
                 "artist_name": "Sekai no Owari",
                 "duration": 230,
-                "album_name": "Tree",
+                "album_title": "Tree",
                 "url": "song url",
                 "preview_image_url": "preview image url"
             }
@@ -69,10 +69,11 @@ Returns all the tracks uploaded by the current user
                 "id": 1,
                 "artist_id": 1,
                 "album_id": 1,
+                "track_num": 1,
                 "title": "Dragon Night",
                 "artist_name": "Sekai no Owari",
                 "duration": 230,
-                "album_name": "Tree",
+                "album_title": "Tree",
                 "url": "song url",
                 "preview_image_url": "preview image url"
             }
@@ -101,6 +102,7 @@ Returns the details of a track specified by its id.
         "id": 1,
         "artist_id": 1,
         "album_id": 1,
+        "track_num": 1,
         "title": "Dragon Night",
         "artist_name": "Sekai no Owari",
         "duration": 230,
@@ -108,9 +110,7 @@ Returns the details of a track specified by its id.
         "url": "song url",
         "preview_image_url": "preview image url",
         "num_playlists": 3,
-        "likes": 10000,
-        "createdAt": "2021-11-19 20:39:36",
-        "updatedAt": "2021-11-19 20:39:36",
+        "likes": 10000
     }
 
     ```
@@ -130,7 +130,8 @@ Creates and returns a new track.
       "title": "Sweet Child o' Mine",
       "genre": "Rock",
       "url": "song url",
-      "preview_image_url": "preview image url"
+      "preview_image_url": "preview image url",
+      "album_id": 1
     }
     ```
 
@@ -150,8 +151,8 @@ Creates and returns a new track.
         "genre": "Rock",
         "url": "song url",
         "preview_image_url": "preview image url",
-        "createdAt": "2021-11-19 20:39:36",
-        "updatedAt": "2021-11-19 20:39:36",
+        "album_id": 1,
+        "track_num": 1
     }
 
     ```
@@ -166,7 +167,7 @@ Creates and returns a new track.
     {
       "message": "Bad Request",
       "errors": {
-        "title": "Name must be 50 characters or less",
+        "title": "Title must be 50 characters or less",
         "genre": "Genre must be 20 characters or less",
         "url": "Url must be a valid url",
         "preview_image_url": "Preview Image Url must be a valid url"
@@ -192,7 +193,8 @@ Updates and returns an existing track.
       "title": "Sweet Child o' Mine",
       "genre": "Rock",
       "url": "song url",
-      "preview_image_url": "preview image url"
+      "preview_image_url": "preview image url",
+      "album_id": 1
     }
     ```
 
@@ -212,8 +214,8 @@ Updates and returns an existing track.
         "genre": "Rock",
         "url": "song url",
         "preview_image_url": "preview image url",
-        "createdAt": "2021-11-19 20:39:36",
-        "updatedAt": "2021-11-19 20:39:36",
+        "album_id": 1,
+        "track_num": 1
     }
     ```
 
@@ -227,7 +229,7 @@ Updates and returns an existing track.
     {
       "message": "Bad Request",
       "errors": {
-        "title": "Name must be 50 characters or less",
+        "title": "Title must be 50 characters or less",
         "genre": "Genre must be 20 characters or less",
         "url": "Url must be a valid url",
         "preview_image_url": "Preview Image Url must be a valid url"
@@ -280,3 +282,491 @@ Deletes an existing track.
       "message": "Track couldn't be found"
     }
     ```
+
+## ALBUMS
+
+### Get all Albums
+
+Returns all the albums.
+
+* Require Authentication: False
+* Request
+  * Method: GET
+  * URL: /api/albums
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+        "Albums": [
+            {
+                "id": 1,
+                "artist_id": 1,
+                "title": "Tree",
+                "release_date": "2021-11-19",
+                "genre": "Pop",
+                "album_cover_url": "album cover url",
+                "single": False
+            }
+        ]
+    }
+    ```
+
+### Get all Albums uploaded by the Current User
+
+Returns all the albums uploaded by the current user
+
+* Require Authentication: True
+* Request
+  * Method: GET
+  * URL: /api/albums/current
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+        "Albums": [
+            {
+                "id": 1,
+                "artist_id": 1,
+                "title": "Tree",
+                "release_date": "2021-11-19",
+                "genre": "Pop",
+                "album_cover_url": "album cover url",
+                "single": False
+            }
+        ]
+    }
+    ```
+
+### Get details of an Album by id
+
+Returns the details of an album specified by its id.
+
+* Require Authentication: true
+* Request
+  * Method: GET
+  * URL: /api/albums/:albumId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "id": 1,
+      "artist_id": 1,
+      "title": "Tree",
+      "release_date": "2021-11-19",
+      "genre": "Pop",
+      "album_cover_url": "album cover url",
+      "single": False,
+      "num_tracks": 6,
+      "duration": 1500
+    }
+
+    ```
+
+### Create an Album
+
+Creates and returns a new album.
+
+* Require Authentication: True
+* Request
+  * Method: POST
+  * URL: /api/albums/
+  * Body:
+
+   ```json
+    {
+      "title": "Tree",
+      "release_date": "2021-11-19",
+      "genre": "Pop",
+      "album_cover_url": "album cover url",
+      "single": False
+    }
+    ```
+
+* Successful Response
+  * Status Code: 201
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "id": 1,
+      "artist_id": 1,
+      "title": "Tree",
+      "release_date": "2021-11-19",
+      "genre": "Pop",
+      "album_cover_url": "album cover url",
+      "single": False
+    }
+
+    ```
+
+* Error Response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "title": "Title must be 50 characters or less",
+        "genre": "Genre must be 20 characters or less",
+        "preview_image_url": "Preview Image Url must be a valid url",
+        "release_date": "Release Date cannot be in the future"
+      }
+    }
+    ```
+
+### Edit an Album
+
+Updates and returns an existing album.
+
+* Require Authentication: True
+* Require proper authorization: Album must belong to the current user
+* Request
+  * Method: PUT
+  * URL: /api/albums/:albumId
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "title": "Tree",
+      "release_date": "2021-11-19",
+      "genre": "Pop",
+      "album_cover_url": "album cover url",
+      "single": False
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "id": 1,
+      "artist_id": 1,
+      "title": "Tree",
+      "release_date": "2021-11-19",
+      "genre": "Pop",
+      "album_cover_url": "album cover url",
+      "single": False
+    }
+    ```
+
+* Error Response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "title": "Title must be 50 characters or less",
+        "genre": "Genre must be 20 characters or less",
+        "preview_image_url": "Preview Image Url must be a valid url",
+        "release_date": "Release Date cannot be in the future"
+      }
+    }
+    ```
+* Error response: Couldn't find an album with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Album couldn't be found"
+    }
+    ```
+
+### Delete an Album
+
+Deletes an existing album.
+
+* Require Authentication: True
+* Require proper authorization: Album must belong to the current user
+* Request
+  * Method: DELETE
+  * URL: /api/albums/:albumId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Successfully deleted"
+    }
+    ```
+
+* Error response: Couldn't find an Album with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Album couldn't be found"
+    }
+    ```
+
+### PLAYLISTS
+    
+### Get all Playlists created by the Current User
+
+Returns all the playlists created by the current user
+
+* Require Authentication: True
+* Request
+  * Method: GET
+  * URL: /api/playlists/current
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+        "Playlists": [
+            {
+                "name": "Awesome Mix"
+            }
+        ]
+    }
+    ```
+
+### Get details of a Playlist by id
+
+Returns the details of a playlist specified by its id.
+
+* Require Authentication: True
+* Request
+  * Method: GET
+  * URL: /api/playlists/:playlistId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "name": "Awesome Mix",
+      "tracks": [
+        {
+            "id": 1,
+            "artist_id": 1,
+            "album_id": 1,
+            "album_title": "Tree",
+            "title": "Dragon Night",
+            "artist_name": "Sekai no Owari",
+            "duration": 230,
+            "url": "song url",
+            "preview_image_url": "preview image url"
+        }
+      ],
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36",
+    }
+
+    ```
+
+### Create a playlist
+
+Creates and returns a new playlist.
+
+* Require Authentication: True
+* Request
+  * Method: POST
+  * URL: /api/playlists/
+  * Body:
+
+   ```json
+    {
+      "name": "Awesome Mix"
+    }
+    ```
+
+* Successful Response
+  * Status Code: 201
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "name": "Awesome Mix"
+    }
+
+    ```
+
+* Error Response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "name": "Name must be less than 50 characters"
+      }
+    }
+    ```
+
+### Edit a Playlist
+
+Updates and returns an existing playlist.
+
+* Require Authentication: True
+* Require proper authorization: Playlist must belong to the current user
+* Request
+  * Method: PUT
+  * URL: /api/playlists/:playlistId
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "name": "Awesome Mix",
+      "tracks": [
+        {
+          "id": 1,
+          "artist_id": 1,
+          "album_id": 1,
+          "album_title": "Tree",
+          "title": "Dragon Night",
+          "artist_name": "Sekai no Owari",
+          "duration": 230,
+          "url": "song url",
+          "preview_image_url": "preview image url"
+        }
+      ]
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "name": "Awesome Mix",
+      "tracks": [
+        {
+          "id": 1,
+          "artist_id": 1,
+          "album_id": 1,
+          "album_title": "Tree",
+          "title": "Dragon Night",
+          "artist_name": "Sekai no Owari",
+          "duration": 230,
+          "url": "song url",
+          "preview_image_url": "preview image url"
+        }
+      ]
+    }
+    ```
+
+* Error Response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "name": "Name is required"
+      }
+    }
+    ```
+* Error response: Couldn't find a playlist with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Playlist couldn't be found"
+    }
+    ```
+
+### Delete a Playlist
+
+Deletes an existing playlist.
+
+* Require Authentication: True
+* Require proper authorization: Playlist must belong to the current user
+* Request
+  * Method: DELETE
+  * URL: /api/playlists/:playlistId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Successfully deleted"
+    }
+    ```
+
+* Error response: Couldn't find a Playlist with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Pllaylist couldn't be found"
+    }
+    ```
+
