@@ -10,16 +10,16 @@
 
 ### All endpoints that require authentication (WIP)
 
-## SONGS
+## TRACKS
 
-### Get all Songs
+### Get all Tracks
 
-Returns all the songs.
+Returns all the tracks.
 
-* Require Authentication: false
+* Require Authentication: False
 * Request
   * Method: GET
-  * URL: /api/groups
+  * URL: /api/tracks
   * Body: none
 
 * Successful Response
@@ -30,12 +30,146 @@ Returns all the songs.
 
     ```json
     {
-        "Songs": [
+        "Tracks": [
             {
                 "id": 1,
-                "userId": 1,
-
+                "artist_id": 1,
+                "album_id": 1,
+                "title": "Dragon Night",
+                "artist_name": "Sekai no Owari",
+                "duration": 230,
+                "album_name": "Tree",
+                "url": "song url",
+                "preview_image_url": "preview image url"
             }
         ]
+    }
+    ```
+
+### Get all Tracks uploaded by the Current User
+
+Returns all the tracks uploaded by the current user
+
+* Require Authentication: True
+* Request
+  * Method: GET
+  * URL: /api/tracks/current
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+        "Tracks": [
+            {
+                "id": 1,
+                "artist_id": 1,
+                "album_id": 1,
+                "title": "Dragon Night",
+                "artist_name": "Sekai no Owari",
+                "duration": 230,
+                "album_name": "Tree",
+                "url": "song url",
+                "preview_image_url": "preview image url"
+            }
+        ]
+    }
+    ```
+
+### Get details of a Track by id
+
+Returns the details of a track specified by its id.
+
+* Require Authentication: true
+* Request
+  * Method: GET
+  * URL: /api/tracks/:track_id
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+        "id": 1,
+        "artist_id": 1,
+        "album_id": 1,
+        "title": "Dragon Night",
+        "artist_name": "Sekai no Owari",
+        "duration": 230,
+        "genre": "Pop",
+        "url": "song url",
+        "preview_image_url": "preview image url",
+        "num_playlists": 3,
+        "likes": 10000,
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36",
+    }
+
+    ```
+
+### Create a track
+
+Creates and returns a new track.
+
+* Require Authentication: True
+* Request
+  * Method: POST
+  * URL: /api/tracks/
+  * Body:
+
+   ```json
+    {
+      "title": "Sweet Child o' Mine",
+      "genre": "Rock",
+      "url": "song url",
+      "preview_image_url": "preview image url"
+    }
+    ```
+
+* Successful Response
+  * Status Code: 201
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+        "id": 1,
+        "artist_id": 1,
+        "title": "Sweet Child o' Mine",
+        "artist_name": "Guns n' Roses",
+        "duration": 356,
+        "genre": "Rock",
+        "url": "song url",
+        "preview_image_url": "preview image url",
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36",
+    }
+
+    ```
+
+* Error Response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "title": "Name must be 50 characters or less",
+        "genre": "Genre must be 20 characters or less",
+        "url": "Url must be a valid url",
+        "preview_image_url": "Preview Image Url must be a valid url"
+      }
     }
     ```
