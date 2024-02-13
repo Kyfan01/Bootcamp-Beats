@@ -40,7 +40,7 @@ Returns all the tracks.
                 "duration": 230,
                 "album_title": "Tree",
                 "total_likes": 20000,
-                "liked": True,
+                "liked": true,
                 "url": "song url",
                 "preview_image_url": "preview image url"
             }
@@ -77,7 +77,7 @@ Returns all the tracks uploaded by the current user
                 "duration": 230,
                 "album_title": "Tree",
                 "total_likes": 20000,
-                "liked": True,
+                "liked": true,
                 "url": "song url",
                 "preview_image_url": "preview image url"
             }
@@ -112,7 +112,7 @@ Returns the details of a track specified by its id.
         "duration": 230,
         "genre": "Pop",
         "total_likes": 20000,
-        "liked": True,
+        "liked": true,
         "url": "song url",
         "preview_image_url": "preview image url",
         "num_playlists": 3
@@ -316,7 +316,7 @@ Returns all the albums.
                 "release_date": "2021-11-19",
                 "genre": "Pop",
                 "album_cover_url": "album cover url",
-                "single": False
+                "single": false
             }
         ]
     }
@@ -348,7 +348,7 @@ Returns all the albums uploaded by the current user
                 "release_date": "2021-11-19",
                 "genre": "Pop",
                 "album_cover_url": "album cover url",
-                "single": False
+                "single": false
             }
         ]
     }
@@ -378,7 +378,7 @@ Returns the details of an album specified by its id.
       "release_date": "2021-11-19",
       "genre": "Pop",
       "album_cover_url": "album cover url",
-      "single": False,
+      "single": false,
       "num_tracks": 6,
       "duration": 1500
     }
@@ -401,7 +401,7 @@ Creates and returns a new album.
       "release_date": "2021-11-19",
       "genre": "Pop",
       "album_cover_url": "album cover url",
-      "single": False
+      "single": false
     }
     ```
 
@@ -419,7 +419,7 @@ Creates and returns a new album.
       "release_date": "2021-11-19",
       "genre": "Pop",
       "album_cover_url": "album cover url",
-      "single": False
+      "single": false
     }
 
     ```
@@ -461,7 +461,7 @@ Updates and returns an existing album.
       "release_date": "2021-11-19",
       "genre": "Pop",
       "album_cover_url": "album cover url",
-      "single": False,
+      "single": false,
       "tracks": [
         {
           "id": 1,
@@ -492,7 +492,7 @@ Updates and returns an existing album.
       "release_date": "2021-11-19",
       "genre": "Pop",
       "album_cover_url": "album cover url",
-      "single": False,
+      "single": false,
       "tracks": [
         {
           "id": 1,
