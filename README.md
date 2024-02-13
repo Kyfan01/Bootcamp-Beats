@@ -30,7 +30,7 @@ Returns all the tracks.
 
     ```json
     {
-        "Tracks": [
+        "tracks": [
             {
                 "id": 1,
                 "artist_id": 1,
@@ -64,7 +64,7 @@ Returns all the tracks uploaded by the current user
 
     ```json
     {
-        "Tracks": [
+        "tracks": [
             {
                 "id": 1,
                 "artist_id": 1,
@@ -769,4 +769,89 @@ Deletes an existing playlist.
       "message": "Pllaylist couldn't be found"
     }
     ```
+
+### LIKES
+
+## Get likes by track id
+
+Returns the number of likes by track id
+
+* Require Authentication: False
+* Request
+  * Method: GET
+  * URL: /api/tracks/:trackId/likes
+  * Body: 
+    ```json
+    {
+      "track_id": 1
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+  ```json
+  {
+    "likes": 5
+  }
+  ```
+
+## Like a Track
+
+Likes a track by its id
+
+* Require Authentication: True
+* Request
+  * Method: POST
+  * URL: /api/tracks/:trackId/like
+  * Body: 
+    ```json
+    {
+      "user_id": 1,
+      "track_id": 1
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+  ```json
+  {
+    "message": "Successfully liked!"
+  }
+  ```
+
+## Unlike a Track
+
+Unlikes a track by its id
+
+* Require Authentication: True
+* Request
+  * Method: DELETE
+  * URL: /api/tracks/:trackId/unlike
+  * Body: 
+    ```json
+    {
+      "user_id": 1,
+      "track_id": 1
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+  ```json
+  {
+    "message": "Successfully deleted!"
+  }
+  ```
 
