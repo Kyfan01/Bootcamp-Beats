@@ -254,7 +254,7 @@ Deletes an existing track.
 * Require proper authorization: Track must belong to the current user
 * Request
   * Method: DELETE
-  * URL: /api/tracks/:trackId
+  * URL: /api/tracks/:track_Id
   * Body: none
 
 * Successful Response
