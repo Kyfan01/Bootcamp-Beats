@@ -1,8 +1,9 @@
 # Bootcamp Beats
 
 ## Database Schema Design
+![bootcamp-beats-schema]
 
-[bootcamp-beats-schema]: images/Bootcamp-Beats.png
+[bootcamp-beats-schema]: ./images/Bootcamp-Beats.png
 
 ## API Documentation
 
