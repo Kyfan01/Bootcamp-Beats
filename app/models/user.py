@@ -13,6 +13,13 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    artist_name = db.Column(db.String(50), nullable=False)
+    name = db.Column(db.String(50), nullable=False)
+    date_of_birth = db.Column(db.Date, nullable=False)
+
+    tracks = db.relationship("Track", back_populates="users")
+    albums = db.relationship("Album", back_populates="users")
+
 
     @property
     def password(self):
@@ -29,5 +36,13 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'artistName': self.artist_name,
+            'name': self.name,
+            'dateOfBirth': self.date_of_birth
+        }
+
+    def to_dict_name_only(self):
+        return {
+            'artistName': self.artist_name
         }
