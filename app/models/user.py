@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from .like import likes
 
 
 class User(db.Model, UserMixin):
@@ -19,6 +20,8 @@ class User(db.Model, UserMixin):
 
     tracks = db.relationship("Track", back_populates="users")
     albums = db.relationship("Album", back_populates="users")
+    user_likes = db.relationship("Track", secondary=likes, back_populates="track_likes")
+    playlists = db.relationship("Playlist", back_populates="users")
 
 
     @property
