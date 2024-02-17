@@ -14,8 +14,8 @@ class Playlist(db.Model):
     createdAt = db.Column(db.String(255), nullable=False)
     updatedAt = db.Column(db.String(255), nullable=False)
 
-    user = db.relationship("User", back_poplates="playlists")
-    
+    user = db.relationship("User", back_populates="playlists")
+
 
 
     def to_dict(self):

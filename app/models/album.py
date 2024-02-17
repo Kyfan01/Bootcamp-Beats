@@ -15,8 +15,8 @@ class Album(db.Model):
     album_cover_url = db.Column(db.String(255), nullable=False)
     single = db.Column(db.Boolean, nullable=False)
 
-    user = db.relationship("User", back_populates="albums")
-    tracks = db.relationship("Track", back_populates="albums")
+    user = db.relationship("User", back_populates="album")
+    tracks = db.relationship("Track", back_populates="album")
 
 
     def to_dict(self):

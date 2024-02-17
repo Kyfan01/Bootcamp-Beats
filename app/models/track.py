@@ -13,7 +13,7 @@ class Track(db.Model):
     album_id = db.Column(db.Integer, db.ForeignKey('albums.id'))
     title = db.Column(db.String(50), nullable=False)
     duration = db.Column(db.Integer, nullable=False)
-    genre = db.Column(db.String(50), nullabe=False)
+    genre = db.Column(db.String(50), nullable=False)
     track_number = db.Column(db.Integer)
     url = db.Column(db.String(255), nullable=False)
     preview_image_url = db.Column(db.String(255))
