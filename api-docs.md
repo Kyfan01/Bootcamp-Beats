@@ -40,7 +40,7 @@ Returns all the tracks.
                 "artist_name": "Sekai no Owari",
                 "duration": 230,
                 "album_title": "Tree",
-                "total_likes": 20000,
+                "track_likes": 20000,
                 "liked": true,
                 "url": "song url",
                 "preview_image_url": "preview image url"
@@ -112,7 +112,7 @@ Returns the details of a track specified by its id.
         "artist_name": "Sekai no Owari",
         "duration": 230,
         "genre": "Pop",
-        "total_likes": 20000,
+        "track_likes": 20000,
         "liked": true,
         "url": "song url",
         "preview_image_url": "preview image url",
