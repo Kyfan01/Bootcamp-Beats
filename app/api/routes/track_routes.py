@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
-from app.models import Track, db
-# from ...forms import NewTrackForm
+from app.models import Track, db, Album
+from ...forms import NewTrackForm
+from flask_login import current_user
 
 track_routes = Blueprint('tracks', __name__)
 
@@ -22,8 +23,9 @@ def user_track_index(userId):
 
 @track_routes.route('/', methods = ['POST'])
 def create_new_track():
-    NewTrackForm = ''
+    # NewTrackForm = ''
     form = NewTrackForm()
+    form.albumId.choices = [ (album.id, album.title) for album in Album.query.filter(Album.artist_id == current_user.id).all()]
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = Track()
@@ -38,7 +40,7 @@ def create_new_track():
 
 @track_routes.route('/<int:trackId>', methods = ['PUT'])
 def update_track(trackId):
-    NewTrackForm = "" #remove when created
+    # NewTrackForm = "" #remove when created
     form = NewTrackForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
