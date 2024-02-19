@@ -574,7 +574,7 @@ Deletes an existing album.
     }
     ```
 
-### PLAYLISTS
+### PLAYLISTS (All playlist functionality is for future development)
 
 ### Get all Playlists created by the Current User
 

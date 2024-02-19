@@ -1,15 +1,24 @@
 from app.models import db, User, environment, SCHEMA
 from sqlalchemy.sql import text
-from datetime import date, datetime
+from datetime import date
+
+
+hun = User(
+        name='Hun Choi', username='myunghun0721', email='hunchoi@aa.io', password='password',artist_name='Tetnim', date_of_birth=date(1998, 12, 4))
+kevin = User(
+        name='Kevin Fan', username='kyfn', email='kyfn@aa.io', password='password', artist_name='Kay-Z', date_of_birth=date(1997, 12, 4))
+collin = User(
+        name='Collin Ullmann', username='collinullmann', email='collinullmann@aa.io', password='password', artist_name='DJ-bytebeat', date_of_birth=date(1943, 12, 4))
+
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
-    hun = User(
-        name='Hun Choi', username='myunghun0721', email='hunchoi@aa.io', password='password',artist_name='Tetnim', date_of_birth=date(1998, 12, 4))
-    kevin = User(
-        name='Kevin Fan', username='kyfn', email='kyfn@aa.io', password='password', artist_name='Kay-Z', date_of_birth=date(1997, 12, 4))
-    collin = User(
-        name='Collin Ullmann', username='collinullmann', email='collinullmann@aa.io', password='password', artist_name='DJ-bytebeat', date_of_birth=date(1943, 12, 4))
+    # hun = User(
+    #     name='Hun Choi', username='myunghun0721', email='hunchoi@aa.io', password='password',artist_name='Tetnim', date_of_birth=date(1998, 12, 4))
+    # kevin = User(
+    #     name='Kevin Fan', username='kyfn', email='kyfn@aa.io', password='password', artist_name='Kay-Z', date_of_birth=date(1997, 12, 4))
+    # collin = User(
+    #     name='Collin Ullmann', username='collinullmann', email='collinullmann@aa.io', password='password', artist_name='DJ-bytebeat', date_of_birth=date(1943, 12, 4))
     demo = User(
         name='Demo User', username='demo', email='demo@aa.io', password='password', artist_name='DJ-Demo', date_of_birth=date(1000, 12, 4))
 
@@ -18,6 +27,7 @@ def seed_users():
     db.session.add(collin)
     db.session.add(demo)
     db.session.commit()
+
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't

@@ -1,5 +1,6 @@
 from app.models import db, Track, environment, SCHEMA
 from sqlalchemy.sql import text
+from .users import hun, kevin, collin
 
 
 def seed_tracks():
@@ -43,24 +44,24 @@ def seed_tracks():
 
     tracks = [
     # collin
-        Track(artist_id = '3', album_id = 3, title = 'Data drive', duration = 300, genre = 'EDM', track_number = 1, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
-        Track(artist_id = '3', album_id = 3, title = 'Digital dreams', duration = 291, genre = 'EDM', track_number = 2, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
-        Track(artist_id = '3', album_id = 3, title = 'Code Jam', duration = 201, genre = 'Pop', track_number = 3, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
-        Track(artist_id = '3', album_id = 3, title = 'Syntax Symphony', duration = 224, genre = 'Pop', track_number = 4, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
-        Track(artist_id = '3', album_id = 3, title = 'Binary Boogie', duration = 196, genre = 'Pop', track_number = 5, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
-        Track(artist_id = '3', album_id = 3, title = 'Byte-sized Beats', duration = 213, genre = 'Pop', track_number = 6, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
-        Track(artist_id = '3', album_id = 3, title = 'Loop Logic', duration = 198, genre = 'Pop', track_number = 7, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
-        Track(artist_id = '3', album_id = 3, title = 'Pixel Pulse', duration = 189, genre = 'Pop', track_number = 8, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
-        Track(artist_id = '3', album_id = 3, title = 'Bit Bounce', duration = 199, genre = 'Pop', track_number = 9, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
-        Track(artist_id = '3', album_id = 3, title = 'Cybernetic Serenade', duration = 214, genre = 'Pop', track_number = 10, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
+        Track(artist_id = '3', album_id = 1, title = 'Data drive', duration = 300, genre = 'EDM', track_number = 1, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com', track_likes = [hun, kevin, collin]),
+        Track(artist_id = '3', album_id = 1, title = 'Digital dreams', duration = 291, genre = 'EDM', track_number = 2, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
+        Track(artist_id = '3', album_id = 1, title = 'Code Jam', duration = 201, genre = 'Pop', track_number = 3, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
+        Track(artist_id = '3', album_id = 1, title = 'Syntax Symphony', duration = 224, genre = 'Pop', track_number = 4, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
+        Track(artist_id = '3', album_id = 1, title = 'Binary Boogie', duration = 196, genre = 'Pop', track_number = 5, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
+        Track(artist_id = '3', album_id = 1, title = 'Byte-sized Beats', duration = 213, genre = 'Pop', track_number = 6, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
+        Track(artist_id = '3', album_id = 1, title = 'Loop Logic', duration = 198, genre = 'Pop', track_number = 7, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
+        Track(artist_id = '3', album_id = 1, title = 'Pixel Pulse', duration = 189, genre = 'Pop', track_number = 8, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
+        Track(artist_id = '3', album_id = 1, title = 'Bit Bounce', duration = 199, genre = 'Pop', track_number = 9, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
+        Track(artist_id = '3', album_id = 1, title = 'Cybernetic Serenade', duration = 214, genre = 'Pop', track_number = 10, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
 
     # kevin
         Track(artist_id = '2', album_id = 4, title = 'Genesis', duration = 234, genre = 'EDM', track_number = 1, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
         Track(artist_id = '2', album_id = 4, title = 'Technologic', duration = 284, genre = 'EDM', track_number = 2, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
 
     # hun
-        Track(artist_id = '1', album_id = 1, title = "World's smallest violin", duration = 240, genre = 'Pop', track_number = 1, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
-        Track(artist_id = '1', album_id = 1, title = "Bang!", duration = 171, genre = 'Pop', track_number = 2, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com')
+        Track(artist_id = '1', album_id = 2, title = "World's smallest violin", duration = 240, genre = 'Pop', track_number = 1, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
+        Track(artist_id = '1', album_id = 2, title = "Bang!", duration = 171, genre = 'Pop', track_number = 2, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com')
         ]
 
     db.session.add_all(tracks)
