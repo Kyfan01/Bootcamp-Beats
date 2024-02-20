@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SelectField
+from wtforms import StringField, IntegerField, SelectField, DateField, BooleanField
 from wtforms.validators import DataRequired, URL
 from ..models import Album
 from flask_login import current_user
@@ -10,10 +10,8 @@ from flask_login import current_user
 
 
 
-class NewTrackForm(FlaskForm):
+class NewAlbumForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
-    albumId = SelectField('album_id', choices = [])
+    releaseDate = DateField('releaseDate', validators=[DataRequired()])
     genre = StringField('genre', validators=[DataRequired()])
-    trackNumber = IntegerField('track_number')
-    url = StringField('url', validators=[DataRequired()])
-    previewImageUrl = StringField('url')
+    albumCoverUrl = StringField('albumCoverUrl', validators=[DataRequired()])

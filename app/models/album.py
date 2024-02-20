@@ -13,7 +13,6 @@ class Album(db.Model):
     release_date = db.Column(db.Date, nullable=False)
     genre = db.Column(db.String(50), nullable=False)
     album_cover_url = db.Column(db.String(255), nullable=False)
-    single = db.Column(db.Boolean, nullable=False)
 
     user = db.relationship("User", back_populates="album")
     tracks = db.relationship("Track", back_populates="album")
@@ -27,5 +26,4 @@ class Album(db.Model):
             'releaseDate': self.release_date,
             'genre': self.genre,
             'albumCoverUrl': self.album_cover_url,
-            'single': self.single
         }
