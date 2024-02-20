@@ -49,3 +49,14 @@ class User(db.Model, UserMixin):
         return {
             'artistName': self.artist_name
         }
+    
+    def to_dict_with_user_likes(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'artistName': self.artist_name,
+            'name': self.name,
+            'dateOfBirth': self.date_of_birth,
+            'userLikes': [track.to_dict() for track in self.user_likes]
+        }

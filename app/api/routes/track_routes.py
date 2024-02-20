@@ -1,7 +1,8 @@
 from flask import Blueprint, jsonify, request
-from app.models import Track, db, Album
+from app.models import Track, db, Album, User
 from ...forms import NewTrackForm
 from flask_login import current_user, login_required
+from .AWS_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 
 track_routes = Blueprint('tracks', __name__)
 
@@ -28,11 +29,21 @@ def create_new_track():
     form.albumId.choices = [ (album.id, album.title) for album in Album.query.filter(Album.artist_id == current_user.id).all()]
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+
+        track = form.data["trackFile"]
+        track.filename = get_unique_filename(track.filename)
+        upload = upload_file_to_s3(track)
+        print(upload)
+
+        if "url" not in upload:
+            return #redirect back to New Track Form route because our upload errored
+
         params = {
             'artist_id': current_user.id,
             'title': form.data['title'],
             'genre': form.data['genre'],
-            'url': form.data['url'],
+            # 'url': form.data['url'],
+            'url': upload['url'],
             'duration': 123,
             'album_id': form.data['albumId'],
             'preview_image_url': form.data['previewImageUrl']
@@ -55,8 +66,8 @@ def update_track(trackId):
         track.title = form.data['title']
         track.album_id = form.data['albumId']
         track.genre = form.data['genre']
-        track.url = form.data['url']
-        track.preview_image_url = form.data['previewImageUrl']
+        track.url = form.data['trackFile'] #changed from url
+        track.preview_image_url = form.data['previewImage'] #changed from previewImageUrl
         track.duration = 'Calculate duration here'
 
         db.session.commit()
@@ -68,9 +79,26 @@ def update_track(trackId):
 @login_required
 def delete_track(trackId):
     track = Track.query.get(trackId)
+
+    file_to_delete = remove_file_from_s3(track.url)
+
     db.session.delete(track)
     db.session.commit()
 
     return {
        'message': 'Successfully deleted!'
     }
+
+@track_routes.route('/<int:trackId>/like', methods=["POST"])
+def like_track(trackId):
+    track = Track.query.get(trackId)
+    current_user.user_likes.append(track)
+    db.session.commit()
+    return current_user.to_dict_with_user_likes()
+
+@track_routes.route('/<int:trackId>/unlike', methods=["POST"])
+def unlike_track(trackId):
+    track = Track.query.get(trackId)
+    current_user.user_likes.remove(track)
+    db.session.commit()
+    return current_user.to_dict_with_user_likes()

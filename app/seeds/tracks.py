@@ -64,7 +64,7 @@ def seed_tracks():
         Track(artist_id='3', album_id=4, title='Loopin\' Lasso', duration=240, genre='Country', track_number=7, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[hun, collin]),
         Track(artist_id='3', album_id=4, title='Cybernetic Swing', duration=195, genre='Country', track_number=8, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[hun, collin]),
         Track(artist_id='3', album_id=4, title='Recursive Roundup', duration=220, genre='Country', track_number=9, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[kevin, hun]),
-        Track(artist_id='3', album_id=4, title='Tech Tumbleweed', duration=320, genre='Country', track_number=10, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[kevin, collin])
+        Track(artist_id='3', album_id=4, title='Tech Tumbleweed', duration=320, genre='Country', track_number=10, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[kevin, collin]),
 
 
     # kevin
