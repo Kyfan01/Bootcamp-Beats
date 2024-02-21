@@ -15,6 +15,8 @@ def track_index():
 @track_routes.route('/<int:trackId>')
 def track_details(trackId):
     track = Track.query.get(trackId)
+    print('track: ', track)
+    print('track.to_dict: ', track.to_dict())
     return track.to_dict()
 
 @track_routes.route('/user/<int:userId>')
