@@ -12,7 +12,7 @@ function TrackFormPage() {
   const [genre, setGenre] = useState("");
   const [trackNumber, setTrackNumber] = useState();
   const [trackFile, setTrackFile] = useState();
-  const [previewImage, setPreviewImage] = useState('')
+  const [previewImage, setPreviewImage] = useState()
 
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [errors, setErrors] = useState({});
@@ -32,17 +32,6 @@ function TrackFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
-    // setHasSubmitted(true)
-
-    // let newTrack = {
-    //   title,
-    //   albumId,
-    //   genre,
-    //   trackFile,
-    //   previewImage
-    // }
-
     const formData = new FormData()
     formData.append('title', title)
     formData.append('albumId', albumId)
@@ -51,7 +40,7 @@ function TrackFormPage() {
     formData.append('trackFile', trackFile)
     formData.append('previewImage', previewImage)
     formData.append('submit', true)
-    // console.log(formData)
+    
     await dispatch(thunkCreateTrack(formData))
 
     setTitle('')
@@ -78,6 +67,7 @@ function TrackFormPage() {
           Title
           <input 
             type="text"
+            name="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
@@ -86,6 +76,7 @@ function TrackFormPage() {
         <label>
           Album
           <select
+            name="album"
             value={albumId}
             onChange={(e) => setAlbumId(e.target.value)}  
           >
@@ -100,6 +91,7 @@ function TrackFormPage() {
           Genre
           <input 
             type="text"
+            name="genre"
             value={genre}
             onChange={(e) => setGenre(e.target.value)}
             required
@@ -109,6 +101,7 @@ function TrackFormPage() {
           Track Number
           <input 
             type="number"
+            name="track_number"
             value={trackNumber}
             onChange={(e) => setTrackNumber(e.target.value)}
             required
@@ -118,8 +111,8 @@ function TrackFormPage() {
           Track File
           <input 
             type="file"
-            value={trackFile}
-            onChange={(e) => setTrackFile(e.target.value)}
+            name="track_file"
+            onChange={(e) => setTrackFile(e.target.files[0])}
             accept="audio/*"
           />
         </label>
@@ -127,8 +120,8 @@ function TrackFormPage() {
           Album Cover
           <input
             type="file"
-            value={previewImage}
-            onChange={(e) => setPreviewImage(e.target.value)}
+            name="album_cover"
+            onChange={(e) => setPreviewImage(e.target.files[0])}
             accept="image/*"
           />
         </label>
