@@ -25,6 +25,10 @@ export const router = createBrowserRouter([
         path: "api/tracks/new",
         element: <TrackFormPage />,
       },
+      {
+        path: "api/tracks/:trackId/update",
+        element: <TrackFormPage />,
+      },
     ],
   },
 ]);
