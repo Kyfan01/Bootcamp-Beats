@@ -27,11 +27,12 @@ class Track(db.Model):
 
 
     def to_dict(self):
+        print(self.album)
         return {
             'id': self.id,
             'artistId': self.artist_id,
             'albumId': self.album_id,
-            # 'albumTitle': self.album.title,
+            'albumTitle': self.album.title if self.album else None,
             'title': self.title,
             'duration': self.duration,
             'genre': self.genre,
