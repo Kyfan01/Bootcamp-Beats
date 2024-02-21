@@ -1,5 +1,5 @@
 import './TrackCard.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { thunkToggleLikeTrack } from '../../../redux/track'
 import { useDispatch } from 'react-redux'
@@ -7,7 +7,17 @@ import { useDispatch } from 'react-redux'
 export function TrackCard({ track }) {
   const dispatch = useDispatch()
 
-  const [liked, setLiked] = useState(false)
+  const [liked, setLiked] = useState('')
+
+  useEffect(() => {
+    setLiked(track?.liked)
+  }, [track])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    dispatch(thunkToggleLikeTrack(track?.id))
+  }
 
   return (
       <div title={track?.title} className='track-card-container'>
@@ -24,10 +34,7 @@ export function TrackCard({ track }) {
         <p>Track Number: {track?.trackNumber}</p>
         <p>URL: {track?.url}</p>
         <p>Liked: {track?.liked ? 'True' : 'False'}</p>
-        <button onClick={() => {
-          console.log('button pressed')
-          console.log(track?.liked ? 'True' : 'False')
-          dispatch(thunkToggleLikeTrack(track?.id))}}>{liked ? 'Unlike' : 'Like'}</button>
+        <button onClick={handleSubmit}>{liked ? 'Unlike' : 'Like'}</button>
       </div>
   )
 }

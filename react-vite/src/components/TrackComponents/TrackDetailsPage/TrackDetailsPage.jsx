@@ -1,13 +1,14 @@
 import { useEffect } from 'react'
 import './TrackDetailsPage.css'
 
-import { useParams } from 'react-router-dom'
-import { thunkFetchTrackById } from '../../../redux/track'
+import { useParams, useNavigate } from 'react-router-dom'
+import { thunkDeleteTrack, thunkFetchTrackById } from '../../../redux/track'
 import { useDispatch, useSelector } from 'react-redux'
 
 export function TrackDetailsPage() {
   const { trackId } = useParams()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const user = useSelector(state => state.session.user)
   const track = useSelector(state => state.tracks[trackId])
@@ -17,6 +18,11 @@ export function TrackDetailsPage() {
   useEffect(() => {
     dispatch(thunkFetchTrackById(trackId))
   }, [dispatch, trackId])
+
+  const handleDelete = (e) => {
+    e.preventDefault()
+    dispatch(thunkDeleteTrack(trackId)).then(() => navigate('/tracks'))
+  }
 
   return (
     <div>
@@ -31,6 +37,7 @@ export function TrackDetailsPage() {
       <p>Liked: {track?.liked}</p>
       <p>URL: {track?.url}</p>
       <p>Preview Image URL: {track?.previewImageUrl}</p>
+      <button onClick={handleDelete}>Delete Track</button>
     </div>
   )
 }
