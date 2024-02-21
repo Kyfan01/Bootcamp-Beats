@@ -1,9 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
-import TrackFormPage from '../components/TrackFormPage/TrackFormPage';
+import TrackFormPage from '../components/TrackComponents/TrackFormPage/TrackFormPage';
 
 import Layout from './Layout';
+import TracksIndex from '../components/TrackComponents/TracksIndex/TracksIndex';
+import TrackDetailsPage from '../components/TrackComponents/TrackDetailsPage/TrackDetailsPage';
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +30,14 @@ export const router = createBrowserRouter([
       {
         path: "api/tracks/:trackId/update",
         element: <TrackFormPage />,
+      },
+      {
+        path: "/tracks",
+        element: <TracksIndex />,
+      },
+      {
+        path: "/tracks/:trackId",
+        element: <TrackDetailsPage />,
       },
     ],
   },

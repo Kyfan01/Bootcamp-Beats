@@ -7,7 +7,7 @@ export const UPDATE_TRACK = 'tacks/updateTrack'
 // action creators
 export const loadTracks = tracks => ({
     type: LOAD_TRACKS,
-    tracks
+    payload: tracks
 })
 
 export const createTrack = track => ({
@@ -37,10 +37,10 @@ export const thunkFetchTracks = () => async dispatch => {
 
 export const thunkFetchTrackById = trackId => async dispatch => {
     const res = await fetch(`api/tracks/${trackId}`)
-
     if (res.ok) {
         const track = await res.json()
         dispatch(loadTracks(track))
+        return track
     } else return 'fetch track by id thunk error'
 }
 
@@ -94,7 +94,7 @@ const trackReducer = (state = {}, action) => {
     switch (action.type) {
         case LOAD_TRACKS: {
             const newTrackState = { ...state }
-            action.tracks.forEach(track => { newTrackState[track.id] = track })
+            action.payload.tracks.forEach(track => { newTrackState[track.id] = track })
             return newTrackState
         }
 

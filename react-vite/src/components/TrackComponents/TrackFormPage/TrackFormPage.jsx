@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {thunkCreateTrack, thunkFetchTrackById, thunkUpdateTrack} from '../../redux/track'
+import {thunkCreateTrack, thunkFetchTrackById, thunkUpdateTrack} from '../../../redux/track'
 import "./TrackForm.css";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function TrackFormPage() {
   const { trackId } = useParams();
@@ -30,9 +30,10 @@ function TrackFormPage() {
     fetchAlbums()
   }, [])
 
-  useEffect(() => {
+  useEffect( () => {
     if (trackId) {
       dispatch(thunkFetchTrackById(trackId)).then((oldTrack) => {
+        console.log(oldTrack)
         setTitle(oldTrack.title)
         setAlbumId(oldTrack.albumId)
         setGenre(oldTrack.genre)
