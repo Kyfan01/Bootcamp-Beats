@@ -29,6 +29,15 @@ export const thunkFetchTracks = () => async dispatch => {
     } else return 'track get all thunks error'
 }
 
+export const thunkFetchTrackById = trackId => async dispatch => {
+    const res = await fetch(`api/tracks/${trackId}`)
+
+    if (res.ok) {
+        const track = await res.json()
+        dispatch(loadTracks(track))
+    } else return 'fetch track by id thunk error'
+}
+
 export const thunkCreateTrack = track => async dispatch => {
     const res = await fetch('/api/tracks', {
         method: 'POST',

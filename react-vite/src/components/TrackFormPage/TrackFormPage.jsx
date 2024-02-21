@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 // import { useNavigate } from "react-router-dom";
-import {thunkCreateTrack} from '../../redux/track'
+import {thunkCreateTrack, thunkFetchTrackById} from '../../redux/track'
 import "./TrackForm.css";
+import { useParams } from "react-router-dom";
 
 function TrackFormPage() {
+  const { trackId } = useParams();
   // const navigate = useNavigate();
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
@@ -27,6 +29,17 @@ function TrackFormPage() {
     }
     fetchAlbums()
   }, [])
+
+  useEffect(() => {
+    if (trackId) {
+      dispatch(thunkFetchTrackById(trackId)).then((oldTrack) => {
+        setTitle(oldTrack.title)
+        setAlbumId(oldTrack.albumId)
+        setGenre(oldTrack.genre)
+        setTrackNumber(oldTrack.trackNumber)
+      })
+    }
+  }, [trackId, dispatch])
 
 
   const handleSubmit = async (e) => {
