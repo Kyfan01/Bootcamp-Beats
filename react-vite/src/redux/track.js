@@ -39,7 +39,7 @@ export const thunkCreateTrack = track => async dispatch => {
     })
 
     if (res.ok) {
-        const { newTrack } = await res.json()
+        const newTrack = await res.json()
         dispatch(createTrack(newTrack))
         return newTrack
     } else return 'track create thunk error'

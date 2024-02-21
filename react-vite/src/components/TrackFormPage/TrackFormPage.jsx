@@ -44,13 +44,13 @@ function TrackFormPage() {
     dispatch(thunkCreateTrack(formData))
     // .then((responseTrack) => navigate(`/api/tracks/${responseTrack.id}`))
 
-    setTitle('')
-    setAlbumId()
-    setGenre()
-    setTrackFile()
-    setPreviewImage()
-    setHasSubmitted(false)
-    setErrors([])
+    // setTitle('')
+    // setAlbumId()
+    // setGenre()
+    // setTrackFile()
+    // setPreviewImage()
+    // setHasSubmitted(false)
+    // setErrors([])
   };
 
   return (
