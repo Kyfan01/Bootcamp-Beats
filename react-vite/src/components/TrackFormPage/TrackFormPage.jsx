@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-// import { Navigate, useNavigate } from "react-router-dom";
-// import "./LoginForm.css";
+import { useDispatch } from "react-redux";
+// import { useNavigate } from "react-router-dom";
+import thunkCreateTrack from '../../redux/track'
+import "./TrackForm.css";
 
 function TrackFormPage() {
   // const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const sessionUser = useSelector((state) => state.session.user);
   const [title, setTitle] = useState("");
-  const [albumId, setAlbumId] = useState("");
+  const [albumId, setAlbumId] = useState();
   const [genre, setGenre] = useState("");
+  const [trackNumber, setTrackNumber] = useState();
   const [trackFile, setTrackFile] = useState();
-  const [previewImageUrl, setPreviewImageUrl] = useState('')
+  const [previewImage, setPreviewImage] = useState('')
 
+  const [hasSubmitted, setHasSubmitted] = useState(false)
   const [errors, setErrors] = useState({});
   
   const [albums, setAlbums] = useState([])
@@ -30,25 +32,48 @@ function TrackFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let newTrack = {
-      title,
-      albumId,
-      genre,
-      trackFile,
-      previewImageUrl
-    }
 
-    dispatch(thunkCreateTrack)
+    // setHasSubmitted(true)
 
+    // let newTrack = {
+    //   title,
+    //   albumId,
+    //   genre,
+    //   trackFile,
+    //   previewImage
+    // }
+
+    const formData = new FormData()
+    formData.append('title', title)
+    formData.append('albumId', albumId)
+    formData.append('genre', genre)
+    formData.append('trackNumber', trackNumber)
+    formData.append('trackFile', trackFile)
+    formData.append('previewImage', previewImage)
+    formData.append('submit', true)
+    // console.log(formData)
+    await dispatch(thunkCreateTrack(formData))
+
+    setTitle('')
+    setAlbumId()
+    setGenre()
+    setTrackFile()
+    setPreviewImage()
+    setHasSubmitted(false)
     setErrors([])
+
+
+
+    // .then((responseTrack) => navigate(`/api/tracks/${responseTrack.id}`))
+
   };
 
   return (
     <>
       <h1>Track Form</h1>
-      {errors.length > 0 &&
+      {errors.length > 0 && hasSubmitted == true &&
         errors.map((message) => <p key={message}>{message}</p>)}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label>
           Title
           <input 
@@ -81,6 +106,15 @@ function TrackFormPage() {
           />
         </label>
         <label>
+          Track Number
+          <input 
+            type="number"
+            value={trackNumber}
+            onChange={(e) => setTrackNumber(e.target.value)}
+            required
+          />
+        </label>
+        <label>
           Track File
           <input 
             type="file"
@@ -93,8 +127,8 @@ function TrackFormPage() {
           Album Cover
           <input
             type="file"
-            value={previewImageUrl}
-            onChange={(e) => setPreviewImageUrl(e.target.value)}
+            value={previewImage}
+            onChange={(e) => setPreviewImage(e.target.value)}
             accept="image/*"
           />
         </label>

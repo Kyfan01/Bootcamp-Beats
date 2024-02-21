@@ -27,15 +27,24 @@ def user_track_index(userId):
 def create_new_track():
     form = NewTrackForm()
     form.albumId.choices = [ (album.id, album.title) for album in Album.query.filter(Album.artist_id == current_user.id).all()]
+    print('form data: ', form.data)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
 
         track = form.data["trackFile"]
         track.filename = get_unique_filename(track.filename)
-        upload = upload_file_to_s3(track)
-        print(upload)
+        track_upload = upload_file_to_s3(track)
+        print(track_upload)
 
-        if "url" not in upload:
+        preview_image = form.data["previewImage"]
+        preview_image.filename = get_unique_filename(preview_image.filename)
+        preview_image_upload = upload_file_to_s3(preview_image)
+        print(preview_image_upload)
+
+
+        if "url" not in track_upload:
+            return #redirect back to New Track Form route because our upload errored
+        if "url" not in preview_image_upload:
             return #redirect back to New Track Form route because our upload errored
 
         params = {
@@ -43,10 +52,11 @@ def create_new_track():
             'title': form.data['title'],
             'genre': form.data['genre'],
             # 'url': form.data['url'],
-            'url': upload['url'],
+            'url': track_upload['url'],
             'duration': 123,
             'album_id': form.data['albumId'],
-            'preview_image_url': form.data['previewImageUrl']
+            # 'preview_image_url': form.data['previewImageUrl']
+            'preview_image_url': preview_image_upload['url']
         }
         new_track = Track(**params)
         db.session.add(new_track)

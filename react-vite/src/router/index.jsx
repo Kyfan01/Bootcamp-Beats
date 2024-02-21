@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
         element: <SignupFormPage />,
       },
       {
-        path: "api/track/new",
+        path: "api/tracks/new",
         element: <TrackFormPage />,
       },
     ],
