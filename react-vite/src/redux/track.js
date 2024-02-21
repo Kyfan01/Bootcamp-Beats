@@ -21,15 +21,16 @@ export const createTrack = track => ({
     track
 })
 
+export const updateTrack = track => ({
+    type: UPDATE_TRACK,
+    track
+})
+
 export const deleteTrack = trackId => ({
     type: DELETE_TRACK,
     trackId
 })
 
-export const updateTrack = track => ({
-    type: UPDATE_TRACK,
-    track
-})
 
 // thunk action creators
 export const thunkFetchTracks = () => async dispatch => {
@@ -66,21 +67,6 @@ export const thunkCreateTrack = track => async dispatch => {
     } else return 'track create thunk error'
 }
 
-export const thunkDeleteTrack = trackId => async dispatch => {
-    const res = await fetch(`/api/tracks/${trackId}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-
-    if (res.ok) {
-        const deleteComfirm = await res.json()
-        dispatch(deleteTrack(trackId))
-        return deleteComfirm
-    } else return 'track delete thunk error'
-}
-
 export const thunkUpdateTrack = (trackId, track) => async dispatch => {
     const res = await fetch(`/api/tracks/${trackId}`, {
         method: 'PUT',
@@ -92,6 +78,21 @@ export const thunkUpdateTrack = (trackId, track) => async dispatch => {
         dispatch(updateTrack(updatedTrack))
         return updatedTrack
     } else return 'track update thunk error'
+}
+
+export const thunkDeleteTrack = trackId => async dispatch => {
+    const res = await fetch(`/api/tracks/${trackId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+
+    if (res.ok) {
+        const deleteConfirm = await res.json()
+        dispatch(deleteTrack(trackId))
+        return deleteConfirm
+    } else return 'track delete thunk error'
 }
 
 
@@ -115,17 +116,18 @@ const trackReducer = (state = {}, action) => {
             return newTrackState
         }
 
+        case UPDATE_TRACK: {
+            const newTrackState = { ...state }
+            newTrackState[action.track.id] = action.track
+            return newTrackState
+        }
+
         case DELETE_TRACK: {
             const newTrackState = { ...state }
             delete newTrackState[action.trackId]
             return newTrackState
         }
 
-        case UPDATE_TRACK: {
-            const newTrackState = { ...state }
-            newTrackState[action.track.id] = action.track
-            return newTrackState
-        }
 
         default:
             return state

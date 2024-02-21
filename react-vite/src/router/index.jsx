@@ -2,10 +2,13 @@ import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import TrackFormPage from '../components/TrackComponents/TrackFormPage/TrackFormPage';
+import AlbumFormPage from '../components/AlbumComponents/AlbumFormPage/AlbumFormPage';
 
 import Layout from './Layout';
 import TracksIndex from '../components/TrackComponents/TracksIndex/TracksIndex';
 import TrackDetailsPage from '../components/TrackComponents/TrackDetailsPage/TrackDetailsPage';
+import AlbumsIndex from '../components/AlbumComponents/AlbumsIndex/AlbumsIndex';
+import AlbumDetailsPage from '../components/AlbumComponents/AlbumDetailsPage/AlbumDetailsPage';
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +41,22 @@ export const router = createBrowserRouter([
       {
         path: "/tracks/:trackId",
         element: <TrackDetailsPage />,
+      },
+      {
+        path: "albums/new",
+        element: <AlbumFormPage />,
+      },
+      {
+        path: "albums/:albumId/update",
+        element: <AlbumFormPage />,
+      },
+      {
+        path: "/albums",
+        element: <AlbumsIndex />,
+      },
+      {
+        path: "/albums/:albumId",
+        element: <AlbumDetailsPage />,
       },
     ],
   },

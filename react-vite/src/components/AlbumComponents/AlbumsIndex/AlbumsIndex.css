@@ -1,0 +1,11 @@
+.album-index-container {
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.album-index-cards-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  max-height: 100%;
+}

@@ -1,0 +1,78 @@
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {thunkCreateAlbum, thunkFetchAlbumById, thunkUpdateAlbum} from '../../../redux/album'
+import "./AlbumForm.css";
+import { useParams } from "react-router-dom";
+
+function AlbumFormPage() {
+  const { albumId } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [title, setTitle] = useState("");
+  
+
+  const [hasSubmitted, setHasSubmitted] = useState(false)
+  const [errors, setErrors] = useState({});
+  
+  const [albums, setAlbums] = useState([])
+
+
+  useEffect( () => {
+    if (albumId) {
+      dispatch(thunkFetchAlbumById(albumId)).then((oldAlbum) => {
+        setTitle(oldAlbum.title)
+      })
+    }
+  }, [albumId, dispatch])
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData()
+    formData.append('title', title)
+
+    if(albumId) {
+      dispatch(thunkUpdateTrack(albumId, formData)).then(() => navigate(`/albums/${albumId}`))
+    } else{
+      dispatch(thunkCreateTrack(formData)).then(newAlbum => navigate(`/albums/${newAlbum.id}`))
+    }
+
+  };
+
+  return (
+    <>
+      <h1>Track Form</h1>
+      {errors.length > 0 && hasSubmitted == true &&
+        errors.map((message) => <p key={message}>{message}</p>)}
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <label>
+          Title
+          <input 
+            type="text"
+            name="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+            />
+        </label>
+        
+        <label>
+          Album Cover
+          <input
+            type="file"
+            name="album_cover"
+            onChange={(e) => setPreviewImage(e.target.files[0])}
+            accept="image/*"
+          />
+        </label>
+
+
+        <button type="submit">Submit</button>
+      </form>
+    </>
+  );
+}
+
+export default AlbumFormPage;
