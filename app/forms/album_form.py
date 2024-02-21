@@ -4,11 +4,6 @@ from wtforms.validators import DataRequired, URL
 from ..models import Album
 from flask_login import current_user
 
-# albums = []
-# for album in albums:
-#     album_choices.append((album.id, album.title))
-
-
 
 class NewAlbumForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
