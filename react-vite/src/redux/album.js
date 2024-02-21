@@ -22,7 +22,7 @@ export const createAlbum = album => ({
 })
 
 export const updateAlbum = album => ({
-    type: UPDATE_TRACK,
+    type: UPDATE_ALBUM,
     album
 })
 
@@ -69,7 +69,7 @@ export const thunkCreateAlbum = album => async dispatch => {
 export const thunkUpdateAlbum = (albumId, album) => async dispatch => {
     const res = await fetch(`/api/albums/${albumId}`, {
         method: 'PUT',
-        body: track
+        body: album
     })
 
     if (res.ok) {

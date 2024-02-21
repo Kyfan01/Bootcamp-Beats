@@ -15,7 +15,6 @@ function AlbumFormPage() {
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [errors, setErrors] = useState({});
   
-  const [albums, setAlbums] = useState([])
 
 
   useEffect( () => {
@@ -34,9 +33,9 @@ function AlbumFormPage() {
     formData.append('title', title)
 
     if(albumId) {
-      dispatch(thunkUpdateTrack(albumId, formData)).then(() => navigate(`/albums/${albumId}`))
+      dispatch(thunkUpdateAlbum(albumId, formData)).then(() => navigate(`/albums/${albumId}`))
     } else{
-      dispatch(thunkCreateTrack(formData)).then(newAlbum => navigate(`/albums/${newAlbum.id}`))
+      dispatch(thunkCreateAlbum(formData)).then(newAlbum => navigate(`/albums/${newAlbum.id}`))
     }
 
   };
@@ -58,15 +57,6 @@ function AlbumFormPage() {
             />
         </label>
         
-        <label>
-          Album Cover
-          <input
-            type="file"
-            name="album_cover"
-            onChange={(e) => setPreviewImage(e.target.files[0])}
-            accept="image/*"
-          />
-        </label>
 
 
         <button type="submit">Submit</button>

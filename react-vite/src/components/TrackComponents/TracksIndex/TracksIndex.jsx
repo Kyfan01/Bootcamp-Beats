@@ -23,7 +23,7 @@ export function TracksIndex() {
 
             <div>
                 <div className='track-index-cards-container'>
-                    {tracks.map(track => <TrackCard track={track} key={track.id} />)}
+                    {tracks.map(track => <TrackCard track={track} key={track?.id} />)}
                 </div>
             </div>
         </div>

@@ -3,7 +3,8 @@ export const LOAD_TRACKS = 'tracks/loadTracks'
 export const LOAD_TRACK_BY_ID = 'tracks/loadTrackById'
 export const CREATE_TRACK = 'tracks/createTrack'
 export const DELETE_TRACK = 'tracks/deleteTrack'
-export const UPDATE_TRACK = 'tacks/updateTrack'
+export const UPDATE_TRACK = 'tracks/updateTrack'
+export const TOGGLE_LIKE_TRACK = 'tracks/toggleLikeTrack'
 
 // action creators
 export const loadTracks = tracks => ({
@@ -28,6 +29,11 @@ export const updateTrack = track => ({
 
 export const deleteTrack = trackId => ({
     type: DELETE_TRACK,
+    trackId
+})
+
+export const toggleLikeTrack = trackId => ({
+    type: TOGGLE_LIKE_TRACK,
     trackId
 })
 
@@ -95,6 +101,21 @@ export const thunkDeleteTrack = trackId => async dispatch => {
     } else return 'track delete thunk error'
 }
 
+export const thunkToggleLikeTrack = trackId => async dispatch => {
+    const res = await fetch(`/api/tracks/${trackId}/like`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    console.log('thunk response: ', res)
+    if (res.ok) {
+        const updatedTrack = await res.json()
+        dispatch(toggleLikeTrack(trackId))
+        return updatedTrack
+    } else return 'track like thunk error'
+}
+
 
 
 const trackReducer = (state = {}, action) => {
@@ -125,6 +146,12 @@ const trackReducer = (state = {}, action) => {
         case DELETE_TRACK: {
             const newTrackState = { ...state }
             delete newTrackState[action.trackId]
+            return newTrackState
+        }
+
+        case TOGGLE_LIKE_TRACK: {
+            const newTrackState = { ...state }
+            newTrackState[action.trackId] = action.track
             return newTrackState
         }
 

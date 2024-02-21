@@ -11,6 +11,6 @@
     border-bottom: black 1px solid;
     padding: 20px;
     box-sizing: border-box;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
 }
