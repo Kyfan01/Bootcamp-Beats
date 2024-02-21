@@ -8,6 +8,8 @@ export function TrackCard({track}) {
       <p>AlbumId: {track?.albumId}</p>
       <p>Genre: {track?.genre}</p>
       <p>Track Number: {track?.trackNumber}</p>
+      <p>URL: {track?.url}</p>
+      <p>Preview Image URL: {track?.previewImageUrl}</p>
     </div>
   )
 }

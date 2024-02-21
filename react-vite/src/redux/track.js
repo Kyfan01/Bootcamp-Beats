@@ -1,5 +1,6 @@
 // action types
 export const LOAD_TRACKS = 'tracks/loadTracks'
+export const LOAD_TRACK_BY_ID = 'tracks/loadTrackById'
 export const CREATE_TRACK = 'tracks/createTrack'
 export const DELETE_TRACK = 'tracks/deleteTrack'
 export const UPDATE_TRACK = 'tacks/updateTrack'
@@ -7,7 +8,12 @@ export const UPDATE_TRACK = 'tacks/updateTrack'
 // action creators
 export const loadTracks = tracks => ({
     type: LOAD_TRACKS,
-    tracks
+    payload: tracks
+})
+
+export const loadTrackById = track => ({
+    type: LOAD_TRACK_BY_ID,
+    track
 })
 
 export const createTrack = track => ({
@@ -39,7 +45,7 @@ export const thunkFetchTrackById = trackId => async dispatch => {
     const res = await fetch(`/api/tracks/${trackId}`)
     if (res.ok) {
         const track = await res.json()
-        dispatch(loadTracks([track]))
+        dispatch(loadTrackById(track))
         return track
     } else return 'fetch track by id thunk error'
 }
@@ -94,7 +100,12 @@ const trackReducer = (state = {}, action) => {
     switch (action.type) {
         case LOAD_TRACKS: {
             const newTrackState = { ...state }
-            action.tracks.forEach(track => { newTrackState[track.id] = track })
+            action.payload.tracks.forEach(track => { newTrackState[track.id] = track })
+            return newTrackState
+        }
+        case LOAD_TRACK_BY_ID: {
+            const newTrackState = { ...state }
+            newTrackState[action.track.id] = action.track
             return newTrackState
         }
 

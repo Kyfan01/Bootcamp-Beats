@@ -56,9 +56,9 @@ function TrackFormPage() {
     formData.append('submit', true)
 
     if(trackId) {
-      dispatch(thunkUpdateTrack(trackId, formData)).then(() => navigate(`/api/tracks/${trackId}`))
+      dispatch(thunkUpdateTrack(trackId, formData)).then(() => navigate(`/tracks/${trackId}`))
     } else{
-      dispatch(thunkCreateTrack(formData)).then(newTrack => navigate(`/api/tracks/${newTrack.id}`))
+      dispatch(thunkCreateTrack(formData)).then(newTrack => navigate(`/tracks/${newTrack.id}`))
     }
 
 

@@ -20,15 +20,17 @@ export function TrackDetailsPage() {
 
   return (
     <div>
-      <p>{track?.title}</p>
-      <p>{track?.albumId}</p>
-      <p>{track?.artistId}</p>
-      <p>{track?.artistName}</p>
-      <p>{track?.duration}</p>
-      <p>{track?.genre}</p>
-      <p>{track?.trackNumber}</p>
-      <p>{track?.trackLikes}</p>
-      <p>{track?.liked}</p>
+      <p>Title: {track?.title}</p>
+      <p>Album Id: {track?.albumId}</p>
+      <p>Artist Id: {track?.artistId}</p>
+      <p>Artist: {track?.artistName}</p>
+      <p>Duration: {track?.duration}</p>
+      <p>Genre: {track?.genre}</p>
+      <p>Track Number: {track?.trackNumber}</p>
+      <p>Likes: {track?.trackLikes}</p>
+      <p>Liked: {track?.liked}</p>
+      <p>URL: {track?.url}</p>
+      <p>Preview Image URL: {track?.previewImageUrl}</p>
     </div>
   )
 }

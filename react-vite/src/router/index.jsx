@@ -24,11 +24,11 @@ export const router = createBrowserRouter([
         element: <SignupFormPage />,
       },
       {
-        path: "api/tracks/new",
+        path: "tracks/new",
         element: <TrackFormPage />,
       },
       {
-        path: "api/tracks/:trackId/update",
+        path: "tracks/:trackId/update",
         element: <TrackFormPage />,
       },
       {
