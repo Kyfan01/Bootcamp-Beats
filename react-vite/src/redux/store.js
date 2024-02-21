@@ -11,7 +11,7 @@ import albumReducer from "./album";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
-  track: trackReducer
+  track: trackReducer,
   album: albumReducer
 });
 
