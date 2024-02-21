@@ -13,7 +13,7 @@ export function TrackDetailsPage() {
   const track = useSelector(state => state.tracks[trackId])
 
   const isOwner = (parseInt(user?.id) === track?.artistId)
-  
+
   useEffect(() => {
     dispatch(thunkFetchTrackById(trackId))
   }, [dispatch, trackId])

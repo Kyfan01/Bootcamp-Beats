@@ -31,6 +31,7 @@ class Track(db.Model):
             'id': self.id,
             'artistId': self.artist_id,
             'albumId': self.album_id,
+            # 'albumTitle': self.album.title,
             'title': self.title,
             'duration': self.duration,
             'genre': self.genre,
