@@ -9,23 +9,24 @@ track_routes = Blueprint('tracks', __name__)
 @track_routes.route('/')
 def track_index():
     tracks = Track.query.order_by(Track.id.desc()).all()
-    # return f"{track.title for track in tracks}"
     return {'tracks': [track.to_dict() for track in tracks]}
 
 @track_routes.route('/<int:trackId>')
 def track_details(trackId):
     track = Track.query.get(trackId)
-    # print('track: ', track)
-    # print('track.to_dict: ', track.to_dict())
+    if (not track):
+        return {"message": "Track not found"}
     return track.to_dict()
 
 @track_routes.route('/user/<int:userId>')
 def user_track_index(userId):
     tracks = Track.query.filter(Track.artist_id == userId).order_by(Track.id.desc()).all()
+    if (not tracks):
+        return {"message": "User tracks not found"}
     return {'tracks': [track.to_dict() for track in tracks]}
 
 @track_routes.route('/', methods = ['POST'])
-# @login_required
+@login_required
 def create_new_track():
     form = NewTrackForm()
     form.albumId.choices = [ (album.id, album.title) for album in Album.query.filter(Album.artist_id == current_user.id).all()]
@@ -45,9 +46,9 @@ def create_new_track():
 
 
         if "url" not in track_upload:
-            return #redirect back to New Track Form route because our upload errored
+            return {"message": "Track audio file required"}
         if "url" not in preview_image_upload:
-            return #redirect back to New Track Form route because our upload errored
+            return {"message": "Track image file required"}
 
         params = {
             'artist_id': current_user.id,
@@ -70,6 +71,16 @@ def create_new_track():
 @track_routes.route('/<int:trackId>', methods = ['PUT'])
 @login_required
 def update_track(trackId):
+
+    track = Track.query.get(trackId)
+
+    if not track:
+        return {"message": "Track not found"}
+
+    if current_user.id != track.user_id:
+        return {"error": "You are not the owner of this track"}, 401
+
+
     form = NewTrackForm()
     form.albumId.choices = [ (album.id, album.title) for album in Album.query.filter(Album.artist_id == current_user.id).all()]
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -92,6 +103,12 @@ def update_track(trackId):
 def delete_track(trackId):
     track = Track.query.get(trackId)
 
+    if (not track):
+        return {"message": "Track not found"}
+
+    if current_user.id != track.user_id:
+        return {"error": "You are not the owner of this track"}, 401
+
     file_to_delete = remove_file_from_s3(track.url)
 
     db.session.delete(track)
@@ -102,8 +119,12 @@ def delete_track(trackId):
     }
 
 @track_routes.route('/<int:trackId>/like', methods=["PUT"])
+@login_required
 def like_track(trackId):
     track = Track.query.get(trackId)
+
+    if (not track):
+        return {"message": "Track not found"}
 
     current_user.user_likes.remove(track) if any(user.id == current_user.id for user in track.track_likes) else current_user.user_likes.append(track)
 
