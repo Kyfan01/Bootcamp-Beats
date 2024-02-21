@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
-import {thunkCreateTrack, thunkFetchTrackById} from '../../redux/track'
+import { useNavigate } from "react-router-dom";
+import {thunkCreateTrack, thunkFetchTrackById, thunkUpdateTrack} from '../../redux/track'
 import "./TrackForm.css";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 function TrackFormPage() {
   const { trackId } = useParams();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [albumId, setAlbumId] = useState();
@@ -44,7 +44,7 @@ function TrackFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     const formData = new FormData()
     formData.append('title', title)
     formData.append('albumId', albumId)
@@ -54,8 +54,12 @@ function TrackFormPage() {
     formData.append('previewImage', previewImage)
     formData.append('submit', true)
 
-    dispatch(thunkCreateTrack(formData))
-    // .then((responseTrack) => navigate(`/api/tracks/${responseTrack.id}`))
+    if(trackId) {
+      dispatch(thunkUpdateTrack(formData)).then(() => navigate(`/api/tracks/${trackId}`))
+    } else{
+      dispatch(thunkCreateTrack(formData)).then(newTrack => navigate(`/api/tracks/${newTrack.id}`))
+    }
+
 
     // setTitle('')
     // setAlbumId()
