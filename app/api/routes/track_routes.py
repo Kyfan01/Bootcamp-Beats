@@ -104,13 +104,15 @@ def delete_track(trackId):
 @track_routes.route('/<int:trackId>/like', methods=["POST"])
 def like_track(trackId):
     track = Track.query.get(trackId)
-    current_user.user_likes.append(track)
+
+    current_user.user_likes.remove(track) if any(user.id == current_user.id for user in track.track_likes) else current_user.user_likes.append(track)
+
     db.session.commit()
     return current_user.to_dict_with_user_likes()
 
-@track_routes.route('/<int:trackId>/unlike', methods=["POST"])
-def unlike_track(trackId):
-    track = Track.query.get(trackId)
-    current_user.user_likes.remove(track)
-    db.session.commit()
-    return current_user.to_dict_with_user_likes()
+# @track_routes.route('/<int:trackId>/unlike', methods=["POST"])
+# def unlike_track(trackId):
+#     track = Track.query.get(trackId)
+#     current_user.user_likes.remove(track)
+#     db.session.commit()
+#     return current_user.to_dict_with_user_likes()
