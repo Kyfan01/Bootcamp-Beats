@@ -23,7 +23,7 @@ def user_track_index(userId):
     return {'tracks': [track.to_dict() for track in tracks]}
 
 @track_routes.route('/', methods = ['POST'])
-@login_required
+# @login_required
 def create_new_track():
     form = NewTrackForm()
     form.albumId.choices = [ (album.id, album.title) for album in Album.query.filter(Album.artist_id == current_user.id).all()]

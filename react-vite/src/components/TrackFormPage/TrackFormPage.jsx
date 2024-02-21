@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 // import { useNavigate } from "react-router-dom";
-import thunkCreateTrack from '../../redux/track'
+import {thunkCreateTrack} from '../../redux/track'
 import "./TrackForm.css";
 
 function TrackFormPage() {
@@ -40,8 +40,9 @@ function TrackFormPage() {
     formData.append('trackFile', trackFile)
     formData.append('previewImage', previewImage)
     formData.append('submit', true)
-    
-    await dispatch(thunkCreateTrack(formData))
+
+    dispatch(thunkCreateTrack(formData))
+    // .then((responseTrack) => navigate(`/api/tracks/${responseTrack.id}`))
 
     setTitle('')
     setAlbumId()
@@ -50,11 +51,6 @@ function TrackFormPage() {
     setPreviewImage()
     setHasSubmitted(false)
     setErrors([])
-
-
-
-    // .then((responseTrack) => navigate(`/api/tracks/${responseTrack.id}`))
-
   };
 
   return (

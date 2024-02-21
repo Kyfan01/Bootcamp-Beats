@@ -30,7 +30,7 @@ export const thunkFetchTracks = () => async dispatch => {
 }
 
 export const thunkCreateTrack = track => async dispatch => {
-    const res = await fetch('/api/tracks/', {
+    const res = await fetch('/api/tracks', {
         method: 'POST',
         // headers: {
         //     'Content-Type': 'application/json'
@@ -40,7 +40,6 @@ export const thunkCreateTrack = track => async dispatch => {
 
     if (res.ok) {
         const { newTrack } = await res.json()
-        // console.log('newTrack: ', newTrack)
         dispatch(createTrack(newTrack))
         return newTrack
     } else return 'track create thunk error'
