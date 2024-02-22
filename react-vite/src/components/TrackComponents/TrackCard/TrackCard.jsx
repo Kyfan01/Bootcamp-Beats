@@ -20,7 +20,7 @@ export function TrackCard({ track }) {
   }
 
   return (
-      <div title={track?.title} className='track-card-container'>
+    <div title={track?.title} className='track-card-container'>
 
       <NavLink to={`/tracks/${track?.id}`} className='track-card-link'>
         <div>
@@ -29,12 +29,12 @@ export function TrackCard({ track }) {
           <p>Artist Name: {track?.artistName}</p>
         </div>
       </NavLink>
-        <p>Album Title: {track?.albumTitle}</p>
-        <p>Genre: {track?.genre}</p>
-        <p>Track Number: {track?.trackNumber}</p>
-        <p>URL: {track?.url}</p>
-        <p>Liked: {track?.liked ? 'True' : 'False'}</p>
-        <button onClick={handleSubmit}>{liked ? 'Unlike' : 'Like'}</button>
-      </div>
+      <p>Album Title: {track?.albumTitle}</p>
+      <p>Genre: {track?.genre}</p>
+      <p>Track Number: {track?.trackNumber}</p>
+      <p>URL: {track?.url}</p>
+      <p>Liked: {track?.liked ? 'True' : 'False'}</p>
+      <button onClick={handleSubmit}>{liked ? 'Unlike' : 'Like'}</button>
+    </div>
   )
 }
