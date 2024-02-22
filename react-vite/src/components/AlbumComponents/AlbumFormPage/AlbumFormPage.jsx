@@ -30,15 +30,24 @@ function AlbumFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log('releaseDate: ', releaseDate)
     
     const formData = new FormData()
     formData.append('title', title)
+    formData.append('releaseDate', releaseDate)
+    formData.append('genre', genre)
+    if (previewImage) {
+      formData.append('albumCoverUrl', previewImage)
+    }
+
 
     if(albumId) {
-      dispatch(thunkUpdateAlbum(albumId, formData)).then(() => navigate(`/albums/${albumId}`))
+      await dispatch(thunkUpdateAlbum(albumId, formData)).then(() => navigate(`/albums/${albumId}`))
     } else{
-      dispatch(thunkCreateAlbum(formData)).then(newAlbum => navigate(`/albums/${newAlbum.id}`))
+      await dispatch(thunkCreateAlbum(formData)).then(newAlbum => navigate(`/albums/${newAlbum.id}`))
     }
+
 
   };
 
@@ -68,7 +77,26 @@ function AlbumFormPage() {
             required
             />
         </label>
-        
+        <label>
+          Genre
+          <input 
+            type="text"
+            name="genre"
+            value={genre}
+            onChange={(e) => setGenre(e.target.value)}
+            required
+            />
+        </label>
+        <label>
+          Preview Image
+          <input 
+            type="file"
+            name="previewImage"
+            onChange={(e) => setPreviewImage(e.target.files[0])}
+            accept="image/*"
+            required
+            />
+        </label>
 
 
         <button type="submit">Submit</button>
