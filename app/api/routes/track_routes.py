@@ -25,6 +25,13 @@ def user_track_index(userId):
         return {"message": "User tracks not found"}
     return {'tracks': [track.to_dict() for track in tracks]}
 
+@track_routes.route('/albums/<int:albumId>')
+def album_track_index(albumId):
+    tracks = Track.query.filter(Track.album_id == albumId).order_by(Track.id.desc()).all()
+    if (not tracks):
+        return {"message": "Album tracks not found"}
+    return {'tracks': [track.to_dict() for track in tracks]}
+
 @track_routes.route('/', methods = ['POST'])
 @login_required
 def create_new_track():

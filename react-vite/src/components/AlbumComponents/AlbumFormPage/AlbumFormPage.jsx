@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {thunkCreateAlbum, thunkFetchAlbumById, thunkUpdateAlbum} from '../../../redux/album'
+import { thunkCreateAlbum, thunkFetchAlbumById, thunkUpdateAlbum } from '../../../redux/album'
 import "./AlbumForm.css";
 import { useParams } from "react-router-dom";
 
@@ -16,7 +16,7 @@ function AlbumFormPage() {
 
   const [hasSubmitted] = useState(false)
   const [errors] = useState({});
-  
+
 
 
   useEffect( () => {
@@ -52,7 +52,7 @@ function AlbumFormPage() {
     e.preventDefault();
 
     console.log('releaseDate: ', releaseDate)
-    
+
     const formData = new FormData()
     formData.append('title', title)
     formData.append('releaseDate', releaseDate)
@@ -62,9 +62,9 @@ function AlbumFormPage() {
     }
 
 
-    if(albumId) {
+    if (albumId) {
       await dispatch(thunkUpdateAlbum(albumId, formData)).then(() => navigate(`/albums/${albumId}`))
-    } else{
+    } else {
       await dispatch(thunkCreateAlbum(formData)).then(newAlbum => navigate(`/albums/${newAlbum.id}`))
     }
 
@@ -79,43 +79,43 @@ function AlbumFormPage() {
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label>
           Title
-          <input 
+          <input
             type="text"
             name="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
-            />
+          />
         </label>
         <label>
           Release Date
-          <input 
+          <input
             type="date"
             name="releaseDate"
             value={releaseDate}
             onChange={(e) => setReleaseDate(e.target.value)}
             required
-            />
+          />
         </label>
         <label>
           Genre
-          <input 
+          <input
             type="text"
             name="genre"
             value={genre}
             onChange={(e) => setGenre(e.target.value)}
             required
-            />
+          />
         </label>
         <label>
           Preview Image
-          <input 
+          <input
             type="file"
             name="previewImage"
             onChange={(e) => setPreviewImage(e.target.files[0])}
             accept="image/*"
             required
-            />
+          />
         </label>
 
 
