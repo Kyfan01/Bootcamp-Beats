@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { thunkCreateTrack, thunkFetchTrackById, thunkUpdateTrack } from '../../../redux/track'
 import "./TrackForm.css";
 import { useParams } from "react-router-dom";
-import { thunkCreateAlbum } from "../../../redux/album";
+import { thunkCreateAlbum, thunkFetchUserAlbums } from "../../../redux/album";
 
 function TrackFormPage() {
   const { trackId } = useParams();
@@ -23,14 +23,13 @@ function TrackFormPage() {
 
   const [albums, setAlbums] = useState([])
 
+  const currentUser = useSelector(state => state.session['user'])
   useEffect(() => { //fetch the albums when the component mounts so that the dropdown has options
-    const fetchAlbums = async () => {
-      const response = await fetch('/api/albums');
-      const data = await response.json();
-      setAlbums(data.albums)
+    if (currentUser) {
+      dispatch(thunkFetchUserAlbums(currentUser.id)).then(userAlbums => setAlbums(userAlbums.albums))
     }
-    fetchAlbums()
-  }, [])
+  }, [dispatch, currentUser])
+
 
   useEffect(() => {
     if (trackId) {
@@ -103,7 +102,6 @@ function TrackFormPage() {
 
   return (
     <>
-      {console.log('track number is ', trackNumber)}
       <h1>Track Form</h1>
       {/* {valErrors.length > 0 && hasSubmitted == true &&
         valErrors.map((message) => <p key={message}>{message}</p>)} */}

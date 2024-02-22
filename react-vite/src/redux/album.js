@@ -1,9 +1,11 @@
 // action types
 export const LOAD_ALBUMS = 'albums/loadAlbums'
 export const LOAD_ALBUM_BY_ID = 'albums/loadAlbumById'
+export const LOAD_USER_ALBUMS = 'albums/loadUserAlbums'
 export const CREATE_ALBUM = 'albums/createAlbum'
 export const UPDATE_ALBUM = 'albums/updateAlbum'
 export const DELETE_ALBUM = 'albums/deleteAlbum'
+
 
 // action creators
 export const loadAlbums = albums => ({
@@ -14,6 +16,11 @@ export const loadAlbums = albums => ({
 export const loadAlbumById = album => ({
     type: LOAD_ALBUM_BY_ID,
     album
+})
+
+export const loadUserAlbums = albums => ({
+    type: LOAD_USER_ALBUMS,
+    payload: albums
 })
 
 export const createAlbum = album => ({
@@ -48,6 +55,15 @@ export const thunkFetchAlbumById = albumId => async dispatch => {
         dispatch(loadAlbumById(album))
         return album
     } else return 'fetch album by id thunk error'
+}
+
+export const thunkFetchUserAlbums = userId => async dispatch => {
+    const res = await fetch(`/api/albums/user/${userId}`)
+    if (res.ok) {
+        const albums = await res.json()
+        dispatch(loadUserAlbums(albums))
+        return albums
+    } else return 'fetch user albums thunk error'
 }
 
 export const thunkCreateAlbum = album => async dispatch => {
@@ -104,6 +120,12 @@ const albumReducer = (state = {}, action) => {
         case LOAD_ALBUM_BY_ID: {
             const newAlbumState = { ...state }
             newAlbumState[action.album.id] = action.album
+            return newAlbumState
+        }
+
+        case LOAD_USER_ALBUMS: {
+            const newAlbumState = { ...state }
+            action.payload.albums.forEach(album => { newAlbumState[album.id] = album })
             return newAlbumState
         }
 

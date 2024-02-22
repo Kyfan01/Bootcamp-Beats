@@ -20,6 +20,8 @@ def album_details(albumId):
 @album_routes.route('/user/<int:userId>')
 def user_album_index(userId):
     albums = Album.query.filter(Album.artist_id == userId).order_by(Album.id.desc()).all()
+    if (not albums):
+        return {'message': 'User Albums not found'}
     return {'albums': [album.to_dict() for album in albums]}
 
 @album_routes.route('/', methods = ['POST'])
