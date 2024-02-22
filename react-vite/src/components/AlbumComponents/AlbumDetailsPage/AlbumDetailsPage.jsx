@@ -14,7 +14,7 @@ export function AlbumDetailsPage() {
 
   // const user = useSelector(state => state.session.user)
   const album = useSelector(state => state.albums[albumId])
-  const tracks = useSelector(state => Object.values(state.tracks).filter(track => parseInt(albumId) === track.albumId))
+  const albumTracks = useSelector(state => Object.values(state.tracks).filter(track => parseInt(albumId) === track.albumId))
 
   // const isOwner = (parseInt(user?.id) === album?.artistId)
 
@@ -37,7 +37,7 @@ export function AlbumDetailsPage() {
       <p>{album?.releaseDate.split(' ')[3]}</p>
       <p>{album?.genre}</p>
       <p>{album?.artistName}</p>
-      <p>{tracks.map(track => <TrackCard track={track} key={track?.id} />)}</p>
+      <p>{albumTracks.map(track => <TrackCard track={track} key={track?.id} />)}</p>
       <button onClick={handleDelete}>Delete Album</button>
 
     </div>
