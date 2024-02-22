@@ -22,6 +22,7 @@ class Album(db.Model):
         return {
             'id': self.id,
             'artistId': self.artist_id,
+            'artistName': self.user.to_dict_name_only().get('artistName') if self.user else 'No artist',
             'title': self.title,
             'releaseDate': self.release_date,
             'genre': self.genre,
