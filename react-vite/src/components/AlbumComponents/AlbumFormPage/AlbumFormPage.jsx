@@ -10,11 +10,9 @@ function AlbumFormPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
-  // const [artistId, setArtistId] = useState("");
-  // const [releaseDate, setReleaseDate] = useState("");
-
-
-  
+  const [releaseDate, setReleaseDate] = useState("");
+  const [genre, setGenre] = useState("");
+  const [previewImage, setPreviewImage] = useState()
 
   const [hasSubmitted] = useState(false)
   const [errors] = useState({});
@@ -57,6 +55,16 @@ function AlbumFormPage() {
             name="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            required
+            />
+        </label>
+        <label>
+          Release Date
+          <input 
+            type="date"
+            name="releaseDate"
+            value={releaseDate}
+            onChange={(e) => setReleaseDate(e.target.value)}
             required
             />
         </label>
