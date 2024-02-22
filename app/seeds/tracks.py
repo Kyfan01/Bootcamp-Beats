@@ -55,20 +55,20 @@ def seed_tracks():
         Track(artist_id = '3', title = 'Bit Bounce', duration = 199, genre = 'Pop', track_number = 9, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
         Track(artist_id = '3', title = 'Cybernetic Serenade', duration = 214, genre = 'Pop', track_number = 10, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com'),
 
-        Track(artist_id='3', album_id=4, title="Code'n'Country", duration=180, genre='Country', track_number=1, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[collin, kevin]),
-        Track(artist_id='3', album_id=4, title='Digital Dusty Roads', duration=220, genre='Country', track_number=2, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[hun, collin]),
-        Track(artist_id='3', album_id=4, title='ByteBeat Hoedown', duration=195, genre='Country', track_number=3, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[kevin, hun]),
-        Track(artist_id='3', album_id=4, title='Algorithmic Cowboy', duration=210, genre='Country', track_number=4, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[collin, hun]),
-        Track(artist_id='3', album_id=4, title='Syntax Saddle', duration=190, genre='Country', track_number=5, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[kevin, hun]),
-        Track(artist_id='3', album_id=4, title='Binary Sunset', duration=205, genre='Country', track_number=6, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[kevin, collin]),
-        Track(artist_id='3', album_id=4, title='Loopin\' Lasso', duration=240, genre='Country', track_number=7, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[hun, collin]),
-        Track(artist_id='3', album_id=4, title='Cybernetic Swing', duration=195, genre='Country', track_number=8, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[hun, collin]),
-        Track(artist_id='3', album_id=4, title='Recursive Roundup', duration=220, genre='Country', track_number=9, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[kevin, hun]),
-        Track(artist_id='3', album_id=4, title='Tech Tumbleweed', duration=320, genre='Country', track_number=10, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[kevin, collin]),
+        Track(artist_id='2', album_id=3, title="Code'n'Country", duration=180, genre='Country', track_number=1, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[collin, kevin]),
+        Track(artist_id='2', album_id=3, title='Digital Dusty Roads', duration=220, genre='Country', track_number=2, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[hun, collin]),
+        Track(artist_id='2', album_id=3, title='ByteBeat Hoedown', duration=195, genre='Country', track_number=3, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[kevin, hun]),
+        Track(artist_id='2', album_id=3, title='Algorithmic Cowboy', duration=210, genre='Country', track_number=4, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[collin, hun]),
+        Track(artist_id='2', album_id=3, title='Syntax Saddle', duration=190, genre='Country', track_number=5, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[kevin, hun]),
+        Track(artist_id='2', album_id=3, title='Binary Sunset', duration=205, genre='Country', track_number=6, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[kevin, collin]),
+        Track(artist_id='2', album_id=3, title='Loopin\' Lasso', duration=240, genre='Country', track_number=7, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[hun, collin]),
+        Track(artist_id='2', album_id=3, title='Cybernetic Swing', duration=195, genre='Country', track_number=8, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[hun, collin]),
+        Track(artist_id='2', album_id=3, title='Recursive Roundup', duration=220, genre='Country', track_number=9, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[kevin, hun]),
+        Track(artist_id='2', album_id=3, title='Tech Tumbleweed', duration=320, genre='Country', track_number=10, url='ineedaurl.com', preview_image_url='ineedanotherurl.com', track_likes=[kevin, collin]),
 
 
     # kevin
-        Track(artist_id = '2', album_id = 4, title = 'Genesis', duration = 234, genre = 'EDM', track_number = 1, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com', track_likes = [hun, kevin, collin]),
+        Track(artist_id = '2', album_id = 3, title = 'Genesis', duration = 234, genre = 'EDM', track_number = 1, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com', track_likes = [hun, kevin, collin]),
         Track(artist_id = '2', album_id = 4, title = 'Technologic', duration = 284, genre = 'EDM', track_number = 2, url = 'ineedaurl.com', preview_image_url = 'ineedanotherurl.com', track_likes = [kevin, collin]),
 
     # hun
