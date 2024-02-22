@@ -12,7 +12,7 @@ class Album(db.Model):
     title = db.Column(db.String(50), nullable=False)
     release_date = db.Column(db.Date, nullable=False)
     genre = db.Column(db.String(50), nullable=False)
-    album_cover_url = db.Column(db.String(255), nullable=False)
+    album_cover_url = db.Column(db.String(255))
 
     user = db.relationship("User", back_populates="album")
     tracks = db.relationship("Track", back_populates="album")

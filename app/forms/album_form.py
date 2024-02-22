@@ -9,4 +9,4 @@ class NewAlbumForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     releaseDate = DateField('releaseDate', validators=[DataRequired()])
     genre = StringField('genre', validators=[DataRequired()])
-    albumCoverUrl = StringField('albumCoverUrl', validators=[DataRequired()])
+    albumCoverUrl = StringField('albumCoverUrl')
