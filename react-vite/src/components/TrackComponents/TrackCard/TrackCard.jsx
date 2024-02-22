@@ -23,7 +23,10 @@ export function TrackCard({ track }) {
     <div title={track?.title} className='track-card-container'>
 
       <NavLink to={`/tracks/${track?.id}`} className='track-card-link'>
-        <div>
+        <div className='track-card-header-container'>
+          <div className="track-card-image-container">
+            <img src={track?.previewImageUrl} alt="Track Preview Image" />
+          </div>
           <p>Preview Image URL: {track?.previewImageUrl}</p>
           <p>Title: {track?.title}</p>
           <p>Artist Name: {track?.artistName}</p>
