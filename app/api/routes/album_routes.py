@@ -34,7 +34,7 @@ def create_new_album():
         preview_image.filename = get_unique_filename(preview_image.filename)
         preview_image_upload = upload_file_to_s3(preview_image)
         if "url" not in preview_image_upload:
-            return {"message": "Track image file required"}
+            return {"message": "Album image file required"}
 
         params = {
             'artist_id': current_user.id,
