@@ -13,7 +13,7 @@ function TrackFormPage() {
   const [title, setTitle] = useState("");
   const [albumId, setAlbumId] = useState("");
   const [genre, setGenre] = useState("");
-  const [trackNumber, setTrackNumber] = useState();
+  const [trackNumber, setTrackNumber] = useState(1);
   const [trackFile, setTrackFile] = useState();
   const [previewImage, setPreviewImage] = useState()
   const [isUpdate, setIsUpdate] = useState(false)
@@ -36,7 +36,6 @@ function TrackFormPage() {
     if (trackId) {
       setIsUpdate(true)
       dispatch(thunkFetchTrackById(trackId)).then((oldTrack) => {
-        console.log(oldTrack)
         setTitle(oldTrack.title)
         setAlbumId(oldTrack.albumId)
         setGenre(oldTrack.genre)
@@ -48,9 +47,10 @@ function TrackFormPage() {
   useEffect(() => {
     const errors = {}
     if (!isUpdate && !trackFile) errors.trackFile = "Need a file for track"
+    if (trackNumber < 1) errors.trackNumber = "Track number must be a positive integer"
+
     setValErrors(errors)
-    console.log(valErrors)
-  }, [trackFile, hasSubmitted, isUpdate])
+  }, [trackFile, hasSubmitted, isUpdate, trackNumber])
 
 
   const handleSubmit = async (e) => {
@@ -79,7 +79,6 @@ function TrackFormPage() {
     formData.append('albumId', albumIdTemp)
     formData.append('genre', genre)
     formData.append('trackNumber', trackNumber)
-    console.log('trackFile is :', trackFile)
     formData.append('trackFile', trackFile)
     formData.append('previewImage', previewImage)
     formData.append('submit', true)
@@ -104,7 +103,7 @@ function TrackFormPage() {
 
   return (
     <>
-      {console.log('albumId: ', albumId)}
+      {console.log('track number is ', trackNumber)}
       <h1>Track Form</h1>
       {/* {valErrors.length > 0 && hasSubmitted == true &&
         valErrors.map((message) => <p key={message}>{message}</p>)} */}
@@ -146,6 +145,7 @@ function TrackFormPage() {
         </label>
         <label>
           Track Number
+          {valErrors.trackNumber && hasSubmitted == true && <span className="validation-error">{valErrors.trackNumber}</span>}
           <input
             type="number"
             name="track_number"

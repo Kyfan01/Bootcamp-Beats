@@ -57,6 +57,7 @@ def create_new_track():
             'url': track_upload['url'],
             'duration': 123,
             'album_id': form.data['albumId'],
+            'track_number': form.data['trackNumber'],
             'preview_image_url': preview_image_upload['url'] if preview_image else None
         }
         new_track = Track(**params)
@@ -100,13 +101,13 @@ def update_track(trackId):
             updated_track = form.data['trackFile']
             updated_track.filename = get_unique_filename(updated_track.filename)
             updated_track_upload = upload_file_to_s3(updated_track)
-            # print(updated_track_upload)
             track.url = updated_track_upload['url']
 
         track.title = form.data['title']
         track.album_id = form.data['albumId']
         track.genre = form.data['genre']
-        track.duration = 'Calculate duration here'
+        track.track_number = form.data['trackNumber']
+        track.duration = 123321
 
         db.session.commit()
         return track.to_dict()
