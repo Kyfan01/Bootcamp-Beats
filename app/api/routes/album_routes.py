@@ -57,9 +57,18 @@ def update_album(albumId):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         album = Album.query.get(albumId)
+
+        if (form.data["albumCoverUrl"]): 
+            remove_file_from_s3(album.album_cover_url) if '/' in album.album_cover_url else None
+
+            updated_album_cover = form.data["albumCoverUrl"]
+            updated_album_cover.filename = get_unique_filename(updated_album_cover.filename)
+            updated_album_cover_upload = upload_file_to_s3(updated_album_cover)
+            print(updated_album_cover_upload)
+            album.albumCoverUrl = updated_album_cover_upload['url']
+
         album.title = form.data['title']
         album.genre = form.data['genre']
-        album.album_cover_url = form.data['albumCoverUrl']
         album.release_date = form.data['releaseDate']
 
         db.session.commit()

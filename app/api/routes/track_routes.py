@@ -86,11 +86,28 @@ def update_track(trackId):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         track = Track.query.get(trackId)
+
+        if (form.data['previewImage']):
+            remove_file_from_s3(track.preview_image_url) if '/' in track.preview_image_url else None
+
+            updated_preview_image = form.data['previewImage']
+            updated_preview_image.filename = get_unique_filename(updated_preview_image.filename)
+            updated_preview_image_upload = upload_file_to_s3(updated_preview_image)
+            print(updated_preview_image_upload)
+            track.preview_image_url = updated_preview_image_upload['url']
+        
+        if (form.data['trackFile']):
+            remove_file_from_s3(track.url) if '/' in track.url else None
+
+            updated_track = form.data['trackFile']
+            updated_track.filename = get_unique_filename(updated_track.filename)
+            updated_track_upload = upload_file_to_s3(updated_track)
+            print(updated_track_upload)
+            track.url = updated_track_upload['url']
+
         track.title = form.data['title']
         track.album_id = form.data['albumId']
         track.genre = form.data['genre']
-        track.url = form.data['trackFile'] #changed from url
-        track.preview_image_url = form.data['previewImage'] #changed from previewImageUrl
         track.duration = 'Calculate duration here'
 
         db.session.commit()

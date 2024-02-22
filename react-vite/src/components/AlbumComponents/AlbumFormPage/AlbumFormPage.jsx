@@ -20,9 +20,29 @@ function AlbumFormPage() {
 
 
   useEffect( () => {
+    function formatReleaseDate(date) {
+      let months = {
+        'Jan': '01',
+        'Feb': '02',
+        'Mar': '03',
+        'Apr': '04',
+        'May': '05',
+        'Jun': '06',
+        'Jul': '07',
+        'Aug': '08',
+        'Sep': '09',
+        'Oct': '10',
+        'Nov': '11',
+        'Dec': '12'
+      }
+      let splitDate = date.split(' ')
+      return `${splitDate[3]}-${months[splitDate[2]]}-${splitDate[1]}`
+    }
     if (albumId) {
       dispatch(thunkFetchAlbumById(albumId)).then((oldAlbum) => {
         setTitle(oldAlbum.title)
+        setReleaseDate(formatReleaseDate(oldAlbum.releaseDate))
+        setGenre(oldAlbum.genre)
       })
     }
   }, [albumId, dispatch])
