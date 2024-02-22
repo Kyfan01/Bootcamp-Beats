@@ -32,9 +32,9 @@ export const deleteTrack = trackId => ({
     trackId
 })
 
-export const toggleLikeTrack = trackId => ({
+export const toggleLikeTrack = track => ({
     type: TOGGLE_LIKE_TRACK,
-    trackId
+    track
 })
 
 
@@ -111,7 +111,7 @@ export const thunkToggleLikeTrack = trackId => async dispatch => {
     console.log('thunk response: ', res)
     if (res.ok) {
         const updatedTrack = await res.json()
-        dispatch(toggleLikeTrack(trackId))
+        dispatch(toggleLikeTrack(updatedTrack))
         return updatedTrack
     } else return 'track like thunk error'
 }
@@ -151,7 +151,7 @@ const trackReducer = (state = {}, action) => {
 
         case TOGGLE_LIKE_TRACK: {
             const newTrackState = { ...state }
-            newTrackState[action.trackId] = action.track
+            newTrackState[action.track.id] = action.track
             return newTrackState
         }
 

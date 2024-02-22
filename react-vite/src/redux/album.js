@@ -51,7 +51,7 @@ export const thunkFetchAlbumById = albumId => async dispatch => {
 }
 
 export const thunkCreateAlbum = album => async dispatch => {
-    const res = await fetch('/api/album', {
+    const res = await fetch('/api/albums', {
         method: 'POST',
         // headers: {
         //     'Content-Type': 'application/json'

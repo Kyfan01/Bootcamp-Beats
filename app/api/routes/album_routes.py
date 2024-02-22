@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from app.api.routes.AWS_helpers import get_unique_filename, upload_file_to_s3
 from app.models import Album, db
 from app.forms import NewAlbumForm
 from flask_login import current_user, login_required
@@ -25,14 +26,21 @@ def user_album_index(userId):
 @login_required
 def create_new_album():
     form = NewAlbumForm()
+    print('album form data: ', form.data)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+
+        preview_image = form.data["albumCoverUrl"]
+        preview_image.filename = get_unique_filename(preview_image.filename)
+        preview_image_upload = upload_file_to_s3(preview_image)
+        if "url" not in preview_image_upload:
+            return {"message": "Track image file required"}
+
         params = {
             'artist_id': current_user.id,
             'title': form.data['title'],
             'genre': form.data['genre'],
-            'album_cover_url': form.data['albumCoverUrl'],
-            'single': form.data['single'],
+            'album_cover_url': preview_image_upload['url'],
             'release_date': form.data['releaseDate']
         }
         new_album = Album(**params)

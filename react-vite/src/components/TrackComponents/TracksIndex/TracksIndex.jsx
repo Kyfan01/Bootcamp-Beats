@@ -9,7 +9,6 @@ export function TracksIndex() {
   
 
   const tracksObj = useSelector(state => state.tracks)
-  console.log('tracksObj: ', tracksObj)
   const tracks = Object.values(tracksObj)
 
   useEffect(() => {

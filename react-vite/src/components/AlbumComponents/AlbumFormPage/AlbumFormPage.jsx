@@ -12,8 +12,8 @@ function AlbumFormPage() {
   const [title, setTitle] = useState("");
   
 
-  const [hasSubmitted, setHasSubmitted] = useState(false)
-  const [errors, setErrors] = useState({});
+  const [hasSubmitted] = useState(false)
+  const [errors] = useState({});
   
 
 

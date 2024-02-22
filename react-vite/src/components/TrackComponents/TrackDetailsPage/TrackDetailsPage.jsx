@@ -10,10 +10,10 @@ export function TrackDetailsPage() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const user = useSelector(state => state.session.user)
+  // const user = useSelector(state => state.session.user)
   const track = useSelector(state => state.tracks[trackId])
 
-  const isOwner = (parseInt(user?.id) === track?.artistId)
+  // const isOwner = (parseInt(user?.id) === track?.artistId)
 
   useEffect(() => {
     dispatch(thunkFetchTrackById(trackId))

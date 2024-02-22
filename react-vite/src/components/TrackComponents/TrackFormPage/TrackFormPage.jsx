@@ -4,20 +4,21 @@ import { useNavigate } from "react-router-dom";
 import {thunkCreateTrack, thunkFetchTrackById, thunkUpdateTrack} from '../../../redux/track'
 import "./TrackForm.css";
 import { useParams } from "react-router-dom";
+import { thunkCreateAlbum } from "../../../redux/album";
 
 function TrackFormPage() {
   const { trackId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
-  const [albumId, setAlbumId] = useState();
+  const [albumId, setAlbumId] = useState("");
   const [genre, setGenre] = useState("");
   const [trackNumber, setTrackNumber] = useState();
   const [trackFile, setTrackFile] = useState();
   const [previewImage, setPreviewImage] = useState()
 
-  const [hasSubmitted, setHasSubmitted] = useState(false)
-  const [errors, setErrors] = useState({});
+  const [hasSubmitted] = useState(false)
+  const [errors] = useState({});
   
   const [albums, setAlbums] = useState([])
 
@@ -45,10 +46,26 @@ function TrackFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let albumIdTemp = albumId;
+    if (!albumId) {
+      const albumFormData = new FormData()
+      albumFormData.append('title', `${title} - Single`)
+      albumFormData.append('releaseDate', new Date().toISOString().split('T')[0])
+      albumFormData.append('genre', genre)
+      if (previewImage) {
+        albumFormData.append('albumCoverUrl', previewImage)
+      }
+      
+      const responseAlbum = await dispatch(thunkCreateAlbum(albumFormData))
+      setAlbumId(responseAlbum.id)
+
+      albumIdTemp = responseAlbum.id
+    }
     
     const formData = new FormData()
     formData.append('title', title)
-    formData.append('albumId', albumId)
+    formData.append('albumId', albumIdTemp)
     formData.append('genre', genre)
     formData.append('trackNumber', trackNumber)
     formData.append('trackFile', trackFile)
@@ -56,6 +73,8 @@ function TrackFormPage() {
     formData.append('submit', true)
 
     if(trackId) {
+      // console.log('trackId: ', trackId)
+      // console.log('formData: ', formData)
       dispatch(thunkUpdateTrack(trackId, formData)).then(() => navigate(`/tracks/${trackId}`))
     } else{
       dispatch(thunkCreateTrack(formData)).then(newTrack => navigate(`/tracks/${newTrack.id}`))
@@ -73,6 +92,7 @@ function TrackFormPage() {
 
   return (
     <>
+      {console.log('albumId: ', albumId)}
       <h1>Track Form</h1>
       {errors.length > 0 && hasSubmitted == true &&
         errors.map((message) => <p key={message}>{message}</p>)}
@@ -94,6 +114,7 @@ function TrackFormPage() {
             value={albumId}
             onChange={(e) => setAlbumId(e.target.value)}  
           >
+            <option value="">(Single)</option>
             {albums.map(album => (
               <option key={album.id} value={album.id}>
                 {album.title}

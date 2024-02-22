@@ -9,10 +9,10 @@ export function AlbumDetailsPage() {
   const { albumId } = useParams()
   const dispatch = useDispatch()
 
-  const user = useSelector(state => state.session.user)
+  // const user = useSelector(state => state.session.user)
   const album = useSelector(state => state.albums[albumId])
 
-  const isOwner = (parseInt(user?.id) === album?.artistId)
+  // const isOwner = (parseInt(user?.id) === album?.artistId)
   
   useEffect(() => {
     dispatch(thunkFetchAlbumById(albumId))
