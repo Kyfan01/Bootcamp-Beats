@@ -10,6 +10,10 @@ function AlbumFormPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
+  // const [artistId, setArtistId] = useState("");
+  // const [releaseDate, setReleaseDate] = useState("");
+
+
   
 
   const [hasSubmitted] = useState(false)

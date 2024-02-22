@@ -77,7 +77,7 @@ def update_track(trackId):
     if not track:
         return {"message": "Track not found"}
 
-    if current_user.id != track.user_id:
+    if current_user.id != track.artist_id:
         return {"error": "You are not the owner of this track"}, 401
 
 
@@ -106,7 +106,7 @@ def delete_track(trackId):
     if (not track):
         return {"message": "Track not found"}
 
-    if current_user.id != track.user_id:
+    if current_user.id != track.artist_id:
         return {"error": "You are not the owner of this track"}, 401
 
     file_to_delete = remove_file_from_s3(track.url)
