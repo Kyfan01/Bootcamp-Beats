@@ -44,29 +44,20 @@ def create_new_track():
         track = form.data["trackFile"]
         track.filename = get_unique_filename(track.filename)
         track_upload = upload_file_to_s3(track)
-        print(track_upload)
 
         preview_image = form.data["previewImage"]
-        preview_image.filename = get_unique_filename(preview_image.filename)
-        preview_image_upload = upload_file_to_s3(preview_image)
-        print(preview_image_upload)
-
-
-        if "url" not in track_upload:
-            return {"message": "Track audio file required"}
-        if "url" not in preview_image_upload:
-            return {"message": "Track image file required"}
+        if (preview_image):
+            preview_image.filename = get_unique_filename(preview_image.filename)
+            preview_image_upload = upload_file_to_s3(preview_image)
 
         params = {
             'artist_id': current_user.id,
             'title': form.data['title'],
             'genre': form.data['genre'],
-            # 'url': form.data['url'],
             'url': track_upload['url'],
             'duration': 123,
             'album_id': form.data['albumId'],
-            # 'preview_image_url': form.data['previewImageUrl']
-            'preview_image_url': preview_image_upload['url']
+            'preview_image_url': preview_image_upload['url'] if preview_image else None
         }
         new_track = Track(**params)
         db.session.add(new_track)
@@ -100,7 +91,7 @@ def update_track(trackId):
             updated_preview_image = form.data['previewImage']
             updated_preview_image.filename = get_unique_filename(updated_preview_image.filename)
             updated_preview_image_upload = upload_file_to_s3(updated_preview_image)
-            print(updated_preview_image_upload)
+            # print(updated_preview_image_upload)
             track.preview_image_url = updated_preview_image_upload['url']
 
         if (form.data['trackFile']):
@@ -109,7 +100,7 @@ def update_track(trackId):
             updated_track = form.data['trackFile']
             updated_track.filename = get_unique_filename(updated_track.filename)
             updated_track_upload = upload_file_to_s3(updated_track)
-            print(updated_track_upload)
+            # print(updated_track_upload)
             track.url = updated_track_upload['url']
 
         track.title = form.data['title']

@@ -34,7 +34,7 @@ export function TrackDetailsPage() {
       <p>Genre: {track?.genre}</p>
       <p>Track Number: {track?.trackNumber}</p>
       <p>Likes: {track?.trackLikes}</p>
-      <p>Liked: {track?.liked}</p>
+      <p>Liked: {track?.liked ? 'true' : 'false'}</p>
       <p>URL: {track?.url}</p>
       <p>Preview Image URL: {track?.previewImageUrl}</p>
       <button onClick={handleDelete}>Delete Track</button>

@@ -12,5 +12,5 @@ class NewTrackForm(FlaskForm):
     albumId = SelectField('album_id', choices = [])
     genre = StringField('genre', validators=[DataRequired()])
     trackNumber = IntegerField('track_number')
-    trackFile = FileField('track', validators=[FileRequired(), FileAllowed(list(ALLOWED_AUDIO_EXTENSIONS))])
+    trackFile = FileField('track', validators=[FileAllowed(list(ALLOWED_AUDIO_EXTENSIONS))])
     previewImage = FileField('preview image', validators=[FileAllowed(list(ALLOWED_IMAGE_EXTENSIONS))])

@@ -26,21 +26,22 @@ def user_album_index(userId):
 @login_required
 def create_new_album():
     form = NewAlbumForm()
-    print('album form data: ', form.data)
+    # print('album form data: ', form.data)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
 
         preview_image = form.data["albumCoverUrl"]
-        preview_image.filename = get_unique_filename(preview_image.filename)
-        preview_image_upload = upload_file_to_s3(preview_image)
-        if "url" not in preview_image_upload:
-            return {"message": "Album image file required"}
+        print('this is the preview_image ', preview_image)
+
+        if (preview_image):
+            preview_image.filename = get_unique_filename(preview_image.filename)
+            preview_image_upload = upload_file_to_s3(preview_image)
 
         params = {
             'artist_id': current_user.id,
             'title': form.data['title'],
             'genre': form.data['genre'],
-            'album_cover_url': preview_image_upload['url'],
+            'album_cover_url': preview_image_upload['url'] if preview_image else None,
             'release_date': form.data['releaseDate']
         }
         new_album = Album(**params)
@@ -58,7 +59,7 @@ def update_album(albumId):
     if form.validate_on_submit():
         album = Album.query.get(albumId)
 
-        if (form.data["albumCoverUrl"]): 
+        if (form.data["albumCoverUrl"]):
             remove_file_from_s3(album.album_cover_url) if '/' in album.album_cover_url else None
 
             updated_album_cover = form.data["albumCoverUrl"]

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {thunkCreateTrack, thunkFetchTrackById, thunkUpdateTrack} from '../../../redux/track'
+import { thunkCreateTrack, thunkFetchTrackById, thunkUpdateTrack } from '../../../redux/track'
 import "./TrackForm.css";
 import { useParams } from "react-router-dom";
 import { thunkCreateAlbum } from "../../../redux/album";
@@ -16,10 +16,11 @@ function TrackFormPage() {
   const [trackNumber, setTrackNumber] = useState();
   const [trackFile, setTrackFile] = useState();
   const [previewImage, setPreviewImage] = useState()
+  const [isUpdate, setIsUpdate] = useState(false)
 
-  const [hasSubmitted] = useState(false)
-  const [errors] = useState({});
-  
+  const [hasSubmitted, setHasSubmitted] = useState(false)
+  const [valErrors, setValErrors] = useState({});
+
   const [albums, setAlbums] = useState([])
 
   useEffect(() => { //fetch the albums when the component mounts so that the dropdown has options
@@ -31,8 +32,9 @@ function TrackFormPage() {
     fetchAlbums()
   }, [])
 
-  useEffect( () => {
+  useEffect(() => {
     if (trackId) {
+      setIsUpdate(true)
       dispatch(thunkFetchTrackById(trackId)).then((oldTrack) => {
         console.log(oldTrack)
         setTitle(oldTrack.title)
@@ -43,9 +45,18 @@ function TrackFormPage() {
     }
   }, [trackId, dispatch])
 
+  useEffect(() => {
+    const errors = {}
+    if (!isUpdate && !trackFile) errors.trackFile = "Need a file for track"
+    setValErrors(errors)
+    console.log(valErrors)
+  }, [trackFile, hasSubmitted, isUpdate])
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setHasSubmitted(true)
+    if (Object.keys(valErrors).length > 0) return null
 
     let albumIdTemp = albumId;
     if (!albumId) {
@@ -56,27 +67,28 @@ function TrackFormPage() {
       if (previewImage) {
         albumFormData.append('albumCoverUrl', previewImage)
       }
-      
+
       const responseAlbum = await dispatch(thunkCreateAlbum(albumFormData))
       setAlbumId(responseAlbum.id)
 
       albumIdTemp = responseAlbum.id
     }
-    
+
     const formData = new FormData()
     formData.append('title', title)
     formData.append('albumId', albumIdTemp)
     formData.append('genre', genre)
     formData.append('trackNumber', trackNumber)
+    console.log('trackFile is :', trackFile)
     formData.append('trackFile', trackFile)
     formData.append('previewImage', previewImage)
     formData.append('submit', true)
 
-    if(trackId) {
+    if (trackId) {
       // console.log('trackId: ', trackId)
       // console.log('formData: ', formData)
       dispatch(thunkUpdateTrack(trackId, formData)).then(() => navigate(`/tracks/${trackId}`))
-    } else{
+    } else {
       dispatch(thunkCreateTrack(formData)).then(newTrack => navigate(`/tracks/${newTrack.id}`))
     }
 
@@ -94,25 +106,25 @@ function TrackFormPage() {
     <>
       {console.log('albumId: ', albumId)}
       <h1>Track Form</h1>
-      {errors.length > 0 && hasSubmitted == true &&
-        errors.map((message) => <p key={message}>{message}</p>)}
+      {/* {valErrors.length > 0 && hasSubmitted == true &&
+        valErrors.map((message) => <p key={message}>{message}</p>)} */}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label>
           Title
-          <input 
+          <input
             type="text"
             name="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
-            />
+          />
         </label>
         <label>
           Album
           <select
             name="album"
             value={albumId}
-            onChange={(e) => setAlbumId(e.target.value)}  
+            onChange={(e) => setAlbumId(e.target.value)}
           >
             <option value="">(Single)</option>
             {albums.map(album => (
@@ -124,7 +136,7 @@ function TrackFormPage() {
         </label>
         <label>
           Genre
-          <input 
+          <input
             type="text"
             name="genre"
             value={genre}
@@ -134,7 +146,7 @@ function TrackFormPage() {
         </label>
         <label>
           Track Number
-          <input 
+          <input
             type="number"
             name="track_number"
             value={trackNumber}
@@ -144,7 +156,8 @@ function TrackFormPage() {
         </label>
         <label>
           Track File
-          <input 
+          {valErrors.trackFile && hasSubmitted == true && <span className="validation-error">{valErrors.trackFile}</span>}
+          <input
             type="file"
             name="track_file"
             onChange={(e) => setTrackFile(e.target.files[0])}
