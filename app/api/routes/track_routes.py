@@ -102,7 +102,7 @@ def update_track(trackId):
             updated_preview_image_upload = upload_file_to_s3(updated_preview_image)
             print(updated_preview_image_upload)
             track.preview_image_url = updated_preview_image_upload['url']
-        
+
         if (form.data['trackFile']):
             remove_file_from_s3(track.url) if '/' in track.url else None
 
