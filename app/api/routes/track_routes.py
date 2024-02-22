@@ -107,9 +107,13 @@ def delete_track(trackId):
         return {"message": "Track not found"}
 
     if current_user.id != track.artist_id:
-        return {"error": "You are not the owner of this track"}, 401
+        return {"error": "You are not the owner of this track",
+                "current_user": current_user.id,
+                "track artist": track.artist_id}, 401
 
-    file_to_delete = remove_file_from_s3(track.url)
+
+    file_to_delete = remove_file_from_s3(track.url) if '/' in track.url else None
+    image_to_delete = remove_file_from_s3(track.preview_image_url) if '/' in track.preview_image_url else None
 
     db.session.delete(track)
     db.session.commit()

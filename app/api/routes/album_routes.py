@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify, request
-from app.api.routes.AWS_helpers import get_unique_filename, upload_file_to_s3
 from app.models import Album, db
 from app.forms import NewAlbumForm
 from flask_login import current_user, login_required
+from .AWS_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 
 album_routes = Blueprint('albums', __name__)
 
@@ -34,7 +34,7 @@ def create_new_album():
         preview_image.filename = get_unique_filename(preview_image.filename)
         preview_image_upload = upload_file_to_s3(preview_image)
         if "url" not in preview_image_upload:
-            return {"message": "Track image file required"}
+            return {"message": "Album image file required"}
 
         params = {
             'artist_id': current_user.id,
@@ -67,12 +67,14 @@ def update_album(albumId):
 
     return form.errors, 401
 
-@album_routes.route('/<int:trackId>', methods = ['DELETE'])
+@album_routes.route('/<int:albumId>', methods = ['DELETE'])
 @login_required
-def delete_track(trackId):
-    track = Album.query.get(trackId)
-    db.session.delete(track)
+def delete_album(albumId):
+    album = Album.query.get(albumId)
+    db.session.delete(album)
     db.session.commit()
+
+    image_to_delete = remove_file_from_s3(album.album_cover_url) if '/' in album.album_cover_url else None
 
     return {
        'message': 'Successfully deleted!'
