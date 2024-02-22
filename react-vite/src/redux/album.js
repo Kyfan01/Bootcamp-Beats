@@ -80,7 +80,7 @@ export const thunkUpdateAlbum = (albumId, album) => async dispatch => {
 }
 
 export const thunkDeleteAlbum = albumId => async dispatch => {
-    const res = await fetch(`/api/tracks/${albumId}`, {
+    const res = await fetch(`/api/albums/${albumId}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
     })
@@ -115,7 +115,7 @@ const albumReducer = (state = {}, action) => {
 
         case UPDATE_ALBUM: {
             const newAlbumState = { ...state }
-            newAlbumState[action.track.id] = action.album
+            newAlbumState[action.album.id] = action.album
             return newAlbumState
         }
 

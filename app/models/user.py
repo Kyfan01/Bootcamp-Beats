@@ -18,8 +18,8 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String(50), nullable=False)
     date_of_birth = db.Column(db.Date, nullable=False)
 
-    tracks = db.relationship("Track", back_populates="user")
-    album = db.relationship("Album", back_populates="user")
+    tracks = db.relationship("Track", back_populates="user", cascade="all, delete-orphan")
+    album = db.relationship("Album", back_populates="user", cascade="all, delete-orphan")
     user_likes = db.relationship("Track", secondary=likes, back_populates="track_likes")
     playlists = db.relationship("Playlist", back_populates="user")
 
@@ -49,7 +49,7 @@ class User(db.Model, UserMixin):
         return {
             'artistName': self.artist_name
         }
-    
+
     def to_dict_with_user_likes(self):
         return {
             'id': self.id,
