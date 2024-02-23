@@ -1,16 +1,17 @@
 import './TrackCard.css'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { thunkToggleLikeTrack } from '../../../redux/track'
 import { useDispatch } from 'react-redux'
+import { thunkFetchPlayingTrack } from '../../../redux/playingTrack'
 
-export function TrackCard({ track, setPlayingTrack }) {
+export function TrackCard({ track }) {
   const dispatch = useDispatch()
 
   const [liked, setLiked] = useState('')
 
   // audio player stuff
-  const [play] = useState(false)
+  // const [play] = useState(false)
   // const trackRef = useRef < HTMLAudioElement > (null)
   //   // const MAX = 20
 
@@ -34,6 +35,11 @@ export function TrackCard({ track, setPlayingTrack }) {
     dispatch(thunkToggleLikeTrack(track?.id))
   }
 
+  const handleTrackSelect = async (e) => {
+    e.preventDefault()
+    dispatch(thunkFetchPlayingTrack(track?.id))
+  }
+
   return (
     <div title={track?.title} className='track-card-container'>
 
@@ -42,19 +48,21 @@ export function TrackCard({ track, setPlayingTrack }) {
           <div className="track-card-image-container">
             <img src={track?.previewImageUrl} alt="Track Preview Image" />
           </div>
-          <p>Preview Image URL: {track?.previewImageUrl}</p>
-          <p>Title: {track?.title}</p>
-          <p>Artist Name: {track?.artistName}</p>
+          <h2>{track?.title}</h2>
+          <p>{track?.artistName}</p>
         </div>
-        <p>Album Title: {track?.albumTitle}</p>
-        <p>Genre: {track?.genre}</p>
-        <p>Track Number: {track?.trackNumber}</p>
       </NavLink>
-      <button type="button" onClick={() => setPlayingTrack(track)}>Select</button>
+
+      <NavLink to={`/albums/${track?.albumId}`} className='track-card-link'>
+        <p>{track?.albumTitle}</p>
+      </NavLink>
+      <button type="button" onClick={handleTrackSelect}>Select</button>
       {/* <audio ref={trackRef} src={track?.url} /> */}
-      <p>URL: {track?.url}</p>
-      <p>Liked: {track?.liked ? 'True' : 'False'}</p>
-      <button onClick={handleSubmit}>{liked ? 'Unlike' : 'Like'}</button>
+
+      <div>
+        <button onClick={handleSubmit}>{liked ? 'Unlike' : 'Like'}</button>
+        <p>{track?.trackLikes}</p>
+      </div>
     </div>
   )
 }

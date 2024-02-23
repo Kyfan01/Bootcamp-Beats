@@ -8,11 +8,13 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import trackReducer from "./track";
 import albumReducer from "./album";
+import playingTrackReducer from "./playingTrack";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   tracks: trackReducer,
-  albums: albumReducer
+  albums: albumReducer,
+  playingTrack: playingTrackReducer
 });
 
 let enhancer;

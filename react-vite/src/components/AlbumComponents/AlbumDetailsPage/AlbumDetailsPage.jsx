@@ -30,21 +30,27 @@ export function AlbumDetailsPage() {
 
   const handleUpdate = (e) => {
     e.preventDefault()
-    navigate(`/tracks/${albumId}/update`)
+    navigate(`/albums/${albumId}/update`)
   }
 
   return (
     <div>
+      <h1>{album?.title} Album Details</h1>
       <div className='album-details-img-container'>
         <img src={album?.albumCoverUrl} alt="Album Preview Image" />
       </div>
-      <p>Title: {album?.title}</p>
-      <p>{album?.releaseDate.split(' ')[3]}</p>
-      <p>{album?.genre}</p>
-      <p>{album?.artistName}</p>
-      <p>{albumTracks.length > 0 ? albumTracks.map(track => <TrackCard track={track} key={track?.id} />) : null}</p>
-      {isOwner && <button onClick={handleDelete}>Delete Album</button>}
-      {isOwner && <button onClick={handleUpdate}>Update Album</button>}
+      <div>
+        <h1>{album?.title}</h1>
+        <p>{album?.releaseDate.split(' ')[3]}</p>
+        <p>{album?.genre}</p>
+        <p>{album?.artistName}</p>
+        {isOwner && <button onClick={handleDelete}>Delete Album</button>}
+        {isOwner && <button onClick={handleUpdate}>Update Album</button>}
+
+      </div>
+      <div>
+        <p>{albumTracks.length > 0 ? albumTracks.map(track => <TrackCard track={track} key={track?.id} />) : null}</p>
+      </div>
     </div>
   )
 }
