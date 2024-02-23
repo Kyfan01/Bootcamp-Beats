@@ -13,9 +13,11 @@ export function Footer({ playingTrack }) {
   }
 
   return (
-    <div>
-      <p>{playingTrack ? playingTrack?.title : 'No track selected'}</p>
-      <button onClick={togglePlay}>Toggle Play</button>
-    </div>
+    <>
+      <div className='track-player'>
+        <p>{playingTrack ? playingTrack?.title : 'No track selected'}</p>
+        <button onClick={togglePlay}>Toggle Play</button>
+      </div>
+    </>
   )
 }

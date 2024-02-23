@@ -173,9 +173,6 @@ const trackReducer = (state = {}, action) => {
             return newTrackState
         }
 
-
-        default:
-            return state
     }
 }
 
