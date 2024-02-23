@@ -8,7 +8,7 @@ export function AlbumCard({ album }) {
       <NavLink to={`/albums/${album.id}`} className='album-card-link'>
         <div>
           <div className='album-card-img-container'>
-            <p>{album?.albumCoverUrl}</p>
+            <img src={album?.albumCoverUrl} alt="Album Preview Image" />
           </div>
           <div>
             <p>Title: {album?.title}</p>

@@ -146,7 +146,7 @@ const trackReducer = (state = {}, action) => {
         }
         case LOAD_ALBUM_TRACKS: {
             const newTrackState = { ...state }
-            action.payload.tracks.forEach(track => { newTrackState[track.id] = track })
+            if (action.payload.tracks) action.payload.tracks.forEach(track => { newTrackState[track.id] = track })
             return newTrackState
         }
         case CREATE_TRACK: {

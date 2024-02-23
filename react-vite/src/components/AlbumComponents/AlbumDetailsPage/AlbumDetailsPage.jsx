@@ -12,11 +12,11 @@ export function AlbumDetailsPage() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  // const user = useSelector(state => state.session.user)
+  const user = useSelector(state => state.session.user)
   const album = useSelector(state => state.albums[albumId])
   const albumTracks = useSelector(state => Object.values(state.tracks).filter(track => parseInt(albumId) === track.albumId))
 
-  // const isOwner = (parseInt(user?.id) === album?.artistId)
+  const isOwner = (user?.id === album?.artistId)
 
   useEffect(() => {
     dispatch(thunkFetchAlbumById(albumId))
@@ -28,18 +28,23 @@ export function AlbumDetailsPage() {
     dispatch(thunkDeleteAlbum(albumId)).then(() => navigate('/albums'))
   }
 
+  const handleUpdate = (e) => {
+    e.preventDefault()
+    navigate(`/tracks/${albumId}/update`)
+  }
+
   return (
     <div>
       <div className='album-details-img-container'>
-        <p>{album?.albumCoverUrl}</p>
+        <img src={album?.albumCoverUrl} alt="Album Preview Image" />
       </div>
       <p>Title: {album?.title}</p>
       <p>{album?.releaseDate.split(' ')[3]}</p>
       <p>{album?.genre}</p>
       <p>{album?.artistName}</p>
-      <p>{albumTracks.map(track => <TrackCard track={track} key={track?.id} />)}</p>
-      <button onClick={handleDelete}>Delete Album</button>
-
+      <p>{albumTracks.length > 0 ? albumTracks.map(track => <TrackCard track={track} key={track?.id} />) : null}</p>
+      {isOwner && <button onClick={handleDelete}>Delete Album</button>}
+      {isOwner && <button onClick={handleUpdate}>Update Album</button>}
     </div>
   )
 }

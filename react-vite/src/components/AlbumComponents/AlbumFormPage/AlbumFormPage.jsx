@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { thunkCreateAlbum, thunkFetchAlbumById, thunkUpdateAlbum } from '../../../redux/album'
 import "./AlbumForm.css";
@@ -17,9 +17,10 @@ function AlbumFormPage() {
   const [hasSubmitted] = useState(false)
   const [errors] = useState({});
 
+  const currentUser = useSelector(state => state.session.user)
 
 
-  useEffect( () => {
+  useEffect(() => {
     function formatReleaseDate(date) {
       let months = {
         'Jan': '01',
@@ -40,12 +41,17 @@ function AlbumFormPage() {
     }
     if (albumId) {
       dispatch(thunkFetchAlbumById(albumId)).then((oldAlbum) => {
+        if (!(currentUser.id === oldAlbum.artistId)) navigate('/albums')
         setTitle(oldAlbum.title)
         setReleaseDate(formatReleaseDate(oldAlbum.releaseDate))
         setGenre(oldAlbum.genre)
       })
     }
-  }, [albumId, dispatch])
+  }, [albumId, dispatch, navigate, currentUser])
+
+  useEffect(() => {
+    if (!currentUser) navigate('/albums')
+  })
 
 
   const handleSubmit = async (e) => {

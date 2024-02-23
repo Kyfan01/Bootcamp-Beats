@@ -35,21 +35,23 @@ function TrackFormPage() {
     if (trackId) {
       setIsUpdate(true)
       dispatch(thunkFetchTrackById(trackId)).then((oldTrack) => {
+        if (!(currentUser.id === oldTrack.artistId)) navigate('/tracks')
         setTitle(oldTrack.title)
         setAlbumId(oldTrack.albumId)
         setGenre(oldTrack.genre)
         setTrackNumber(oldTrack.trackNumber)
       })
     }
-  }, [trackId, dispatch])
+  }, [trackId, dispatch, navigate, currentUser])
 
   useEffect(() => {
     const errors = {}
+    if (!currentUser) navigate('/tracks')
     if (!isUpdate && !trackFile) errors.trackFile = "Need a file for track"
     if (trackNumber < 1) errors.trackNumber = "Track number must be a positive integer"
 
     setValErrors(errors)
-  }, [trackFile, hasSubmitted, isUpdate, trackNumber])
+  }, [trackFile, hasSubmitted, isUpdate, trackNumber, currentUser, navigate])
 
 
   const handleSubmit = async (e) => {

@@ -10,10 +10,10 @@ export function TrackDetailsPage() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  // const user = useSelector(state => state.session.user)
+  const user = useSelector(state => state.session.user)
   const track = useSelector(state => state.tracks[trackId])
 
-  // const isOwner = (parseInt(user?.id) === track?.artistId)
+  const isOwner = (parseInt(user?.id) === track?.artistId)
 
   useEffect(() => {
     dispatch(thunkFetchTrackById(trackId))
@@ -24,8 +24,16 @@ export function TrackDetailsPage() {
     dispatch(thunkDeleteTrack(trackId)).then(() => navigate('/tracks'))
   }
 
+  const handleUpdate = (e) => {
+    e.preventDefault()
+    navigate(`/tracks/${trackId}/update`)
+  }
+
   return (
     <div>
+      <div>
+        <img src={track?.previewImageUrl} alt="Track Preview Image" />
+      </div>
       <p>Title: {track?.title}</p>
       <p>Album Id: {track?.albumId}</p>
       <p>Artist Id: {track?.artistId}</p>
@@ -37,7 +45,8 @@ export function TrackDetailsPage() {
       <p>Liked: {track?.liked ? 'true' : 'false'}</p>
       <p>URL: {track?.url}</p>
       <p>Preview Image URL: {track?.previewImageUrl}</p>
-      <button onClick={handleDelete}>Delete Track</button>
+      {isOwner && <button onClick={handleDelete}>Delete Track</button>}
+      {isOwner && <button onClick={handleUpdate}>Update Track</button>}
     </div>
   )
 }
