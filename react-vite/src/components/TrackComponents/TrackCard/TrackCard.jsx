@@ -48,16 +48,21 @@ export function TrackCard({ track }) {
           <div className="track-card-image-container">
             <img src={track?.previewImageUrl} alt="Track Preview Image" />
           </div>
-          <p>Title: {track?.title}</p>
-          <p>Artist Name: {track?.artistName}</p>
+          <h2>{track?.title}</h2>
+          <p>{track?.artistName}</p>
         </div>
-        <p>Album Title: {track?.albumTitle}</p>
-        <p>Genre: {track?.genre}</p>
-        <p>Track Number: {track?.trackNumber}</p>
+      </NavLink>
+
+      <NavLink to={`/albums/${track?.albumId}`} className='track-card-link'>
+        <p>{track?.albumTitle}</p>
       </NavLink>
       <button type="button" onClick={handleTrackSelect}>Select</button>
       {/* <audio ref={trackRef} src={track?.url} /> */}
-      <button onClick={handleSubmit}>{liked ? 'Unlike' : 'Like'}</button>
+
+      <div>
+        <button onClick={handleSubmit}>{liked ? 'Unlike' : 'Like'}</button>
+        <p>{track?.trackLikes}</p>
+      </div>
     </div>
   )
 }

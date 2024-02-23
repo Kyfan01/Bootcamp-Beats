@@ -103,81 +103,105 @@ function TrackFormPage() {
   };
 
   return (
-    <>
+    <div className="track-form-container">
       <h1>Track Form</h1>
       {/* {valErrors.length > 0 && hasSubmitted == true &&
         valErrors.map((message) => <p key={message}>{message}</p>)} */}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <label>
-          Title
-          <input
-            type="text"
-            name="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Album
-          <select
-            name="album"
-            value={albumId}
-            onChange={(e) => setAlbumId(e.target.value)}
-          >
-            <option value="">(Single)</option>
-            {albums.map(album => (
-              <option key={album.id} value={album.id}>
-                {album.title}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Genre
-          <input
-            type="text"
-            name="genre"
-            value={genre}
-            onChange={(e) => setGenre(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Track Number
-          {valErrors.trackNumber && hasSubmitted == true && <span className="validation-error">{valErrors.trackNumber}</span>}
-          <input
-            type="number"
-            name="track_number"
-            value={trackNumber}
-            onChange={(e) => setTrackNumber(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Track File
-          {valErrors.trackFile && hasSubmitted == true && <span className="validation-error">{valErrors.trackFile}</span>}
-          <input
-            type="file"
-            name="track_file"
-            onChange={(e) => setTrackFile(e.target.files[0])}
-            accept="audio/*"
-          />
-        </label>
-        <label>
-          Album Cover
-          <input
-            type="file"
-            name="album_cover"
-            onChange={(e) => setPreviewImage(e.target.files[0])}
-            accept="image/*"
-          />
-        </label>
+        <div>
+          <label>
+            Title
+            <input
+              type="text"
+              name="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Album
+            <select
+              name="album"
+              value={albumId}
+              onChange={(e) => setAlbumId(e.target.value)}
+            >
+              <option value="">(Single)</option>
+              {albums.map(album => (
+                <option key={album.id} value={album.id}>
+                  {album.title}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Genre
+            <input
+              type="text"
+              name="genre"
+              value={genre}
+              onChange={(e) => setGenre(e.target.value)}
+              required
+            />
+          </label>
+
+        </div>
+
+        <div>
+          <label>
+            Track Number
+            {valErrors.trackNumber && hasSubmitted == true && <span className="validation-error">{valErrors.trackNumber}</span>}
+            <input
+              type="number"
+              name="track_number"
+              value={trackNumber}
+              onChange={(e) => setTrackNumber(e.target.value)}
+              required
+            />
+          </label>
+
+        </div>
+
+        <div>
+          <label>
+            Track File
+            {valErrors.trackFile && hasSubmitted == true && <span className="validation-error">{valErrors.trackFile}</span>}
+            <input
+              type="file"
+              name="track_file"
+              onChange={(e) => setTrackFile(e.target.files[0])}
+              accept="audio/*"
+            />
+          </label>
+
+        </div>
+
+        <div>
+          <label>
+            Album Cover
+            <input
+              type="file"
+              name="album_cover"
+              onChange={(e) => setPreviewImage(e.target.files[0])}
+              accept="image/*"
+            />
+          </label>
+
+        </div>
 
 
-        <button type="submit">Submit</button>
+        <div>
+          <button type="submit">Submit</button>
+
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 

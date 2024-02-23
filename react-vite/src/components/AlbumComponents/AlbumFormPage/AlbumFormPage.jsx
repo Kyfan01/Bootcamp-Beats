@@ -78,56 +78,72 @@ function AlbumFormPage() {
   };
 
   return (
-    <>
-      <h1>Track Form</h1>
+    <div className="album-form-container">
+      <h1>Album Form</h1>
       {errors.length > 0 && hasSubmitted == true &&
         errors.map((message) => <p key={message}>{message}</p>)}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <label>
-          Title
-          <input
-            type="text"
-            name="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Release Date
-          <input
-            type="date"
-            name="releaseDate"
-            value={releaseDate}
-            onChange={(e) => setReleaseDate(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Genre
-          <input
-            type="text"
-            name="genre"
-            value={genre}
-            onChange={(e) => setGenre(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Preview Image
-          <input
-            type="file"
-            name="previewImage"
-            onChange={(e) => setPreviewImage(e.target.files[0])}
-            accept="image/*"
-            required
-          />
-        </label>
 
+        <div>
 
-        <button type="submit">Submit</button>
+          <label>
+            Title
+            <input
+              type="text"
+              name="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Release Date
+            <input
+              type="date"
+              name="releaseDate"
+              value={releaseDate}
+              onChange={(e) => setReleaseDate(e.target.value)}
+              required
+            />
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Genre
+            <input
+              type="text"
+              name="genre"
+              value={genre}
+              onChange={(e) => setGenre(e.target.value)}
+              required
+            />
+          </label>
+
+        </div>
+
+        <div>
+          <label>
+            Preview Image
+            <input
+              type="file"
+              name="previewImage"
+              onChange={(e) => setPreviewImage(e.target.files[0])}
+              accept="image/*"
+              required
+            />
+          </label>
+
+        </div>
+
+        <div>
+          <button type="submit">Submit</button>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 

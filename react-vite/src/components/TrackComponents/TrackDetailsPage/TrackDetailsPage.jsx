@@ -31,20 +31,21 @@ export function TrackDetailsPage() {
 
   return (
     <div>
+      <h1>{track?.title} Track Details</h1>
       <div>
         <img src={track?.previewImageUrl} alt="Track Preview Image" />
       </div>
-      <p>Title: {track?.title}</p>
-      <p>Album Id: {track?.albumId}</p>
-      <p>Artist Id: {track?.artistId}</p>
+      <h1>{track?.title}</h1>
+      {/* <p>Album Id: {track?.albumId}</p>
+      <p>Artist Id: {track?.artistId}</p> */}
       <p>Artist: {track?.artistName}</p>
-      <p>Duration: {track?.duration}</p>
+      {/* <p>Duration: {track?.duration}</p> */}
       <p>Genre: {track?.genre}</p>
       <p>Track Number: {track?.trackNumber}</p>
       <p>Likes: {track?.trackLikes}</p>
       <p>Liked: {track?.liked ? 'true' : 'false'}</p>
-      <p>URL: {track?.url}</p>
-      <p>Preview Image URL: {track?.previewImageUrl}</p>
+      {/* <p>URL: {track?.url}</p>
+      <p>Preview Image URL: {track?.previewImageUrl}</p> */}
       {isOwner && <button onClick={handleDelete}>Delete Track</button>}
       {isOwner && <button onClick={handleUpdate}>Update Track</button>}
     </div>
