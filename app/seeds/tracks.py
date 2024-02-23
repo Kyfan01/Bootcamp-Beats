@@ -1,9 +1,8 @@
 from app.models import db, Track, environment, SCHEMA
 from sqlalchemy.sql import text
-from .users import hun, kevin, collin
 
 
-def seed_tracks():
+def seed_tracks(hun, kevin, collin, demo):
         # collin
     # collin_track1 = Track(
     #     artist_id = '3', album_id = 1, title = 'Believe', duration = 239, genre = 'Pop', track_number = 1, url = 'ineedaurl.com', preview_image_url = test_image_url)

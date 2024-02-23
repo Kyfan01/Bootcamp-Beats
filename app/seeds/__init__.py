@@ -23,9 +23,9 @@ def seed():
         undo_albums()
         undo_users()
         undo_likes()
-    seed_users()
+    [hun, kevin, collin, demo] = seed_users()
     seed_albums()
-    seed_tracks()
+    seed_tracks(hun, kevin, collin, demo)
     # Add other seed functions here
 
 
