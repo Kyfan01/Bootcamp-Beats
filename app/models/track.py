@@ -39,7 +39,7 @@ class Track(db.Model):
             'trackNumber': self.track_number,
             'url': self.url,
             'previewImageUrl': self.preview_image_url,
-            'artistName': self.user.to_dict_name_only().get('artistName'),
+            'artistName': self.user.to_dict_name_only().get('artistName') if self.user else 'No artist',
             'trackLikes': len(self.track_likes),
             'liked': any(user.id == current_user.id for user in self.track_likes) if current_user.is_authenticated else False
         }
