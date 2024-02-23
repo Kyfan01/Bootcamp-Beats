@@ -1,5 +1,5 @@
 import './TrackCard.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { NavLink } from 'react-router-dom'
 import { thunkToggleLikeTrack } from '../../../redux/track'
 import { useDispatch } from 'react-redux'
@@ -8,6 +8,21 @@ export function TrackCard({ track }) {
   const dispatch = useDispatch()
 
   const [liked, setLiked] = useState('')
+
+  // audio player stuff
+  const [play, setPlay] = useState(false)
+  const trackRef = useRef < HTMLAudioElement > (null)
+  // const MAX = 20
+
+  function toggleAudio() {
+    if (play) {
+      trackRef.current?.pause()
+      setPlay(false)
+    } else {
+      trackRef.current?.play()
+      setPlay(true)
+    }
+  }
 
   useEffect(() => {
     setLiked(track?.liked)
@@ -31,10 +46,12 @@ export function TrackCard({ track }) {
           <p>Title: {track?.title}</p>
           <p>Artist Name: {track?.artistName}</p>
         </div>
+        <p>Album Title: {track?.albumTitle}</p>
+        <p>Genre: {track?.genre}</p>
+        <p>Track Number: {track?.trackNumber}</p>
       </NavLink>
-      <p>Album Title: {track?.albumTitle}</p>
-      <p>Genre: {track?.genre}</p>
-      <p>Track Number: {track?.trackNumber}</p>
+      <button type="button" onClick={toggleAudio}>{!play ? 'play' : 'pause'}</button>
+      {/* <audio ref={trackRef} src={track?.url} /> */}
       <p>URL: {track?.url}</p>
       <p>Liked: {track?.liked ? 'True' : 'False'}</p>
       <button onClick={handleSubmit}>{liked ? 'Unlike' : 'Like'}</button>
