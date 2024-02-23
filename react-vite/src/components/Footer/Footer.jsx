@@ -1,6 +1,10 @@
+import { useSelector } from 'react-redux'
 import './Footer.css'
 
-export function Footer({ playingTrack }) {
+export function Footer() {
+
+
+  const playingTrack = useSelector(state => state.playingTrack['selected'])
 
   const src = playingTrack?.url
   const audio = new Audio(src)
@@ -13,7 +17,7 @@ export function Footer({ playingTrack }) {
   }
 
   return (
-    <div>
+    <div className='track-player'>
       <p>{playingTrack ? playingTrack?.title : 'No track selected'}</p>
       <button onClick={togglePlay}>Toggle Play</button>
     </div>

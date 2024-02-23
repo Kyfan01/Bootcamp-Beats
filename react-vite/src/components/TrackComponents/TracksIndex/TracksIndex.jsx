@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import './TracksIndex.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { thunkFetchTracks } from '../../../redux/track';
 import { TrackCard } from '../TrackCard/TrackCard';
-import { Footer } from '../../Footer/Footer';
+// import { Footer } from '../../Footer/Footer';
 
 export function TracksIndex() {
     const dispatch = useDispatch();
 
-    const [playingTrack, setPlayingTrack] = useState()
+    // const [playingTrack, setPlayingTrack] = useState()
 
 
     const tracksObj = useSelector(state => state.tracks)
@@ -25,9 +25,9 @@ export function TracksIndex() {
 
                 <div>
                     <div className='track-index-cards-container'>
-                        {tracks.map(track => <TrackCard track={track} setPlayingTrack={setPlayingTrack} key={track?.id} />)}
+                        {tracks.map(track => <TrackCard track={track} key={track?.id} />)}
                     </div>
-                    <Footer playingTrack={playingTrack}/>
+                    {/* <Footer playingTrack={playingTrack}/> */}
                 </div>
             </div>
         </div>
