@@ -76,7 +76,7 @@ def seed_tracks(hun, kevin, collin, demo):
         Track(artist_id = '1', album_id = 2, title = "Bang!", duration = 171, genre = 'Pop', track_number = 2, url = test_track_url, preview_image_url = test_image_url, track_likes = [hun, kevin])
         ]
     
-    print([track.to_dict() for track in tracks])
+    # print([track.to_dict() for track in tracks])
 
 
     for track in tracks:
