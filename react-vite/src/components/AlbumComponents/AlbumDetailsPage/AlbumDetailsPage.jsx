@@ -30,7 +30,7 @@ export function AlbumDetailsPage() {
 
   const handleUpdate = (e) => {
     e.preventDefault()
-    navigate(`/tracks/${albumId}/update`)
+    navigate(`/albums/${albumId}/update`)
   }
 
   return (

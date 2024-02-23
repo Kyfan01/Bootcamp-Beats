@@ -133,10 +133,8 @@ function AlbumFormPage() {
               name="previewImage"
               onChange={(e) => setPreviewImage(e.target.files[0])}
               accept="image/*"
-              required
             />
           </label>
-
         </div>
 
         <div>
