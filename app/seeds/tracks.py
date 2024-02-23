@@ -86,6 +86,17 @@ def seed_tracks(hun, kevin, collin, demo):
 
     db.session.commit()
 
+    for track in tracks:
+        track.track_likes.append(hun)
+        if track.id % 2 == 0:
+            track.track_likes.append(kevin)
+        if track.id % 3 == 0:
+            track.track_likes.append(collin)
+        
+    db.session.commit()
+
+
+
     # print([track.to_dict() for track in tracks])
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
