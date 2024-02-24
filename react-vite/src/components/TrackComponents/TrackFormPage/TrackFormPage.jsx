@@ -91,7 +91,7 @@ function TrackFormPage() {
     formData.append('submit', true)
 
     if (trackId) {
-      // setIsLoading(true)
+      setIsLoading(true)
       // console.log('trackId: ', trackId)
       // console.log('formData: ', formData)
       dispatch(thunkUpdateTrack(trackId, formData)).then(() => navigate(`/tracks/${trackId}`)).then(() => setIsLoading(false))

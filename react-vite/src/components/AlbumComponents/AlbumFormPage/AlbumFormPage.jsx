@@ -5,6 +5,9 @@ import { thunkCreateAlbum, thunkFetchAlbumById, thunkUpdateAlbum } from '../../.
 import "./AlbumForm.css";
 import { useParams } from "react-router-dom";
 
+import { Oval } from 'react-loader-spinner'
+
+
 function AlbumFormPage() {
   const { albumId } = useParams();
   const navigate = useNavigate();
@@ -16,6 +19,8 @@ function AlbumFormPage() {
 
   const [hasSubmitted] = useState(false)
   const [errors] = useState({});
+
+  const [isLoading, setIsLoading] = useState(false)
 
   const currentUser = useSelector(state => state.session.user)
 
@@ -69,9 +74,10 @@ function AlbumFormPage() {
 
 
     if (albumId) {
-      await dispatch(thunkUpdateAlbum(albumId, formData)).then(() => navigate(`/albums/${albumId}`))
+      setIsLoading(true)
+      await dispatch(thunkUpdateAlbum(albumId, formData)).then(() => navigate(`/albums/${albumId}`)).then(() => setIsLoading(false))
     } else {
-      await dispatch(thunkCreateAlbum(formData)).then(newAlbum => navigate(`/albums/${newAlbum.id}`))
+      await dispatch(thunkCreateAlbum(formData)).then(newAlbum => navigate(`/albums/${newAlbum.id}`)).then(() => setIsLoading(false))
     }
 
 
@@ -137,8 +143,18 @@ function AlbumFormPage() {
           </label>
         </div>
 
-        <div>
+        <div className="submitButtonWithLoadingIcon">
           <button type="submit">Submit</button>
+
+          {isLoading && <Oval
+          visible={true}
+          height="100%"
+          width="100%"
+          color="#4fa94d"
+          ariaLabel="oval-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          />}
         </div>
       </form>
     </div>
