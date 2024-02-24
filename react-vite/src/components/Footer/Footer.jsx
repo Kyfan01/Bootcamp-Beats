@@ -32,15 +32,9 @@ export function Footer() {
   return (
     <div className='track-player'>
       <AudioPlayer
-<<<<<<< HEAD
         autoPlay
         src={src}
       // onPlay={e => console.log("onPlay")}
-=======
-      autoPlay
-      src={src}
-      onPlay={}
->>>>>>> 1fcab427ae8e0b42d6fb22bd107a4c4151a56c9d
       // other props here
       />
     </div>
