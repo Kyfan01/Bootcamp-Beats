@@ -19,9 +19,9 @@ export function AlbumsIndex() {
   return (
     <div>
         <div className='album-index-container'>
-            <h1>Albums in BootCamp Beats</h1>
+            <h1>Albums</h1>
 
-            <div>
+            <div className='album-index'>
                 <div className='album-index-cards-container'>
                     {albums.map(album => <AlbumCard album={album} key={album.id} />)}
                 </div>

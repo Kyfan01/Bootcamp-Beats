@@ -8,13 +8,11 @@ export function AlbumCard({ album }) {
       <NavLink to={`/albums/${album.id}`} className='album-card-link'>
         <div>
           <div className='album-card-img-container'>
-            <img src={album?.albumCoverUrl} alt="Album Preview Image" />
+            <img className='album-card-image' src={album?.albumCoverUrl} alt="Album Preview Image" />
           </div>
           <div>
-            <p>Title: {album?.title}</p>
-            <p>{album?.releaseDate.split(' ')[3]}</p>
-            <p>{album?.genre}</p>
-            <p>{album?.artistName}</p>
+            <p className='album-card-title'>{album?.title.length < 13 ? album?.title : album?.title.substring(0, 13) + '...'}</p>
+            <p className='album-card-artist'>{album?.artistName}</p>
           </div>
 
         </div>
