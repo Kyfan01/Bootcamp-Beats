@@ -5,12 +5,11 @@ import { thunkFetchUserAlbums } from '../../redux/album'
 import { thunkFetchTracksByUserId } from '../../redux/track'
 import { TrackCard } from '../TrackComponents/TrackCard/TrackCard'
 import { AlbumCard } from '../AlbumComponents/AlbumCard/AlbumCard'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { thunkFetchArtist } from '../../redux/artist'
 
 export function UserTracksAlbums() {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     let { userId } = useParams()
     userId = parseInt(userId)
 
@@ -25,8 +24,8 @@ export function UserTracksAlbums() {
         dispatch(thunkFetchUserAlbums(userId))
         dispatch(thunkFetchTracksByUserId(userId))
         dispatch(thunkFetchArtist(userId))
-        if (!artist) navigate('/albums')
-    }, [dispatch, userId, artist, navigate])
+        window.scrollTo(0, 0)
+    }, [dispatch, userId])
 
     return (
         <div>
