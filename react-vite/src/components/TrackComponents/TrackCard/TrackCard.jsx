@@ -59,7 +59,7 @@ export function TrackCard({ track }) {
       <NavLink to={`/albums/${track?.albumId}`} className='track-card-link'>
         <p>{track?.albumTitle}</p>
       </NavLink>
-      <button type="button" onClick={handleTrackSelect}>Select</button>
+      <button type="button" onClick={handleTrackSelect}>Play</button>
       {/* <audio ref={trackRef} src={track?.url} /> */}
 
       <div>

@@ -4,6 +4,7 @@ import './TrackDetailsPage.css'
 import { useParams, useNavigate } from 'react-router-dom'
 import { thunkDeleteTrack, thunkFetchTrackById } from '../../../redux/track'
 import { useDispatch, useSelector } from 'react-redux'
+import { thunkFetchPlayingTrack } from '../../../redux/playingTrack'
 
 export function TrackDetailsPage() {
   const { trackId } = useParams()
@@ -29,6 +30,11 @@ export function TrackDetailsPage() {
     navigate(`/tracks/${trackId}/update`)
   }
 
+  const handleTrackSelect = async (e) => {
+    e.preventDefault()
+    dispatch(thunkFetchPlayingTrack(track?.id))
+  }
+
   return (
     <div>
       <h1>{track?.title} Track Details</h1>
@@ -36,6 +42,7 @@ export function TrackDetailsPage() {
         <img src={track?.previewImageUrl} alt="Track Preview Image" />
       </div>
       <h1>{track?.title}</h1>
+      <button type="button" onClick={handleTrackSelect}>Play</button>
       {/* <p>Album Id: {track?.albumId}</p>
       <p>Artist Id: {track?.artistId}</p> */}
       <p>Artist: {track?.artistName}</p>

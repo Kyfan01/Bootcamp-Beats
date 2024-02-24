@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import './Footer.css'
-import { useState } from 'react'
+// import { useState } from 'react'
 
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
@@ -10,7 +10,7 @@ export function Footer() {
 
   const playingTrack = useSelector(state => state.playingTrack['selected'])
 
-  const [isPlaying, setIsPlaying] = useState(false)
+  // const [isPlaying, setIsPlaying] = useState(false)
 
   const src = playingTrack?.url
 
@@ -32,14 +32,12 @@ export function Footer() {
   return (
     <div className='track-player'>
       <AudioPlayer
-      autoPlay
-      src={src}
-      onPlay={e => console.log("onPlay")}
+        autoPlay
+        src={src}
+      // onPlay={e => console.log("onPlay")}
       // other props here
       />
     </div>
-
-
 
 
     // <div className='track-player'>
