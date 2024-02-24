@@ -5,6 +5,12 @@ import { thunkToggleLikeTrack } from '../../../redux/track'
 import { useDispatch } from 'react-redux'
 import { thunkFetchPlayingTrack } from '../../../redux/playingTrack'
 
+import { IoPlay } from "react-icons/io5";
+import { IoIosHeart } from "react-icons/io";
+import { IoIosHeartEmpty } from "react-icons/io";
+
+
+
 export function TrackCard({ track }) {
   const dispatch = useDispatch()
 
@@ -46,7 +52,8 @@ export function TrackCard({ track }) {
         <div className='track-id-div'>
           <p className='track-id'>{track?.id}</p>
           <div className='track-play-button'>
-            <button type="button" onClick={handleTrackSelect}>Play</button>
+            <IoPlay className='track-hover-play-icon' onClick={handleTrackSelect} />
+            {/* <button type="button" onClick={handleTrackSelect}>Play</button> */}
           </div>
         </div>
         <div className='preview-image-div'>
@@ -63,12 +70,12 @@ export function TrackCard({ track }) {
       </div>
       <div className='album-name-div'>
         <NavLink to={`/albums/${track?.albumId}`} className='track-card-link'>
-          <p>{track?.albumTitle}</p>
+          <p className='track-album'>{track?.albumTitle}</p>
         </NavLink>
       </div>
       <div className='likes-div'>
+        {liked ? <IoIosHeart className='like-heart-icon' onClick={handleSubmit}/> : <IoIosHeartEmpty className='like-heart-icon' onClick={handleSubmit}/>}
         <p>{track?.trackLikes}</p>
-        <button onClick={handleSubmit}>{liked ? 'Unlike' : 'Like'}</button>
       </div>
 
       {/* <div className='track-card-header-container'>

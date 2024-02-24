@@ -1,14 +1,26 @@
+body {
+    background-color: #1a1b1c;
+    color: white;
+}
+
+.rhap_container {
+    background-color: black;
+    color: white;
+}
+
 .track-card-link {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 .track-card-link>p:hover {
     text-decoration: underline;
+    color: white;
 }
 
 .track-card-link>h2:hover {
     text-decoration: underline;
+    color: white;
 }
 
 .track-card-container {
@@ -16,7 +28,7 @@
     width: 100%;
     height: 20%;
     max-height: 20%;
-    border-bottom: black 1px solid;
+    /* border-bottom: white 1px solid; */
     padding: 20px;
     box-sizing: border-box;
     justify-content: space-between;
@@ -24,8 +36,8 @@
 }
 
 .preview-image {
-    height: 80px;
-    padding: 0 5px;
+    height: 70px;
+    padding: 0 8px;
 }
 
 .track-card-header-container {
@@ -43,18 +55,18 @@
     flex-direction: column;
     align-items: stretch;
     width: 50%;
-    border: 1px solid blue;
     justify-content: center;
 }
 
 .track-title {
     font-weight: 600;
-    font-size: x-large;
+    font-size: larger;
 }
 
 .track-artist {
     font-weight: 100;
     font-size: small;
+    color: gray;
 }
 
 .track-id-div {
@@ -62,16 +74,37 @@
     justify-content: start;
     align-items: center;
     height: 50px;
-    width: 10%;
-    border: 1px solid blue;
+    width: 5%;
 }
 
-.track-id-div:hover .track-id {
+.track-card-container:hover .track-id {
     display: none;
 }
 .track-play-button {
     display: none;
 }
-.track-id-div:hover .track-play-button {
+.track-play-button:hover {
+    cursor: pointer;
+}
+.track-card-container:hover .track-play-button {
     display: block;
+}
+
+.track-hover-play-icon {
+    height: 50px;
+}
+
+.track-album {
+    font-size: small;
+    color: gray;
+    text-align: center;
+    width: 300px;
+}
+
+.likes-div {
+    display: flex;
+    align-items: center;
+}
+.like-heart-icon:hover {
+    cursor: pointer;
 }
