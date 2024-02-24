@@ -9,6 +9,7 @@ import TracksIndex from '../components/TrackComponents/TracksIndex/TracksIndex';
 import TrackDetailsPage from '../components/TrackComponents/TrackDetailsPage/TrackDetailsPage';
 import AlbumsIndex from '../components/AlbumComponents/AlbumsIndex/AlbumsIndex';
 import AlbumDetailsPage from '../components/AlbumComponents/AlbumDetailsPage/AlbumDetailsPage';
+import UserTracksAlbums from '../components/UserTracksAlbums/UserTracksAlbums';
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
         path: "/albums/:albumId",
         element: <AlbumDetailsPage />,
       },
+      {
+        path: 'users/:userId',
+        element: <UserTracksAlbums />
+      }
     ],
   },
 ]);

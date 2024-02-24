@@ -1,6 +1,7 @@
 // action types
 export const LOAD_TRACKS = 'tracks/loadTracks'
 export const LOAD_TRACK_BY_ID = 'tracks/loadTrackById'
+export const LOAD_TRACKS_BY_USER_ID = 'tracks/loadTracksByUserId'
 export const LOAD_ALBUM_TRACKS = 'tracks/loadAlbumTracks'
 export const CREATE_TRACK = 'tracks/createTrack'
 export const DELETE_TRACK = 'tracks/deleteTrack'
@@ -16,6 +17,11 @@ export const loadTracks = tracks => ({
 export const loadTrackById = track => ({
     type: LOAD_TRACK_BY_ID,
     track
+})
+
+export const loadTracksByUserId = tracks => ({
+    type: LOAD_TRACKS_BY_USER_ID,
+    payload: tracks
 })
 
 export const loadAlbumTracks = tracks => ({
@@ -61,6 +67,15 @@ export const thunkFetchTrackById = trackId => async dispatch => {
         dispatch(loadTrackById(track))
         return track
     } else return 'fetch track by id thunk error'
+}
+
+export const thunkFetchTracksByUserId = userId => async dispatch => {
+    const res = await fetch(`/api/tracks/user/${userId}`)
+    if (res.ok) {
+        const tracks = await res.json()
+        dispatch(loadTracksByUserId(tracks))
+        return tracks
+    } else return 'fetch tracks by user id thunk error'
 }
 
 export const thunkFetchAlbumTracks = albumId => async dispatch => {
@@ -142,6 +157,11 @@ const trackReducer = (state = {}, action) => {
         case LOAD_TRACK_BY_ID: {
             const newTrackState = { ...state }
             newTrackState[action.track.id] = action.track
+            return newTrackState
+        }
+        case LOAD_TRACKS_BY_USER_ID: {
+            const newTrackState = { ...state }
+            action.payload.tracks.forEach(track => { newTrackState[track.id] = track })
             return newTrackState
         }
         case LOAD_ALBUM_TRACKS: {
