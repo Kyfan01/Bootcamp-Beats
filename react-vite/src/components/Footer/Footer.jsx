@@ -30,7 +30,7 @@ export function Footer() {
   // }
 
   return (
-    <div>
+    <div className='track-player'>
       <AudioPlayer
       autoPlay
       src={src}
