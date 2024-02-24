@@ -34,7 +34,7 @@ export function Footer() {
       <AudioPlayer
       autoPlay
       src={src}
-      onPlay={e => console.log("onPlay")}
+      onPlay={}
       // other props here
       />
     </div>
