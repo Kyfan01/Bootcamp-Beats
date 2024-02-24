@@ -22,3 +22,56 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.preview-image {
+    height: 80px;
+    padding: 0 5px;
+}
+
+.track-card-header-container {
+    display: flex;
+}
+
+.id-image-title-artist-div {
+    display: flex;
+    align-items: center;
+    width: 50%;
+}
+
+.title-artist-div {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 50%;
+    border: 1px solid blue;
+    justify-content: center;
+}
+
+.track-title {
+    font-weight: 600;
+    font-size: x-large;
+}
+
+.track-artist {
+    font-weight: 100;
+    font-size: small;
+}
+
+.track-id-div {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 50px;
+    width: 10%;
+    border: 1px solid blue;
+}
+
+.track-id-div:hover .track-id {
+    display: none;
+}
+.track-play-button {
+    display: none;
+}
+.track-id-div:hover .track-play-button {
+    display: block;
+}

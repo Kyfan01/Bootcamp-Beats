@@ -6,7 +6,7 @@ import uuid
 BUCKET_NAME = os.environ.get("S3_BUCKET")
 S3_LOCATION = f"https://{BUCKET_NAME}.s3.amazonaws.com/"
 ALLOWED_IMAGE_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "gif"}
-ALLOWED_AUDIO_EXTENSIONS = {"mp3", "wav", "mp4"}
+ALLOWED_AUDIO_EXTENSIONS = {"mp3", "wav", "mp4", "m4a"}
 
 
 s3 = boto3.client(

@@ -42,11 +42,39 @@ export function TrackCard({ track }) {
 
   return (
     <div title={track?.title} className='track-card-container'>
+      <div className='id-image-title-artist-div'>
+        <div className='track-id-div'>
+          <p className='track-id'>{track?.id}</p>
+          <div className='track-play-button'>
+            <button type="button" onClick={handleTrackSelect}>Play</button>
+          </div>
+        </div>
+        <div className='preview-image-div'>
+          <img className='preview-image' src={track?.previewImageUrl} alt="Track Preview Image" />
+        </div>
+        <div className='title-artist-div'>
+          <NavLink to={`/tracks/${track?.id}`} className='track-card-link'>
+            <p className='track-title'>{track?.title}</p>
+          </NavLink>
+          <NavLink to={`/users/${track?.artistId}`} className="track-card-link">
+            <p className='track-artist'>{track?.artistName}</p>
+          </NavLink>
+        </div>
+      </div>
+      <div className='album-name-div'>
+        <NavLink to={`/albums/${track?.albumId}`} className='track-card-link'>
+          <p>{track?.albumTitle}</p>
+        </NavLink>
+      </div>
+      <div className='likes-div'>
+        <p>{track?.trackLikes}</p>
+        <button onClick={handleSubmit}>{liked ? 'Unlike' : 'Like'}</button>
+      </div>
 
-      <div className='track-card-header-container'>
+      {/* <div className='track-card-header-container'>
         <NavLink to={`/tracks/${track?.id}`} className='track-card-link'>
           <div className="track-card-image-container">
-            <img src={track?.previewImageUrl} alt="Track Preview Image" />
+            <img className='preview-image' src={track?.previewImageUrl} alt="Track Preview Image" />
           </div>
           <h2>{track?.title}</h2>
         </NavLink>
@@ -59,13 +87,13 @@ export function TrackCard({ track }) {
       <NavLink to={`/albums/${track?.albumId}`} className='track-card-link'>
         <p>{track?.albumTitle}</p>
       </NavLink>
-      <button type="button" onClick={handleTrackSelect}>Play</button>
-      {/* <audio ref={trackRef} src={track?.url} /> */}
+      <button type="button" onClick={handleTrackSelect}>Play</button> */}
+      {/* <audio ref={trackRef} src={track?.url} />
 
       <div>
         <button onClick={handleSubmit}>{liked ? 'Unlike' : 'Like'}</button>
         <p>{track?.trackLikes}</p>
-      </div>
+      </div> */}
     </div>
   )
 }
