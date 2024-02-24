@@ -15,6 +15,8 @@ from .config import Config
 
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
 
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 1024 * 20
+
 # Setup login manager
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'

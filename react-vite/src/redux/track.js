@@ -87,10 +87,10 @@ export const thunkFetchAlbumTracks = albumId => async dispatch => {
 }
 
 export const thunkCreateTrack = track => async dispatch => {
-    const res = await fetch('/api/tracks', {
+    const res = await fetch('/api/tracks/', {
         method: 'POST',
         // headers: {
-        //     'Content-Type': 'application/json'
+        //     'Expect': '100-continue'
         // },
         body: track
     })

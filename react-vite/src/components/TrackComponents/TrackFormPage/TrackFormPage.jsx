@@ -6,6 +6,9 @@ import "./TrackForm.css";
 import { useParams } from "react-router-dom";
 import { thunkCreateAlbum, thunkFetchUserAlbums } from "../../../redux/album";
 
+// import { Oval } from 'react-loader-spinner'
+
+
 function TrackFormPage() {
   const { trackId } = useParams();
   const navigate = useNavigate();
@@ -22,6 +25,8 @@ function TrackFormPage() {
   const [valErrors, setValErrors] = useState({});
 
   const [albums, setAlbums] = useState([])
+
+  // const [isLoading, setIsLoading] = useState(false)
 
   const currentUser = useSelector(state => state.session['user'])
   useEffect(() => { //fetch the albums when the component mounts so that the dropdown has options
@@ -68,8 +73,9 @@ function TrackFormPage() {
       if (previewImage) {
         albumFormData.append('albumCoverUrl', previewImage)
       }
-
+      // setIsLoading(true)
       const responseAlbum = await dispatch(thunkCreateAlbum(albumFormData))
+      // setIsLoading(false)
       setAlbumId(responseAlbum.id)
 
       albumIdTemp = responseAlbum.id
@@ -85,11 +91,14 @@ function TrackFormPage() {
     formData.append('submit', true)
 
     if (trackId) {
+      // setIsLoading(true)
       // console.log('trackId: ', trackId)
       // console.log('formData: ', formData)
       dispatch(thunkUpdateTrack(trackId, formData)).then(() => navigate(`/tracks/${trackId}`))
+      // .then(() => setIsLoading(false))
     } else {
       dispatch(thunkCreateTrack(formData)).then(newTrack => navigate(`/tracks/${newTrack.id}`))
+      // .then(() => setIsLoading(false))
     }
 
 
@@ -196,9 +205,18 @@ function TrackFormPage() {
         </div>
 
 
-        <div>
+        <div className="submitButtonWithLoadingIcon">
           <button type="submit">Submit</button>
-
+          
+          {/* {isLoading && <Oval
+          visible={true}
+          height="100%"
+          width="100%"
+          color="#4fa94d"
+          ariaLabel="oval-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          />} */}
         </div>
       </form>
     </div>
