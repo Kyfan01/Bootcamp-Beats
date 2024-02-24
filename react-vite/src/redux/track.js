@@ -1,5 +1,3 @@
-import { bindActionCreators } from "redux"
-
 // action types
 export const LOAD_TRACKS = 'tracks/loadTracks'
 export const LOAD_TRACK_BY_ID = 'tracks/loadTrackById'
@@ -164,6 +162,7 @@ const trackReducer = (state = {}, action) => {
         case LOAD_TRACKS_BY_USER_ID: {
             const newTrackState = { ...state }
             action.payload.tracks.forEach(track => { newTrackState[track.id] = track })
+            return newTrackState
         }
         case LOAD_ALBUM_TRACKS: {
             const newTrackState = { ...state }
