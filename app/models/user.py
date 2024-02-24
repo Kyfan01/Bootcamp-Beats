@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     artist_name = db.Column(db.String(50), nullable=False)
     name = db.Column(db.String(50), nullable=False)
-    date_of_birth = db.Column(db.Date, nullable=False)
+    date_of_birth = db.Column(db.Date)
 
     tracks = db.relationship("Track", back_populates="user", cascade="all, delete-orphan")
     album = db.relationship("Album", back_populates="user", cascade="all, delete-orphan")
@@ -41,8 +41,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'artistName': self.artist_name,
-            'name': self.name,
-            'dateOfBirth': self.date_of_birth
+            'name': self.name
         }
 
     def to_dict_name_only(self):
@@ -57,6 +56,5 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'artistName': self.artist_name,
             'name': self.name,
-            'dateOfBirth': self.date_of_birth,
             'userLikes': [track.to_dict() for track in self.user_likes]
         }
