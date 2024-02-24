@@ -3,6 +3,10 @@
     color: black;
 }
 
+.track-card-link>p:hover {
+    text-decoration: underline;
+}
+
 .track-card-container {
     display: flex;
     width: 100%;

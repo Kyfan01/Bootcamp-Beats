@@ -57,7 +57,7 @@ function LoginFormModal() {
 
         <button className='login-modal-button'
           onClick={() => {
-            setEmail('kyfn@aa.io')
+            setEmail('demo@aa.io')
             setPassword('password')
           }}>Log In as Demo User</button>
       </form>

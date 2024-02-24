@@ -51,7 +51,7 @@ export function TrackCard({ track }) {
           <h2>{track?.title}</h2>
         </NavLink>
 
-        <NavLink to={`/users/${track?.artistId}`}>
+        <NavLink to={`/users/${track?.artistId}`} className="track-card-link">
           <p>{track?.artistName}</p>
         </NavLink>
       </div>
