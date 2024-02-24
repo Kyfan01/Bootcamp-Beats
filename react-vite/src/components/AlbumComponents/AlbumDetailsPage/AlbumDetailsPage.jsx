@@ -15,6 +15,7 @@ export function AlbumDetailsPage() {
   const user = useSelector(state => state.session.user)
   const album = useSelector(state => state.albums[albumId])
   const albumTracks = useSelector(state => Object.values(state.tracks).filter(track => parseInt(albumId) === track.albumId))
+  const sortedAlbumTracks = albumTracks.sort((a, b) => a.trackNumber - b.trackNumber)
 
   const isOwner = (user?.id === album?.artistId)
 
@@ -35,6 +36,8 @@ export function AlbumDetailsPage() {
 
   return (
     <div>
+      {console.log('albumTracks', albumTracks)}
+      {console.log('sortedAlbumTracks', sortedAlbumTracks)}
       <h1>{album?.title} Album Details</h1>
       <div className='album-details-img-container'>
         <img src={album?.albumCoverUrl} alt="Album Preview Image" />
@@ -49,7 +52,7 @@ export function AlbumDetailsPage() {
 
       </div>
       <div>
-        <p>{albumTracks.length > 0 ? albumTracks.map(track => <TrackCard track={track} key={track?.id} />) : null}</p>
+        <p>{sortedAlbumTracks.length > 0 ? sortedAlbumTracks.map(track => <TrackCard track={track} key={track?.id} />) : null}</p>
       </div>
     </div>
   )
