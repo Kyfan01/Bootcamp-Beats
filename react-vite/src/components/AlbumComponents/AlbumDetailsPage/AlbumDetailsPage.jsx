@@ -1,11 +1,17 @@
 import { useEffect } from 'react'
 import './AlbumDetailsPage.css'
 
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, NavLink } from 'react-router-dom'
 import { thunkFetchAlbumById, thunkDeleteAlbum } from '../../../redux/album'
 import { useDispatch, useSelector } from 'react-redux'
 import { thunkFetchAlbumTracks } from '../../../redux/track'
 import { TrackCard } from '../../TrackComponents/TrackCard/TrackCard'
+
+import { IoPlayCircle } from "react-icons/io5";
+import { TbArrowsExchange2 } from "react-icons/tb";
+import { MdDelete } from "react-icons/md";
+
+import { thunkFetchPlayingTrack } from '../../../redux/playingTrack'
 
 export function AlbumDetailsPage() {
   const { albumId } = useParams()
@@ -34,9 +40,37 @@ export function AlbumDetailsPage() {
     navigate(`/albums/${albumId}/update`)
   }
 
+  const handleTrackSelect = async (e) => {
+    e.preventDefault()
+    dispatch(thunkFetchPlayingTrack(sortedAlbumTracks[0]?.id))
+  }
+
   return (
     <div>
-      {console.log('albumTracks', albumTracks)}
+      <div className='album-details-header-div'>
+        <div className='album-details-header-image-div'>
+          <img src={album?.albumCoverUrl} alt="Album Preview Image" />
+        </div>
+        <div className='album-details-header-details-div'>
+          <p className='album-details-album-word'>Album</p>
+          <p className='album-details-album-name'>{album?.title}</p>
+          <div className='album-details-artist-year-length-div'>
+            <p className='album-details-artist'>{album?.artistName} •</p>
+            <p>{album?.releaseDate.split(' ')[3]} •</p>
+            <p>{sortedAlbumTracks.length} songs</p>
+          </div>
+        </div>
+      </div>
+      <div className='play-update-delete-div'>
+        <IoPlayCircle className='album-details-header-playicon' onClick={handleTrackSelect} />
+        {isOwner && <TbArrowsExchange2 className='album-details-update' onClick={handleUpdate}/>}
+        {isOwner && <MdDelete className='album-details-delete' onClick={handleDelete}/>}
+      </div>
+
+
+
+
+      {/* {console.log('albumTracks', albumTracks)}
       {console.log('sortedAlbumTracks', sortedAlbumTracks)}
       <h1>{album?.title} Album Details</h1>
       <div className='album-details-img-container'>
@@ -50,7 +84,7 @@ export function AlbumDetailsPage() {
         {isOwner && <button onClick={handleDelete}>Delete Album</button>}
         {isOwner && <button onClick={handleUpdate}>Update Album</button>}
 
-      </div>
+      </div> */}
       <div>
         <p>{sortedAlbumTracks.length > 0 ? sortedAlbumTracks.map(track => <TrackCard track={track} key={track?.id} />) : null}</p>
       </div>
