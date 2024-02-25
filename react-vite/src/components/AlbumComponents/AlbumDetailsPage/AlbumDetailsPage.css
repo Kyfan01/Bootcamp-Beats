@@ -1,0 +1,63 @@
+.album-details-header-image-div {
+  width: 30%;
+}
+.album-details-header-image-div img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.album-details-album-word {
+  font-size: x-small;
+}
+
+.album-details-album-name {
+  font-size: xx-large;
+  font-weight: 600;
+}
+
+.album-details-artist-year-length-div {
+  display: flex;
+  align-items: center;
+  font-size: small;
+}
+
+.album-details-header-div {
+  display: flex;
+  align-items: flex-end;
+}
+
+.album-details-header-details-div {
+  margin: 0 0 0 10px;
+  width: 100%;
+}
+
+.album-details-header-playicon {
+  width: 50px;
+  height: 50px;
+  margin: 0 0 0 5px;
+}
+.album-details-header-playicon:hover {
+  cursor: pointer;
+}
+
+.album-details-update {
+  width: 20px;
+  height: 20px;
+  margin: 0 10px;
+}
+.album-details-update:hover {
+  cursor: pointer;
+}
+
+.album-details-delete {
+  width: 20px;
+  height: 20px;
+}
+.album-details-delete:hover {
+  cursor: pointer;
+}
+
+.play-update-delete-div {
+  display: flex;
+  align-items: center;
+}

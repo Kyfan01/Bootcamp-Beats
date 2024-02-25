@@ -33,6 +33,11 @@ body {
     box-sizing: border-box;
     justify-content: space-between;
     align-items: center;
+    transition: background-color .25s ease;
+    border-radius: 5px;
+}
+.track-card-container:hover {
+    background-color: #2b2d2e;
 }
 
 .preview-image {
@@ -107,4 +112,8 @@ body {
 }
 .like-heart-icon:hover {
     cursor: pointer;
+}
+
+.isPlaying {
+    color: rgb(43, 181, 43);
 }

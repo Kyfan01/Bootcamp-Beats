@@ -2,7 +2,7 @@ import './TrackCard.css'
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { thunkToggleLikeTrack } from '../../../redux/track'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { thunkFetchPlayingTrack } from '../../../redux/playingTrack'
 
 import { IoPlay } from "react-icons/io5";
@@ -31,9 +31,21 @@ export function TrackCard({ track }) {
   //   }
   // }
 
+  const currentlyPlayingTrackId = useSelector(state => state.playingTrack['selected']?.id)
+
+  const [isPlayingTag, setIsPlayingTag] = useState(false)
+
   useEffect(() => {
     setLiked(track?.liked)
   }, [track])
+
+  useEffect(() => {
+    if (currentlyPlayingTrackId == track?.id) {
+      setIsPlayingTag(true)
+    } else {
+      setIsPlayingTag(false)
+    }
+  }, [currentlyPlayingTrackId])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -61,7 +73,7 @@ export function TrackCard({ track }) {
         </div>
         <div className='title-artist-div'>
           <NavLink to={`/tracks/${track?.id}`} className='track-card-link'>
-            <p className='track-title'>{track?.title}</p>
+            <p className={isPlayingTag ? 'track-title isPlaying' : 'track-title'}>{track?.title}</p>
           </NavLink>
           <NavLink to={`/users/${track?.artistId}`} className="track-card-link">
             <p className='track-artist'>{track?.artistName}</p>
