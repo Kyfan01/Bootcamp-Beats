@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import './AlbumDetailsPage.css'
 
-import { useParams, useNavigate, NavLink } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { thunkFetchAlbumById, thunkDeleteAlbum } from '../../../redux/album'
 import { useDispatch, useSelector } from 'react-redux'
 import { thunkFetchAlbumTracks } from '../../../redux/track'
