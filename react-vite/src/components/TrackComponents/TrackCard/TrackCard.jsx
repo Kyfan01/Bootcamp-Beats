@@ -8,6 +8,7 @@ import { thunkFetchPlayingTrack } from '../../../redux/playingTrack'
 import { IoPlay } from "react-icons/io5";
 import { IoIosHeart } from "react-icons/io";
 import { IoIosHeartEmpty } from "react-icons/io";
+import { Audio } from 'react-loader-spinner'
 
 
 
@@ -64,7 +65,18 @@ export function TrackCard({ track }) {
         <div className='track-id-div'>
           <p className='track-id'>{track?.id}</p>
           <div className='track-play-button'>
-            <IoPlay className='track-hover-play-icon' onClick={handleTrackSelect} />
+            {!isPlayingTag ? <IoPlay className='track-hover-play-icon' onClick={handleTrackSelect} /> : 
+            <Audio
+            height="20px"
+            width="20px"
+            radius="9"
+            color="green"
+            ariaLabel="three-dots-loading"
+            wrapperStyle
+            wrapperClass
+          />
+            }
+            
             {/* <button type="button" onClick={handleTrackSelect}>Play</button> */}
           </div>
         </div>
