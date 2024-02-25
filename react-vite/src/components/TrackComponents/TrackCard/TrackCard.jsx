@@ -15,8 +15,9 @@ import { Audio } from 'react-loader-spinner'
 export function TrackCard({ numTrack, track }) {
   const dispatch = useDispatch()
 
-  const user = useSelector(state => state.session.user)
-  const [liked, setLiked] = useState('')
+  // const user = useSelector(state => state.session.user)
+  // const [liked, setLiked] = useState('')
+  const isLiked = useSelector(state => state.tracks[track?.id]?.liked)
 
   // audio player stuff
   // const [play] = useState(false)
@@ -37,9 +38,9 @@ export function TrackCard({ numTrack, track }) {
 
   const [isPlayingTag, setIsPlayingTag] = useState(false)
 
-  useEffect(() => {
-    setLiked(track?.liked)
-  }, [track, user])
+  // useEffect(() => {
+  //   setLiked(track?.liked)
+  // }, [track, user])
 
   useEffect(() => {
     if (currentlyPlayingTrackId == track?.id) {
@@ -99,7 +100,7 @@ export function TrackCard({ numTrack, track }) {
         </NavLink>
       </div>
       <div className='likes-div'>
-        {liked ? <IoIosHeart className='like-heart-icon' onClick={handleSubmit} /> : <IoIosHeartEmpty className='like-heart-icon' onClick={handleSubmit} />}
+        {isLiked ? <IoIosHeart className='like-heart-icon' onClick={handleSubmit} /> : <IoIosHeartEmpty className='like-heart-icon' onClick={handleSubmit} />}
         <p>{track?.trackLikes}</p>
       </div>
 

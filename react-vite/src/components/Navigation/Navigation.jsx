@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 import { PiMusicNotesPlusFill } from "react-icons/pi";
 import { PiMusicNotesFill } from "react-icons/pi";
@@ -14,7 +15,7 @@ function Navigation() {
   const user = useSelector(state => state.session.user)
   return (
     <div className="navbar">
-      <NavLink to='/tracks' className='nav-logo'>
+      <NavLink to='/' className='nav-logo'>
         <p>logo here</p>
       </NavLink>
       <div className="nav-buttons">

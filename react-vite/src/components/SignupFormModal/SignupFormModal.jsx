@@ -39,6 +39,7 @@ function SignupFormModal() {
       setErrors(serverResponse);
     } else {
       closeModal();
+      window.location.reload(false);
     }
   };
 

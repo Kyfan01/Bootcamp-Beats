@@ -35,10 +35,12 @@ function ProfileButton() {
 
   const closeMenu = () => setShowMenu(false);
 
-  const logout = (e) => {
+  const logout = async (e) => {
     e.preventDefault();
-    dispatch(thunkLogout());
-    closeMenu();
+    dispatch(thunkLogout()).then(() => {
+      closeMenu();
+      window.location.reload(false);
+    })
   };
 
   return (
