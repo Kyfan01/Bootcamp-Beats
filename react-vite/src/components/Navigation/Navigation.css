@@ -8,10 +8,9 @@
 .profile-dropdown-menu {
   display: flex;
   flex-direction: column;
-  background: white;
+  background: #2b2d2e;
   border-radius: 5px;
   padding: 20px;
-  border: black 3px solid;
 }
 
 .profile-dropdown-menu>li>a {
