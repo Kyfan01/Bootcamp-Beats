@@ -10,6 +10,7 @@ import TrackDetailsPage from '../components/TrackComponents/TrackDetailsPage/Tra
 import AlbumsIndex from '../components/AlbumComponents/AlbumsIndex/AlbumsIndex';
 import AlbumDetailsPage from '../components/AlbumComponents/AlbumDetailsPage/AlbumDetailsPage';
 import UserTracksAlbums from '../components/UserTracksAlbums/UserTracksAlbums';
+import { SplashPage } from '../components/SplashPage/SplashPage';
 
 export const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Welcome!</h1>,
+        element: <SplashPage />,
       },
       {
         path: "login",
