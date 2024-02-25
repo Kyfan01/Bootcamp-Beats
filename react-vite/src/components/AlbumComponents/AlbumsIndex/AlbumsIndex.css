@@ -16,3 +16,7 @@
   display: flex;
   justify-content: center;
 }
+
+.album-details-artist {
+  font-weight: 600;
+}

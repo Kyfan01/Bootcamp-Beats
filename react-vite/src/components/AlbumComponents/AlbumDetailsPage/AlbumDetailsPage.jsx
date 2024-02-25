@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import './AlbumDetailsPage.css'
 
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, NavLink } from 'react-router-dom'
 import { thunkFetchAlbumById, thunkDeleteAlbum } from '../../../redux/album'
 import { useDispatch, useSelector } from 'react-redux'
 import { thunkFetchAlbumTracks } from '../../../redux/track'
@@ -55,8 +55,8 @@ export function AlbumDetailsPage() {
           <p className='album-details-album-word'>Album</p>
           <p className='album-details-album-name'>{album?.title}</p>
           <div className='album-details-artist-year-length-div'>
-            <p>{album?.artistName} •</p>
-            <p>{album?.releaseDate} •</p>
+            <p className='album-details-artist'>{album?.artistName} •</p>
+            <p>{album?.releaseDate.split(' ')[3]} •</p>
             <p>{sortedAlbumTracks.length} songs</p>
           </div>
         </div>
