@@ -47,7 +47,7 @@ export function AlbumDetailsPage() {
   }
 
   return (
-    <div>
+    <div id='album-details-body'>
       <div className='album-details-header-div'>
         <div className='album-details-header-image-div'>
           <img src={album?.albumCoverUrl} alt="Album Preview Image" />
