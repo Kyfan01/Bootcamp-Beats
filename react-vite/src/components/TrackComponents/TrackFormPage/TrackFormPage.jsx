@@ -31,7 +31,9 @@ function TrackFormPage() {
   const currentUser = useSelector(state => state.session['user'])
   useEffect(() => { //fetch the albums when the component mounts so that the dropdown has options
     if (currentUser) {
-      dispatch(thunkFetchUserAlbums(currentUser.id)).then(userAlbums => setAlbums(userAlbums.albums))
+      dispatch(thunkFetchUserAlbums(currentUser.id)).then(userAlbums => {
+        setAlbums(userAlbums.albums)
+      })
     }
   }, [dispatch, currentUser])
 

@@ -34,7 +34,8 @@
 .album-details-header-playicon {
   width: 50px;
   height: 50px;
-  margin: 0 0 0 5px;
+  margin: 0 0 0 
+  5px;
 }
 .album-details-header-playicon:hover {
   cursor: pointer;

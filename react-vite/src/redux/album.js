@@ -61,6 +61,9 @@ export const thunkFetchUserAlbums = userId => async dispatch => {
     const res = await fetch(`/api/albums/user/${userId}`)
     if (res.ok) {
         const albums = await res.json()
+        if (albums.message != null) {
+            return { albums: [] }
+        }
         dispatch(loadUserAlbums(albums))
         return albums
     } else return 'fetch user albums thunk error'
@@ -125,7 +128,7 @@ const albumReducer = (state = {}, action) => {
 
         case LOAD_USER_ALBUMS: {
             const newAlbumState = { ...state }
-            action.payload.albums.forEach(album => { newAlbumState[album.id] = album })
+            action.payload.albums?.forEach(album => { newAlbumState[album.id] = album })
             return newAlbumState
         }
 
