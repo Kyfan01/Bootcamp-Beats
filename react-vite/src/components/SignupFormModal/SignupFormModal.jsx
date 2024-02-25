@@ -44,10 +44,12 @@ function SignupFormModal() {
 
   return (
     <>
-      <h1>Sign Up</h1>
+      <div className="signup-header-div">
+        <h1>Sign Up</h1>
+      </div>
       {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form className="signup-form" onSubmit={handleSubmit}>
+        <label className="signup-form-input">
           Email
           <input
             type="text"
@@ -57,7 +59,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.email && <p>{errors.email}</p>}
-        <label>
+        <label className="signup-form-input">
           Username
           <input
             type="text"
@@ -67,7 +69,7 @@ function SignupFormModal() {
           />
         </label>
 
-        <label>
+        <label className="signup-form-input">
           Artist Name
           <input
             type="text"
@@ -77,7 +79,7 @@ function SignupFormModal() {
           />
         </label>
 
-        <label>
+        <label className="signup-form-input">
           Name
           <input
             type="text"
@@ -88,7 +90,7 @@ function SignupFormModal() {
         </label>
 
         {errors.username && <p>{errors.username}</p>}
-        <label>
+        <label className="signup-form-input">
           Password
           <input
             type="password"
@@ -98,7 +100,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
-        <label>
+        <label className="signup-form-input">
           Confirm Password
           <input
             type="password"
@@ -107,8 +109,10 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        <div className="signup-form-submit-button-div">
+          {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+          <button type="submit">Sign Up</button>
+        </div>
       </form>
     </>
   );
