@@ -59,12 +59,12 @@ def seed_tracks(hun, kevin, collin, demo):
 
     tracks = [
     # collin
-        Track(artist_id = 3, album_id = 1, title = 'Data drive', duration = 300, genre = 'EDM', track_number = 1, url = 'https://bootcampbeats-tracks.s3.amazonaws.com/seeder-track-1.m4a', preview_image_url = album_image_1),
-        Track(artist_id = 3, album_id = 1, title = 'Digital dreams', duration = 291, genre = 'EDM', track_number = 2, url = 'https://bootcampbeats-tracks.s3.amazonaws.com/seeder-track-2.m4a', preview_image_url = album_image_1),
+        Track(artist_id = 3, album_id = 1, title = 'Data Drive', duration = 300, genre = 'EDM', track_number = 1, url = 'https://bootcampbeats-tracks.s3.amazonaws.com/seeder-track-1.m4a', preview_image_url = album_image_1),
+        Track(artist_id = 3, album_id = 1, title = 'Digital Dreams', duration = 291, genre = 'EDM', track_number = 2, url = 'https://bootcampbeats-tracks.s3.amazonaws.com/seeder-track-2.m4a', preview_image_url = album_image_1),
         Track(artist_id = 3, album_id = 1, title = 'Code Jam', duration = 201, genre = 'Pop', track_number = 3, url = 'https://bootcampbeats-tracks.s3.amazonaws.com/seeder-track-3.m4a', preview_image_url = album_image_1),
         Track(artist_id = 3, album_id = 1, title = 'Syntax Symphony', duration = 224, genre = 'Pop', track_number = 4, url = 'https://bootcampbeats-tracks.s3.amazonaws.com/seeder-track-4.m4a', preview_image_url = album_image_1),
         Track(artist_id = 3, album_id = 5, title = 'Binary Boogie', duration = 196, genre = 'Pop', track_number = 5, url = 'https://bootcampbeats-tracks.s3.amazonaws.com/seeder-track-5.m4a', preview_image_url = album_image_2),
-        Track(artist_id = 3, album_id = 5, title = 'Byte-sized Beats', duration = 213, genre = 'Pop', track_number = 6, url = 'https://bootcampbeats-tracks.s3.amazonaws.com/seeder-track-6.m4a', preview_image_url = album_image_2),
+        Track(artist_id = 3, album_id = 5, title = 'Byte-Sized Beats', duration = 213, genre = 'Pop', track_number = 6, url = 'https://bootcampbeats-tracks.s3.amazonaws.com/seeder-track-6.m4a', preview_image_url = album_image_2),
         Track(artist_id = 3, album_id = 5, title = 'Loop Logic', duration = 198, genre = 'Pop', track_number = 7, url = 'https://bootcampbeats-tracks.s3.amazonaws.com/seeder-track-7.m4a', preview_image_url = album_image_2 ),
         Track(artist_id = 3, album_id = 6, title = 'Pixel Pulse', duration = 189, genre = 'Pop', track_number = 8, url = 'https://bootcampbeats-tracks.s3.amazonaws.com/seeder-track-8.m4a', preview_image_url = album_image_3),
         Track(artist_id = 3, album_id = 6, title = 'Bit Bounce', duration = 199, genre = 'Pop', track_number = 9, url = 'https://bootcampbeats-tracks.s3.amazonaws.com/seeder-track-9.m4a', preview_image_url = album_image_3),

@@ -18,7 +18,7 @@ def seed_users():
     kevin = User(
         name='Kevin Fan', username='kyfn', email='kyfn@aa.io', password='password', artist_name='Kay-Z', date_of_birth=date(1997, 12, 4))
     collin = User(
-        name='Collin Ullmann', username='collinullmann', email='collinullmann@aa.io', password='password', artist_name='DJ-bytebeat', date_of_birth=date(1943, 12, 4))
+        name='Collin Ullmann', username='collinullmann', email='collinullmann@aa.io', password='password', artist_name='DJ ByteBeat', date_of_birth=date(1943, 12, 4))
     demo = User(
         name='Demo User', username='demo', email='demo@aa.io', password='password', artist_name='DJ-Demo', date_of_birth=date(1000, 12, 4))
 
