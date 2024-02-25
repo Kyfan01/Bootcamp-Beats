@@ -12,7 +12,7 @@ import { Audio } from 'react-loader-spinner'
 
 
 
-export function TrackCard({ track }) {
+export function TrackCard({ numTrack, track }) {
   const dispatch = useDispatch()
 
   const user = useSelector(state => state.session.user)
@@ -64,7 +64,7 @@ export function TrackCard({ track }) {
     <div title={track?.title} className='track-card-container'>
       <div className='id-image-title-artist-div'>
         <div className='track-id-div'>
-          <p className='track-id'>{track?.id}</p>
+          <p className='track-id'>{numTrack}</p>
           <div className='track-play-button'>
             {!isPlayingTag ? <IoPlay className='track-hover-play-icon' onClick={handleTrackSelect} /> :
               <Audio

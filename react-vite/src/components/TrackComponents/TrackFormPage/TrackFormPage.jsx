@@ -113,11 +113,11 @@ function TrackFormPage() {
 
   return (
     <div className="track-form-container">
-      <h1>Track Form</h1>
+      <h1>New Track</h1>
       {/* {valErrors.length > 0 && hasSubmitted == true &&
         valErrors.map((message) => <p key={message}>{message}</p>)} */}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <div>
+        <div className="form-input title">
           <label>
             Title
             <input
@@ -130,7 +130,7 @@ function TrackFormPage() {
           </label>
         </div>
 
-        <div>
+        <div className="form-input album">
           <label>
             Album
             <select
@@ -148,7 +148,7 @@ function TrackFormPage() {
           </label>
         </div>
 
-        <div>
+        <div className="form-input genre">
           <label>
             Genre
             <input
@@ -162,7 +162,7 @@ function TrackFormPage() {
 
         </div>
 
-        <div>
+        <div className="form-input track-number">
           <label>
             Track Number
             {valErrors.trackNumber && hasSubmitted == true && <span className="validation-error">{valErrors.trackNumber}</span>}
@@ -177,7 +177,7 @@ function TrackFormPage() {
 
         </div>
 
-        <div>
+        <div className="form-input track-file">
           <label>
             Track File
             {valErrors.trackFile && hasSubmitted == true && <span className="validation-error">{valErrors.trackFile}</span>}
@@ -191,7 +191,7 @@ function TrackFormPage() {
 
         </div>
 
-        <div>
+        <div className="form-input album-cover">
           <label>
             Album Cover
             <input

@@ -6,6 +6,8 @@ import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 
+import './Navigation'
+
 function ProfileButton() {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -41,9 +43,7 @@ function ProfileButton() {
 
   return (
     <>
-      <button onClick={toggleMenu} className='user-profile-button'>
-        <FaUserCircle />
-      </button>
+      <FaUserCircle onClick={toggleMenu} className='user-profile-button'/>
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (

@@ -24,6 +24,7 @@ export function AlbumDetailsPage() {
   const sortedAlbumTracks = albumTracks.sort((a, b) => a.trackNumber - b.trackNumber)
 
   const isOwner = (user?.id === album?.artistId)
+  let numTrack = 0;
 
   useEffect(() => {
     dispatch(thunkFetchAlbumById(albumId))
@@ -86,7 +87,7 @@ export function AlbumDetailsPage() {
 
       </div> */}
       <div>
-        <p>{sortedAlbumTracks.length > 0 ? sortedAlbumTracks.map(track => <TrackCard track={track} key={track?.id} />) : null}</p>
+        <p>{sortedAlbumTracks.length > 0 ? sortedAlbumTracks.map(track => <TrackCard numTrack={numTrack+=1} track={track} key={track?.id} />) : null}</p>
       </div>
     </div>
   )
