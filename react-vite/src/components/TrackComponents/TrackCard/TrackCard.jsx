@@ -15,6 +15,7 @@ import { Audio } from 'react-loader-spinner'
 export function TrackCard({ track }) {
   const dispatch = useDispatch()
 
+  const user = useSelector(state => state.session.user)
   const [liked, setLiked] = useState('')
 
   // audio player stuff
@@ -38,7 +39,7 @@ export function TrackCard({ track }) {
 
   useEffect(() => {
     setLiked(track?.liked)
-  }, [track])
+  }, [track, user])
 
   useEffect(() => {
     if (currentlyPlayingTrackId == track?.id) {
@@ -46,7 +47,7 @@ export function TrackCard({ track }) {
     } else {
       setIsPlayingTag(false)
     }
-  }, [currentlyPlayingTrackId])
+  }, [currentlyPlayingTrackId, track])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -65,18 +66,18 @@ export function TrackCard({ track }) {
         <div className='track-id-div'>
           <p className='track-id'>{track?.id}</p>
           <div className='track-play-button'>
-            {!isPlayingTag ? <IoPlay className='track-hover-play-icon' onClick={handleTrackSelect} /> : 
-            <Audio
-            height="20px"
-            width="20px"
-            radius="9"
-            color="green"
-            ariaLabel="three-dots-loading"
-            wrapperStyle
-            wrapperClass
-          />
+            {!isPlayingTag ? <IoPlay className='track-hover-play-icon' onClick={handleTrackSelect} /> :
+              <Audio
+                height="20px"
+                width="20px"
+                radius="9"
+                color="green"
+                ariaLabel="three-dots-loading"
+                wrapperStyle
+                wrapperClass
+              />
             }
-            
+
             {/* <button type="button" onClick={handleTrackSelect}>Play</button> */}
           </div>
         </div>
@@ -98,7 +99,7 @@ export function TrackCard({ track }) {
         </NavLink>
       </div>
       <div className='likes-div'>
-        {liked ? <IoIosHeart className='like-heart-icon' onClick={handleSubmit}/> : <IoIosHeartEmpty className='like-heart-icon' onClick={handleSubmit}/>}
+        {liked ? <IoIosHeart className='like-heart-icon' onClick={handleSubmit} /> : <IoIosHeartEmpty className='like-heart-icon' onClick={handleSubmit} />}
         <p>{track?.trackLikes}</p>
       </div>
 

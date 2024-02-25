@@ -16,6 +16,7 @@ export function SplashPage() {
                 <h2>Collin Ullmann</h2>
 
                 <h2>Kevin Fan</h2>
+                <a href="https://github.com/Kyfan01">Kevin&apos;s Github</a>
             </div>
 
 
