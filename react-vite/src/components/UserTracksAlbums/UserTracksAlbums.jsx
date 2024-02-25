@@ -34,12 +34,12 @@ export function UserTracksAlbums() {
             {console.log('artist is ', artist)}
             <h1>{artist?.artistName}&apos;s Albums and Tracks</h1>
 
-            <div>
-                <h2>Albums</h2>
+            <h2>Albums</h2>
+            <div className='user-details-albums-div'>
                 {userAlbums.map(album => <AlbumCard album={album} key={album.id} />)}
             </div>
-            <div>
-                <h2>Tracks</h2>
+            <h2>Tracks</h2>
+            <div className='user-details-tracks-div'>
                 {userTracks.map(track => <TrackCard track={track} key={track?.id} />)}
             </div>
 
