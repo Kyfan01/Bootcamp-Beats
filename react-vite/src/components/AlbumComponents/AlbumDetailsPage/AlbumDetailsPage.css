@@ -1,3 +1,8 @@
+#album-details-body {
+  background-image: linear-gradient(to bottom, rgb(43, 181, 43) 30%, rgba(255,0,0,0));
+  background-size: 100% 40vh;
+  background-repeat: no-repeat;
+}
 .album-details-header-image-div {
   width: 30%;
 }
