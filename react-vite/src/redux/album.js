@@ -5,6 +5,7 @@ export const LOAD_USER_ALBUMS = 'albums/loadUserAlbums'
 export const CREATE_ALBUM = 'albums/createAlbum'
 export const UPDATE_ALBUM = 'albums/updateAlbum'
 export const DELETE_ALBUM = 'albums/deleteAlbum'
+export const CLEAR_ALBUMS = 'albums/clearAlbums'
 
 
 // action creators
@@ -36,6 +37,10 @@ export const updateAlbum = album => ({
 export const deleteAlbum = albumId => ({
     type: DELETE_ALBUM,
     albumId
+})
+
+export const clearAlbums = () => ({
+    type: CLEAR_ALBUMS
 })
 
 // thunk action creators
@@ -148,6 +153,10 @@ const albumReducer = (state = {}, action) => {
             const newAlbumState = { ...state }
             delete newAlbumState[action.albumId]
             return newAlbumState
+        }
+
+        case CLEAR_ALBUMS: {
+            return {}
         }
 
         default:

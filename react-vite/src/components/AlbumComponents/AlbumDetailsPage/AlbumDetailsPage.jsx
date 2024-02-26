@@ -3,7 +3,7 @@ import './AlbumDetailsPage.css'
 import default_upload_image from '../../../../../images/default_upload_image.jpg'
 
 import { useParams, useNavigate } from 'react-router-dom'
-import { thunkFetchAlbumById, thunkDeleteAlbum } from '../../../redux/album'
+import { thunkFetchAlbumById, thunkDeleteAlbum, clearAlbums } from '../../../redux/album'
 import { useDispatch, useSelector } from 'react-redux'
 import { thunkFetchAlbumTracks } from '../../../redux/track'
 import { TrackCard } from '../../TrackComponents/TrackCard/TrackCard'
@@ -34,7 +34,10 @@ export function AlbumDetailsPage() {
 
   const handleDelete = (e) => {
     e.preventDefault()
-    dispatch(thunkDeleteAlbum(albumId)).then(() => navigate('/albums'))
+    dispatch(thunkDeleteAlbum(albumId)).then(() => {
+      dispatch(clearAlbums())
+      navigate('/albums')
+    })
   }
 
   const handleUpdate = (e) => {
@@ -59,7 +62,7 @@ export function AlbumDetailsPage() {
           <p className='album-details-album-word'>Album</p>
           <p className='album-details-album-name'>{album?.title}</p>
           <div className='album-details-artist-year-length-div'>
-          <p className='album-details-artist-year-length'>{album?.artistName} • {album?.releaseDate.split(' ')[3]} • {sortedAlbumTracks.length} songs</p>
+            <p className='album-details-artist-year-length'>{album?.artistName} • {album?.releaseDate.split(' ')[3]} • {sortedAlbumTracks.length} songs</p>
           </div>
         </div>
       </div>

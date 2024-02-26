@@ -13,7 +13,7 @@ export function AlbumsIndex() {
 
     useEffect(() => {
         dispatch(thunkFetchAlbums())
-    }, [dispatch])
+    }, [dispatch, albums.length])
 
     return (
 
