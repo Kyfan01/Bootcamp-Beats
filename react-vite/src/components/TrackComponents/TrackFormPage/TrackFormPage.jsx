@@ -125,7 +125,7 @@ function TrackFormPage() {
 
   return (
     <div className="track-form-container">
-      <h1>New Track</h1>
+      <h1>Track Form</h1>
       {Object.values(valErrors).length > 0 && hasSubmitted == true &&
         Object.values(valErrors).map((message) => <p key={message} className="validation-error">{message}</p>)}
       <form className="track-form" onSubmit={handleSubmit} encType="multipart/form-data">
