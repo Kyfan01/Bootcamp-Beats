@@ -7,6 +7,7 @@ export const CREATE_TRACK = 'tracks/createTrack'
 export const DELETE_TRACK = 'tracks/deleteTrack'
 export const UPDATE_TRACK = 'tracks/updateTrack'
 export const TOGGLE_LIKE_TRACK = 'tracks/toggleLikeTrack'
+export const CLEAR_TRACKS = 'tracks/clearTracks'
 
 // action creators
 export const loadTracks = tracks => ({
@@ -49,6 +50,9 @@ export const toggleLikeTrack = track => ({
     track
 })
 
+export const clearTracks = () => ({
+    type: CLEAR_TRACKS
+})
 
 // thunk action creators
 export const thunkFetchTracks = () => async dispatch => {
@@ -192,6 +196,9 @@ const trackReducer = (state = {}, action) => {
             return newTrackState
         }
 
+        case CLEAR_TRACKS: {
+            return {}
+        }
 
         default:
             return state
