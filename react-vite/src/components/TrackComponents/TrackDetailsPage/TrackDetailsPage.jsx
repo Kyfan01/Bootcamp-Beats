@@ -43,7 +43,7 @@ export function TrackDetailsPage() {
   if (track && !(track.previewImageUrl)) track.previewImageUrl = default_upload_image
 
   return (
-    <div>
+    <div id='track-details-body'>
       <div className='track-details-header-div'>
         <div className='track-details-header-image-div'>
           <img src={track?.previewImageUrl} alt="Track Preview Image" />
