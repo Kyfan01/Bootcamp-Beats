@@ -104,3 +104,11 @@
   height: 100%;
   margin: 0 15px 0 0 ;
 }
+
+.nav-logo-div {
+  height: 70%;
+}
+
+.nav-logo-div img {
+  height: 100%;
+}

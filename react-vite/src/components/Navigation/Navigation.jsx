@@ -8,15 +8,20 @@ import { PiMusicNotesFill } from "react-icons/pi";
 import { MdLibraryMusic } from "react-icons/md";
 import { MdLibraryAdd } from "react-icons/md";
 
+import logo from '../../../../images/bootcamp_beats_logo.png'
+
+
 
 function Navigation() {
   const navigate = useNavigate()
   const user = useSelector(state => state.session.user)
   return (
     <div className="navbar">
-      <NavLink to='/' className='nav-logo' title="Splash Page">
-        <p>logo here</p>
-      </NavLink>
+      <div className="nav-logo-div">
+        <NavLink to='/' className='nav-logo' title="Splash Page">
+          <img src={logo} alt="Bootcamp Beats Logo" />
+        </NavLink>
+      </div>
       <div className="nav-buttons">
         <div className="nav-button-icons-div">
           <PiMusicNotesFill onClick={() => navigate('/tracks')} className="navigation-link" title="All Tracks" />
