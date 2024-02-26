@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { thunkSignup } from "../../redux/session";
+import './SignupForm.css'
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -43,7 +44,8 @@ function SignupFormPage() {
   return (
     <>
       <h1>Sign Up</h1>
-      {errors.server && <p>{errors.server}</p>}
+      {errors.server && <p className="validation-error">{errors.server}</p>}
+      {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
       <form onSubmit={handleSubmit}>
         <label>
           Email
@@ -84,7 +86,7 @@ function SignupFormPage() {
             required
           />
         </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        
         <button type="submit">Sign Up</button>
       </form>
     </>
