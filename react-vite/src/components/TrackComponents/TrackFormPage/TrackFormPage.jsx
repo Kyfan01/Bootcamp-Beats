@@ -60,6 +60,8 @@ function TrackFormPage() {
     e.preventDefault();
     setHasSubmitted(true)
 
+    console.log('handle submit')
+
     const errObj = {}
     if (title.length >= 50) errObj.title = "Title must be less than 50 characters"
     if (genre.length >= 50) errObj.genre = "Genre must be less than 50 characters"
@@ -68,8 +70,10 @@ function TrackFormPage() {
     if (!isUpdate && !trackFile) errObj.trackFile = "Need a file for track"
 
     if (Object.values(errObj).length) {
+      console.log('there are errors')
       setValErrors(errObj)
     } else {
+      console.log('hitting else')
       let albumIdTemp = albumId;
       if (!albumId) {
         const albumFormData = new FormData()
@@ -83,25 +87,21 @@ function TrackFormPage() {
         const responseAlbum = await dispatch(thunkCreateAlbum(albumFormData))
         setIsLoading(false)
         setAlbumId(responseAlbum.id)
-
         albumIdTemp = responseAlbum.id
-        const formData = new FormData()
-        formData.append('title', title)
-        formData.append('albumId', albumIdTemp)
-        formData.append('genre', genre)
-        formData.append('trackNumber', trackNumber)
-        formData.append('trackFile', trackFile)
-        formData.append('previewImage', previewImage)
-        // formData.append('submit', true)
+      }
+      const formData = new FormData()
+      formData.append('title', title)
+      formData.append('albumId', albumIdTemp)
+      formData.append('genre', genre)
+      formData.append('trackNumber', trackNumber)
+      formData.append('trackFile', trackFile)
+      formData.append('previewImage', previewImage)
 
-        if (trackId) {
-          setIsLoading(true)
-          // console.log('trackId: ', trackId)
-          // console.log('formData: ', formData)
-          dispatch(thunkUpdateTrack(trackId, formData)).then(() => navigate(`/tracks/${trackId}`)).then(() => setIsLoading(false))
-        } else {
-          dispatch(thunkCreateTrack(formData)).then(newTrack => navigate(`/tracks/${newTrack.id}`)).then(() => setIsLoading(false))
-        }
+      if (trackId) {
+        setIsLoading(true)
+        dispatch(thunkUpdateTrack(trackId, formData)).then(() => navigate(`/tracks/${trackId}`)).then(() => setIsLoading(false))
+      } else {
+        dispatch(thunkCreateTrack(formData)).then(newTrack => navigate(`/tracks/${newTrack.id}`)).then(() => setIsLoading(false))
       }
     }
 
@@ -118,7 +118,7 @@ function TrackFormPage() {
 
   return (
     <div className="track-form-container">
-      <h1>New Track</h1>
+      <h1>Track Form</h1>
       {Object.values(valErrors).length > 0 && hasSubmitted == true &&
         Object.values(valErrors).map((message) => <p key={message} className="validation-error">{message}</p>)}
       <form className="track-form" onSubmit={handleSubmit} encType="multipart/form-data">

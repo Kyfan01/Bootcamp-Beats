@@ -33,9 +33,6 @@ export function UserTracksAlbums() {
 
     return (
         <div className='user-page-container'>
-            {console.log('user tracks ', userTracks)}
-            {console.log('user albums ', userAlbums)}
-            {console.log('artist is ', artist)}
             <h1>{artistName}&apos;s Albums and Tracks</h1>
 
             <h2>Albums</h2>
