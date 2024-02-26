@@ -9,7 +9,6 @@ export function AlbumsIndex() {
 
 
     const albumsObj = useSelector(state => state.albums)
-    console.log('albumsObj: ', albumsObj)
     const albums = Object.values(albumsObj)
 
     useEffect(() => {

@@ -52,8 +52,7 @@ export function TrackDetailsPage() {
           <p className='track-details-track-word'>Track</p>
           <p className='track-details-track-title'>{track?.title}</p>
           <div className='track-details-artist-genre-div'>
-            <p className='track-details-track-artist'>{track?.artistName}  •</p>
-            <p className='track-details-track-genre'>{track?.genre}</p>
+            <p>{track?.artistName} • {track?.genre}</p>
           </div>
         </div>
       </div>

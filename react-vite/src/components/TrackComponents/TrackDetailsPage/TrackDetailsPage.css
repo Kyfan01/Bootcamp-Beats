@@ -16,18 +16,18 @@
 }
 
 .track-details-track-word {
-  font-size: x-small;
+  font-size: small;
 }
 
 .track-details-track-title {
-  font-size: xx-large;
+  font-size: xxx-large;
   font-weight: 600;
 }
 
 .track-details-artist-genre-div {
   display: flex;
   align-items: center;
-  font-size: small;
+  font-size: medium;
 }
 
 .track-details-header-div {

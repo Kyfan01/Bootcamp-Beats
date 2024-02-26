@@ -59,9 +59,7 @@ export function AlbumDetailsPage() {
           <p className='album-details-album-word'>Album</p>
           <p className='album-details-album-name'>{album?.title}</p>
           <div className='album-details-artist-year-length-div'>
-            <p className='album-details-artist'>{album?.artistName} •</p>
-            <p>{album?.releaseDate.split(' ')[3]} •</p>
-            <p>{sortedAlbumTracks.length} songs</p>
+          <p className='album-details-artist-year-length'>{album?.artistName} • {album?.releaseDate.split(' ')[3]} • {sortedAlbumTracks.length} songs</p>
           </div>
         </div>
       </div>

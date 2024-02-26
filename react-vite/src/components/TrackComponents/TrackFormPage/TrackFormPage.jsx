@@ -60,8 +60,6 @@ function TrackFormPage() {
     e.preventDefault();
     setHasSubmitted(true)
 
-    console.log('handle submit')
-
     const errObj = {}
     if (title.length >= 50) errObj.title = "Title must be less than 50 characters"
     if (genre.length >= 50) errObj.genre = "Genre must be less than 50 characters"
@@ -70,10 +68,9 @@ function TrackFormPage() {
     if (!isUpdate && !trackFile) errObj.trackFile = "Need a file for track"
 
     if (Object.values(errObj).length) {
-      console.log('there are errors')
+
       setValErrors(errObj)
     } else {
-      console.log('hitting else')
       let albumIdTemp = albumId;
       if (!albumId) {
         const albumFormData = new FormData()
