@@ -98,7 +98,7 @@ def seed_tracks(hun, kevin, collin, demo):
 
 
     # kevin
-        Track(artist_id = 2, album_id = 3, title = 'Genesis', duration = 234, genre = 'EDM', track_number = 1, url = 'https://bootcampbeats-tracks.s3.amazonaws.com/seeder-track-10.m4a', preview_image_url = album_image_4),
+        Track(artist_id = 2, album_id = 3, title = 'Genesis', duration = 234, genre = 'EDM', track_number = 1, url = 'https://bootcampbeats-tracks.s3.us-east-2.amazonaws.com/genesis.mp3', preview_image_url = album_image_4),
         Track(artist_id = 2, album_id = 4, title = 'Technologic', duration = 284, genre = 'EDM', track_number = 2, url = 'https://bootcampbeats-tracks.s3.amazonaws.com/seeder-track-9.m4a', preview_image_url = album_image_5),
 
         Track(artist_id = 2, album_id = 3, title = 'D.A.N.C.E.', duration = 214, genre = 'EDM', track_number = 2, url = 'https://bootcampbeats-tracks.s3.amazonaws.com/cross-dance.mp3', preview_image_url = album_image_4),
