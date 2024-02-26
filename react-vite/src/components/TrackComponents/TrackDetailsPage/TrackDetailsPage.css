@@ -1,6 +1,7 @@
 .track-details-header-image-div {
   width: 30%;
 }
+
 .track-details-header-image-div img {
   width: 100%;
   border-radius: 10px;
@@ -34,9 +35,9 @@
 .track-details-header-playicon {
   width: 50px;
   height: 50px;
-  margin: 0 0 0 
-  5px;
+  margin: 0 0 0 5px;
 }
+
 .track-details-header-playicon:hover {
   cursor: pointer;
 }
@@ -46,6 +47,7 @@
   height: 20px;
   margin: 0 10px;
 }
+
 .track-details-update:hover {
   cursor: pointer;
 }
@@ -54,6 +56,7 @@
   width: 20px;
   height: 20px;
 }
+
 .track-details-delete:hover {
   cursor: pointer;
 }
@@ -61,4 +64,13 @@
 .play-update-delete-div {
   display: flex;
   align-items: center;
+}
+
+.track-details-update:hover::after {
+  display: block;
+  position: absolute;
+  content: attr(data-tooltip);
+  border: 1px solid black;
+  background: #eee;
+  padding: .25em;
 }

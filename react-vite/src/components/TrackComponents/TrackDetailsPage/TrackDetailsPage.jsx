@@ -55,9 +55,10 @@ export function TrackDetailsPage() {
         </div>
       </div>
       <div className='play-update-delete-div'>
-        <IoPlayCircle className='track-details-header-playicon' onClick={handleTrackSelect} />
-        {isOwner && <TbArrowsExchange2 className='album-details-update' onClick={handleUpdate}/>}
-        {isOwner && <MdDelete className='album-details-delete' onClick={handleDelete}/>}       
+        <IoPlayCircle className='track-details-header-playicon' onClick={handleTrackSelect} title='Select for player' />
+        {isOwner && <TbArrowsExchange2 className='track-details-update' onClick={handleUpdate} title='Update' />}
+        {isOwner && <MdDelete className='track-details-delete' onClick={handleDelete} title='Delete' />}
+
       </div>
 
 

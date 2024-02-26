@@ -1,23 +1,23 @@
 import { useEffect } from 'react';
 import './AlbumsIndex.css'
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { thunkFetchAlbums } from '../../../redux/album';
 import { AlbumCard } from '../AlbumCard/AlbumCard';
 
 export function AlbumsIndex() {
-  const dispatch = useDispatch();
-  
+    const dispatch = useDispatch();
 
-  const albumsObj = useSelector(state => state.albums)
-  console.log('albumsObj: ', albumsObj)
-  const albums = Object.values(albumsObj)
 
-  useEffect(() => {
-    dispatch(thunkFetchAlbums())
-  }, [dispatch]) 
+    const albumsObj = useSelector(state => state.albums)
+    console.log('albumsObj: ', albumsObj)
+    const albums = Object.values(albumsObj)
 
-  return (
-    <div>
+    useEffect(() => {
+        dispatch(thunkFetchAlbums())
+    }, [dispatch])
+
+    return (
+
         <div className='album-index-container'>
             <h1>Albums</h1>
 
@@ -27,8 +27,7 @@ export function AlbumsIndex() {
                 </div>
             </div>
         </div>
-    </div>
-)
+    )
 }
 
 export default AlbumsIndex;

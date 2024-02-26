@@ -17,6 +17,6 @@
     display: flex;
 }
 
-.form-input > label> input {
+.form-input>label>input {
     width: 100%;
 }

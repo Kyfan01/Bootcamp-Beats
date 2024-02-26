@@ -12,6 +12,7 @@ export function UserTracksAlbums() {
     const dispatch = useDispatch()
     let { userId } = useParams()
     userId = parseInt(userId)
+    let numTrack = 0;
 
     const tracks = useSelector(state => Object.values(state.tracks))
     const albums = useSelector(state => Object.values(state.albums))
@@ -28,7 +29,7 @@ export function UserTracksAlbums() {
     }, [dispatch, userId])
 
     return (
-        <div>
+        <div className='user-page-container'>
             {console.log('user tracks ', userTracks)}
             {console.log('user albums ', userAlbums)}
             {console.log('artist is ', artist)}
@@ -40,7 +41,7 @@ export function UserTracksAlbums() {
             </div>
             <h2>Tracks</h2>
             <div className='user-details-tracks-div'>
-                {userTracks.map(track => <TrackCard track={track} key={track?.id} />)}
+                {userTracks.map(track => <TrackCard track={track} key={track?.id} numTrack={numTrack += 1} />)}
             </div>
 
         </div>

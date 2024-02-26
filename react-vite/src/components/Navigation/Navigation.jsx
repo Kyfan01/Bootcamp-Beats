@@ -2,7 +2,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 
 import { PiMusicNotesPlusFill } from "react-icons/pi";
 import { PiMusicNotesFill } from "react-icons/pi";
@@ -15,19 +14,19 @@ function Navigation() {
   const user = useSelector(state => state.session.user)
   return (
     <div className="navbar">
-      <NavLink to='/' className='nav-logo'>
+      <NavLink to='/' className='nav-logo' title="Splash Page">
         <p>logo here</p>
       </NavLink>
       <div className="nav-buttons">
         <div className="nav-button-icons-div">
-          <PiMusicNotesFill onClick={() => navigate('/tracks')} className="navigation-link"/>
-          {user && <PiMusicNotesPlusFill onClick={() => navigate('/tracks/new')} className="navigation-link" />}
-          <MdLibraryMusic onClick={() => navigate('/albums')} className="navigation-link"/>
-          {user && <MdLibraryAdd onClick={() => navigate('/albums/new')} className="navigation-link"/>}
+          <PiMusicNotesFill onClick={() => navigate('/tracks')} className="navigation-link" title="All Tracks" />
+          {user && <PiMusicNotesPlusFill onClick={() => navigate('/tracks/new')} className="navigation-link" title="New Track" />}
+          <MdLibraryMusic onClick={() => navigate('/albums')} className="navigation-link" title="All Albums" />
+          {user && <MdLibraryAdd onClick={() => navigate('/albums/new')} className="navigation-link" title="New Album" />}
         </div>
 
 
-        <ProfileButton className="profile-button" user={user} />
+        <ProfileButton className="profile-button" user={user} title="User Options" />
 
       </div>
     </div>

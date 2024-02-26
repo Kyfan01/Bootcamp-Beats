@@ -1,6 +1,6 @@
 .track-player {
     overflow: hidden;
-    position: sticky;
+    position: fixed;
     bottom: 0px;
     background-color: var(--purple);
     height: 8vh;
