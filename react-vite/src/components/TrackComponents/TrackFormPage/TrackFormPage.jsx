@@ -60,6 +60,8 @@ function TrackFormPage() {
     e.preventDefault();
     setHasSubmitted(true)
 
+    console.log('handle submit')
+
     const errObj = {}
     if (title.length >= 50) errObj.title = "Title must be less than 50 characters"
     if (genre.length >= 50) errObj.genre = "Genre must be less than 50 characters"
@@ -68,8 +70,10 @@ function TrackFormPage() {
     if (!isUpdate && !trackFile) errObj.trackFile = "Need a file for track"
 
     if (Object.values(errObj).length) {
+      console.log('there are errors')
       setValErrors(errObj)
     } else {
+      console.log('hitting else')
       let albumIdTemp = albumId;
       if (!albumId) {
         const albumFormData = new FormData()
@@ -84,24 +88,27 @@ function TrackFormPage() {
         setIsLoading(false)
         setAlbumId(responseAlbum.id)
 
-        albumIdTemp = responseAlbum.id
-        const formData = new FormData()
-        formData.append('title', title)
-        formData.append('albumId', albumIdTemp)
-        formData.append('genre', genre)
-        formData.append('trackNumber', trackNumber)
-        formData.append('trackFile', trackFile)
-        formData.append('previewImage', previewImage)
-        // formData.append('submit', true)
 
-        if (trackId) {
-          setIsLoading(true)
-          // console.log('trackId: ', trackId)
-          // console.log('formData: ', formData)
-          dispatch(thunkUpdateTrack(trackId, formData)).then(() => navigate(`/tracks/${trackId}`)).then(() => setIsLoading(false))
-        } else {
-          dispatch(thunkCreateTrack(formData)).then(newTrack => navigate(`/tracks/${newTrack.id}`)).then(() => setIsLoading(false))
-        }
+        albumIdTemp = responseAlbum.id
+
+
+      }
+      const formData = new FormData()
+      formData.append('title', title)
+      formData.append('albumId', albumIdTemp)
+      formData.append('genre', genre)
+      formData.append('trackNumber', trackNumber)
+      formData.append('trackFile', trackFile)
+      formData.append('previewImage', previewImage)
+      // formData.append('submit', true)
+
+      if (trackId) {
+        setIsLoading(true)
+        // console.log('trackId: ', trackId)
+        // console.log('formData: ', formData)
+        dispatch(thunkUpdateTrack(trackId, formData)).then(() => navigate(`/tracks/${trackId}`)).then(() => setIsLoading(false))
+      } else {
+        dispatch(thunkCreateTrack(formData)).then(newTrack => navigate(`/tracks/${newTrack.id}`)).then(() => setIsLoading(false))
       }
     }
 
