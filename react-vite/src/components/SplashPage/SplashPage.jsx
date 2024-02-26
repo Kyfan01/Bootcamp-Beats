@@ -26,24 +26,24 @@ export function SplashPage() {
                 <h1>Meet the Developers</h1>
                 <div className='splash-dev-name-icon-div'>
                     <h2>Collin Ullmann</h2>
-                    <a href="https://github.com/CollinUllmann"><FaGithubSquare className='splash-icon'/></a>
-                    <a href="https://www.linkedin.com/in/collin-ullmann-984115119/"><SiLinkedin className='splash-icon'/></a>
+                    <a href="https://github.com/CollinUllmann"><FaGithubSquare className='splash-icon' /></a>
+                    <a href="https://www.linkedin.com/in/collin-ullmann-984115119/"><SiLinkedin className='splash-icon' /></a>
 
                 </div>
                 <div className='splash-dev-name-icon-div'>
                     <h2>Kevin Fan</h2>
-                    <a href="https://github.com/Kyfan01"><FaGithubSquare className='splash-icon'/></a>
-                    <a href="https://www.linkedin.com/in/kevin-fan-20475a162/"><SiLinkedin className='splash-icon'/></a>
+                    <a href="https://github.com/Kyfan01"><FaGithubSquare className='splash-icon' /></a>
+                    <a href="https://www.linkedin.com/in/kevin-fan-20475a162/"><SiLinkedin className='splash-icon' /></a>
 
                 </div>
 
-                
+
             </div>
 
 
             <div>
-                <p>Here is a sample track. Try playing it and controlling it with our music player! You can find more tracks
-                    on our track page.
+                <p>Here is a sample track. Try playing it and controlling it with our music player! The fast-forward and rewind buttons skip 5 seconds forwards/back.
+                    The button in the bottom left toggles track looping. You can find more tracks on our track page!
                 </p>
             </div>
 

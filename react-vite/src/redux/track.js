@@ -137,7 +137,6 @@ export const thunkToggleLikeTrack = trackId => async dispatch => {
             'Content-Type': 'application/json'
         }
     })
-    console.log('thunk response: ', res)
     if (res.ok) {
         const updatedTrack = await res.json()
         dispatch(toggleLikeTrack(updatedTrack))
