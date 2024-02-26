@@ -100,9 +100,9 @@ function AlbumFormPage() {
       <h1>Album Form</h1>
       {Object.values(valErrors).length > 0 && hasSubmitted == true &&
         Object.values(valErrors).map((message) => <p key={message} className="validation-error">{message}</p>)}
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <div>
-          <label>
+      <form className="track-form" onSubmit={handleSubmit} encType="multipart/form-data">
+        <div className="form-input title">
+          <label className="track-form-input">
             Title
             <input
               type="text"
@@ -114,8 +114,8 @@ function AlbumFormPage() {
           </label>
         </div>
 
-        <div>
-          <label>
+        <div className="form-input release-date">
+          <label className="track-form-input">
             Release Date
             <input
               type="date"
@@ -127,8 +127,8 @@ function AlbumFormPage() {
           </label>
         </div>
 
-        <div>
-          <label>
+        <div className="form-input genre">
+          <label className="track-form-input">
             Genre
             <input
               type="text"
@@ -141,8 +141,8 @@ function AlbumFormPage() {
 
         </div>
 
-        <div>
-          <label>
+        <div className="form-input">
+          <label className="track-form-input-file">
             Preview Image
             <input
               type="file"

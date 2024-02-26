@@ -3,4 +3,5 @@
     flex-direction: column;
     padding: 20px;
     box-sizing: border-box;
+    min-height: 84vh;
 }

@@ -9,15 +9,15 @@ import { SiLinkedin } from "react-icons/si";
 
 export function SplashPage() {
     const dispatch = useDispatch()
-    const track = useSelector(state => state.tracks[14])
+    const track = useSelector(state => state.tracks[21])
 
     useEffect(() => {
-        dispatch(thunkFetchTrackById(14))
+        dispatch(thunkFetchTrackById(21))
     }, [dispatch])
 
     return (
         <div className='splash-page-container'>
-            <div>
+            <div className='splash-welcome-div'>
                 <h1>Welcome to Bootcamp Beats!</h1>
                 <h3>A Spotify clone created using React/Redux and Flask</h3>
             </div>

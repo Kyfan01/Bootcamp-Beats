@@ -121,9 +121,9 @@ function TrackFormPage() {
       <h1>New Track</h1>
       {Object.values(valErrors).length > 0 && hasSubmitted == true &&
         Object.values(valErrors).map((message) => <p key={message} className="validation-error">{message}</p>)}
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
+      <form className="track-form" onSubmit={handleSubmit} encType="multipart/form-data">
         <div className="form-input title">
-          <label>
+          <label className="track-form-input">
             Title
             <input
               type="text"
@@ -136,7 +136,7 @@ function TrackFormPage() {
         </div>
 
         <div className="form-input album">
-          <label>
+          <label className="track-form-input-file">
             Album
             <select
               name="album"
@@ -154,7 +154,7 @@ function TrackFormPage() {
         </div>
 
         <div className="form-input genre">
-          <label>
+          <label className="track-form-input">
             Genre
             <input
               type="text"
@@ -168,7 +168,7 @@ function TrackFormPage() {
         </div>
 
         <div className="form-input track-number">
-          <label>
+          <label className="track-form-input">
             Track Number
             {/* {valErrors.trackNumber && hasSubmitted == true && <span className="validation-error">{valErrors.trackNumber}</span>} */}
             <input
@@ -183,7 +183,7 @@ function TrackFormPage() {
         </div>
 
         <div className="form-input track-file">
-          <label>
+          <label className="track-form-input-file">
             Track File
             {/* {valErrors.trackFile && hasSubmitted == true && <span className="validation-error">{valErrors.trackFile}</span>} */}
             <input
@@ -197,7 +197,7 @@ function TrackFormPage() {
         </div>
 
         <div className="form-input album-cover">
-          <label>
+          <label className="track-form-input-file">
             Album Cover
             <input
               type="file"

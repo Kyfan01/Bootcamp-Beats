@@ -1,6 +1,7 @@
 .album-index-container {
   padding: 20px;
   box-sizing: border-box;
+  min-height: 84vh;
 }
 
 .album-index-cards-container {

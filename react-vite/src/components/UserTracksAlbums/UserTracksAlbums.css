@@ -3,4 +3,7 @@
   justify-content: center;
 }
 
-.user-page-container {}
+.user-page-container {
+  box-sizing: border-box;
+  min-height: 84vh;
+}

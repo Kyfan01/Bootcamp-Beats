@@ -1,6 +1,7 @@
 .splash-page-container {
     padding: 20px;
     box-sizing: border-box;
+    min-height: 84vh;
 }
 
 .splash-dev-name-icon-div {
@@ -12,4 +13,8 @@
     height: 100%;
     color: gray;
     margin: 0 0 0 5px;
+}
+
+.splash-welcome-div {
+    margin: 0 0 10vh 0;
 }

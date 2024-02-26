@@ -50,8 +50,8 @@
 }
 
 .track-details-update {
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   margin: 0 10px;
 }
 
@@ -60,8 +60,8 @@
 }
 
 .track-details-delete {
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
 }
 
 .track-details-delete:hover {
