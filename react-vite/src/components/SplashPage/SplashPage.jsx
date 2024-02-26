@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { thunkFetchTrackById } from '../../redux/track'
 
 import { FaGithubSquare } from "react-icons/fa";
+import { SiLinkedin } from "react-icons/si";
 
 export function SplashPage() {
     const dispatch = useDispatch()
@@ -18,18 +19,22 @@ export function SplashPage() {
         <div className='splash-page-container'>
             <div>
                 <h1>Welcome to Bootcamp Beats!</h1>
-                <h3>A Spotify/Soundcloud clone created using React/Redux and Flask</h3>
+                <h3>A Spotify clone created using React/Redux and Flask</h3>
             </div>
 
             <div>
                 <h1>Meet the Developers</h1>
                 <div className='splash-dev-name-icon-div'>
                     <h2>Collin Ullmann</h2>
-                    <a href="https://github.com/CollinUllmann"><FaGithubSquare/></a>
+                    <a href="https://github.com/CollinUllmann"><FaGithubSquare className='splash-icon'/></a>
+                    <a href="https://www.linkedin.com/in/collin-ullmann-984115119/"><SiLinkedin className='splash-icon'/></a>
+
                 </div>
                 <div className='splash-dev-name-icon-div'>
                     <h2>Kevin Fan</h2>
-                    <a href="https://github.com/Kyfan01"><FaGithubSquare/></a>
+                    <a href="https://github.com/Kyfan01"><FaGithubSquare className='splash-icon'/></a>
+                    <a href="https://www.linkedin.com/in/kevin-fan-20475a162/"><SiLinkedin className='splash-icon'/></a>
+
                 </div>
 
                 
