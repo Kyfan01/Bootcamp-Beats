@@ -4,6 +4,8 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { thunkFetchTrackById } from '../../redux/track'
 
+import { FaGithubSquare } from "react-icons/fa";
+
 export function SplashPage() {
     const dispatch = useDispatch()
     const track = useSelector(state => state.tracks[14])
@@ -21,12 +23,16 @@ export function SplashPage() {
 
             <div>
                 <h1>Meet the Developers</h1>
+                <div className='splash-dev-name-icon-div'>
+                    <h2>Collin Ullmann</h2>
+                    <a href="https://github.com/CollinUllmann"><FaGithubSquare/></a>
+                </div>
+                <div className='splash-dev-name-icon-div'>
+                    <h2>Kevin Fan</h2>
+                    <a href="https://github.com/Kyfan01"><FaGithubSquare/></a>
+                </div>
 
-                <h2>Collin Ullmann</h2>
-                <a href="https://github.com/CollinUllmann">Collin&apos;s Github</a>
-
-                <h2>Kevin Fan</h2>
-                <a href="https://github.com/Kyfan01">Kevin&apos;s Github</a>
+                
             </div>
 
 
