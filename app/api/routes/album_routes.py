@@ -86,7 +86,8 @@ def delete_album(albumId):
     db.session.delete(album)
     db.session.commit()
 
-    image_to_delete = remove_file_from_s3(album.album_cover_url) if '/' in album.album_cover_url else None
+    if album.album_cover_url:
+        image_to_delete = remove_file_from_s3(album.album_cover_url) if '/' in album.album_cover_url else None
 
     return {
        'message': 'Successfully deleted!'

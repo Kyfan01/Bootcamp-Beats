@@ -17,7 +17,7 @@ export function TracksIndex() {
 
     useEffect(() => {
         dispatch(thunkFetchTracks())
-    }, [dispatch])
+    }, [dispatch, tracks.length])
 
     return (
         <div className='track-index-container'>

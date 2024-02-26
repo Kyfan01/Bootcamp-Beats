@@ -5,7 +5,7 @@ import default_upload_image from '../../../../../images/default_upload_image.jpg
 import { useParams, useNavigate } from 'react-router-dom'
 import { thunkFetchAlbumById, thunkDeleteAlbum, clearAlbums } from '../../../redux/album'
 import { useDispatch, useSelector } from 'react-redux'
-import { thunkFetchAlbumTracks } from '../../../redux/track'
+import { clearTracks, thunkFetchAlbumTracks } from '../../../redux/track'
 import { TrackCard } from '../../TrackComponents/TrackCard/TrackCard'
 
 import { IoPlayCircle } from "react-icons/io5";
@@ -36,6 +36,7 @@ export function AlbumDetailsPage() {
     e.preventDefault()
     dispatch(thunkDeleteAlbum(albumId)).then(() => {
       dispatch(clearAlbums())
+      dispatch(clearTracks())
       navigate('/albums')
     })
   }
