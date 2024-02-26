@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import './TrackDetailsPage.css'
+import default_upload_image from '../../../../../images/default_upload_image.jpg'
 
 import { useParams, useNavigate } from 'react-router-dom'
 import { thunkDeleteTrack, thunkFetchTrackById } from '../../../redux/track'
@@ -38,6 +39,8 @@ export function TrackDetailsPage() {
     e.preventDefault()
     dispatch(thunkFetchPlayingTrack(track?.id))
   }
+
+  if (track && !(track.previewImageUrl)) track.previewImageUrl = default_upload_image
 
   return (
     <div>

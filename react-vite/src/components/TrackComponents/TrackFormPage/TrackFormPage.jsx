@@ -52,54 +52,59 @@ function TrackFormPage() {
   }, [trackId, dispatch, navigate, currentUser])
 
   useEffect(() => {
-    const errors = {}
     if (!currentUser) navigate('/tracks')
-    if (!isUpdate && !trackFile) errors.trackFile = "Need a file for track"
-    if (trackNumber < 1) errors.trackNumber = "Track number must be a positive integer"
-
-    setValErrors(errors)
-  }, [trackFile, hasSubmitted, isUpdate, trackNumber, currentUser, navigate])
+  }, [navigate, currentUser])
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setHasSubmitted(true)
-    if (Object.keys(valErrors).length > 0) return null
 
-    let albumIdTemp = albumId;
-    if (!albumId) {
-      const albumFormData = new FormData()
-      albumFormData.append('title', `${title} - Single`)
-      albumFormData.append('releaseDate', new Date().toISOString().split('T')[0])
-      albumFormData.append('genre', genre)
-      if (previewImage) {
-        albumFormData.append('albumCoverUrl', previewImage)
-      }
-      setIsLoading(true)
-      const responseAlbum = await dispatch(thunkCreateAlbum(albumFormData))
-      setIsLoading(false)
-      setAlbumId(responseAlbum.id)
+    const errObj = {}
+    if (title.length >= 50) errObj.title = "Title must be less than 50 characters"
+    if (genre.length >= 50) errObj.genre = "Genre must be less than 50 characters"
+    if (trackNumber >= 50) errObj.trackNumber = "Track Number must be less than 50"
+    if (trackNumber < 1) errObj.trackNumber = "Track number must be a positive integer"
+    if (!isUpdate && !trackFile) errObj.trackFile = "Need a file for track"
 
-      albumIdTemp = responseAlbum.id
-    }
-
-    const formData = new FormData()
-    formData.append('title', title)
-    formData.append('albumId', albumIdTemp)
-    formData.append('genre', genre)
-    formData.append('trackNumber', trackNumber)
-    formData.append('trackFile', trackFile)
-    formData.append('previewImage', previewImage)
-    formData.append('submit', true)
-
-    if (trackId) {
-      setIsLoading(true)
-      // console.log('trackId: ', trackId)
-      // console.log('formData: ', formData)
-      dispatch(thunkUpdateTrack(trackId, formData)).then(() => navigate(`/tracks/${trackId}`)).then(() => setIsLoading(false))
+    if (Object.values(errObj).length) {
+      setValErrors(errObj)
     } else {
-      dispatch(thunkCreateTrack(formData)).then(newTrack => navigate(`/tracks/${newTrack.id}`)) .then(() => setIsLoading(false))
+      let albumIdTemp = albumId;
+      if (!albumId) {
+        const albumFormData = new FormData()
+        albumFormData.append('title', `${title} - Single`)
+        albumFormData.append('releaseDate', new Date().toISOString().split('T')[0])
+        albumFormData.append('genre', genre)
+        if (previewImage) {
+          albumFormData.append('albumCoverUrl', previewImage)
+        }
+        setIsLoading(true)
+        const responseAlbum = await dispatch(thunkCreateAlbum(albumFormData))
+        setIsLoading(false)
+        setAlbumId(responseAlbum.id)
+
+        albumIdTemp = responseAlbum.id
+        const formData = new FormData()
+        formData.append('title', title)
+        formData.append('albumId', albumIdTemp)
+        formData.append('genre', genre)
+        formData.append('trackNumber', trackNumber)
+        formData.append('trackFile', trackFile)
+        formData.append('previewImage', previewImage)
+        // formData.append('submit', true)
+
+        if (trackId) {
+          setIsLoading(true)
+          // console.log('trackId: ', trackId)
+          // console.log('formData: ', formData)
+          dispatch(thunkUpdateTrack(trackId, formData)).then(() => navigate(`/tracks/${trackId}`)).then(() => setIsLoading(false))
+        } else {
+          dispatch(thunkCreateTrack(formData)).then(newTrack => navigate(`/tracks/${newTrack.id}`)).then(() => setIsLoading(false))
+        }
+      }
     }
+
 
 
     // setTitle('')
@@ -114,8 +119,8 @@ function TrackFormPage() {
   return (
     <div className="track-form-container">
       <h1>New Track</h1>
-      {/* {valErrors.length > 0 && hasSubmitted == true &&
-        valErrors.map((message) => <p key={message}>{message}</p>)} */}
+      {Object.values(valErrors).length > 0 && hasSubmitted == true &&
+        Object.values(valErrors).map((message) => <p key={message} className="validation-error">{message}</p>)}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div className="form-input title">
           <label>
@@ -165,7 +170,7 @@ function TrackFormPage() {
         <div className="form-input track-number">
           <label>
             Track Number
-            {valErrors.trackNumber && hasSubmitted == true && <span className="validation-error">{valErrors.trackNumber}</span>}
+            {/* {valErrors.trackNumber && hasSubmitted == true && <span className="validation-error">{valErrors.trackNumber}</span>} */}
             <input
               type="number"
               name="track_number"
@@ -180,7 +185,7 @@ function TrackFormPage() {
         <div className="form-input track-file">
           <label>
             Track File
-            {valErrors.trackFile && hasSubmitted == true && <span className="validation-error">{valErrors.trackFile}</span>}
+            {/* {valErrors.trackFile && hasSubmitted == true && <span className="validation-error">{valErrors.trackFile}</span>} */}
             <input
               type="file"
               name="track_file"
@@ -207,15 +212,15 @@ function TrackFormPage() {
 
         <div className="submitButtonWithLoadingIcon">
           <button type="submit">Submit</button>
-          
+
           {isLoading && <Oval
-          visible={true}
-          height="100%"
-          width="100%"
-          color="#4fa94d"
-          ariaLabel="oval-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
+            visible={true}
+            height="100%"
+            width="100%"
+            color="#4fa94d"
+            ariaLabel="oval-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
           />}
         </div>
       </form>

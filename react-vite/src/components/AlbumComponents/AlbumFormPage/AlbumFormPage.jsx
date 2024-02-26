@@ -17,13 +17,17 @@ function AlbumFormPage() {
   const [genre, setGenre] = useState("");
   const [previewImage, setPreviewImage] = useState()
 
-  const [hasSubmitted] = useState(false)
-  const [errors] = useState({});
+  const [hasSubmitted, setHasSubmitted] = useState(false)
+  const [valErrors, setValErrors] = useState({});
+
 
   const [isLoading, setIsLoading] = useState(false)
 
   const currentUser = useSelector(state => state.session.user)
 
+  useEffect(() => {
+    if (!currentUser) navigate('/albums')
+  }, [navigate, currentUser])
 
   useEffect(() => {
     function formatReleaseDate(date) {
@@ -59,39 +63,45 @@ function AlbumFormPage() {
   })
 
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setHasSubmitted(true)
 
-    console.log('releaseDate: ', releaseDate)
+    const errObj = {}
+    if (Date.parse(releaseDate) >= Date.parse(new Date())) errObj.releaseDate = "Release date cannot be in the future"
+    if (title.length >= 50) errObj.title = "Title must be less than 50 characters"
+    if (genre.length >= 50) errObj.genre = "Genre must be less than 50 characters"
 
-    const formData = new FormData()
-    formData.append('title', title)
-    formData.append('releaseDate', releaseDate)
-    formData.append('genre', genre)
-    if (previewImage) {
-      formData.append('albumCoverUrl', previewImage)
-    }
-
-
-    if (albumId) {
-      setIsLoading(true)
-      await dispatch(thunkUpdateAlbum(albumId, formData)).then(() => navigate(`/albums/${albumId}`)).then(() => setIsLoading(false))
+    if (Object.values(errObj).length) {
+      setValErrors(errObj)
     } else {
-      await dispatch(thunkCreateAlbum(formData)).then(newAlbum => navigate(`/albums/${newAlbum.id}`)).then(() => setIsLoading(false))
+
+      const formData = new FormData()
+      formData.append('title', title)
+      formData.append('releaseDate', releaseDate)
+      formData.append('genre', genre)
+      if (previewImage) {
+        formData.append('albumCoverUrl', previewImage)
+      }
+
+
+      if (albumId) {
+        setIsLoading(true)
+        await dispatch(thunkUpdateAlbum(albumId, formData)).then(() => navigate(`/albums/${albumId}`)).then(() => setIsLoading(false))
+      } else {
+        await dispatch(thunkCreateAlbum(formData)).then(newAlbum => navigate(`/albums/${newAlbum.id}`)).then(() => setIsLoading(false))
+      }
     }
-
-
   };
 
   return (
     <div className="album-form-container">
       <h1>Album Form</h1>
-      {errors.length > 0 && hasSubmitted == true &&
-        errors.map((message) => <p key={message}>{message}</p>)}
+      {Object.values(valErrors).length > 0 && hasSubmitted == true &&
+        Object.values(valErrors).map((message) => <p key={message} className="validation-error">{message}</p>)}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
-
         <div>
-
           <label>
             Title
             <input
@@ -147,13 +157,13 @@ function AlbumFormPage() {
           <button type="submit">Submit</button>
 
           {isLoading && <Oval
-          visible={true}
-          height="100%"
-          width="100%"
-          color="#4fa94d"
-          ariaLabel="oval-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
+            visible={true}
+            height="100%"
+            width="100%"
+            color="#4fa94d"
+            ariaLabel="oval-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
           />}
         </div>
       </form>

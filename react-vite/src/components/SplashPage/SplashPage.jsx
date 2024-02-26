@@ -32,7 +32,7 @@ export function SplashPage() {
 
             <div>
                 <p>Here is a sample track. Try playing it and controlling it with our music player! You can find more tracks
-                    on our track page!
+                    on our track page.
                 </p>
             </div>
 

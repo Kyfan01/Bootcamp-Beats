@@ -1,11 +1,13 @@
 #album-details-body {
-  background-image: linear-gradient(to bottom, rgb(43, 181, 43) 30%, rgba(255,0,0,0));
+  background-image: linear-gradient(to bottom, rgb(43, 181, 43) 30%, rgba(255, 0, 0, 0));
   background-size: 100% 40vh;
   background-repeat: no-repeat;
 }
+
 .album-details-header-image-div {
   width: 30%;
 }
+
 .album-details-header-image-div img {
   width: 100%;
   border-radius: 10px;
@@ -39,9 +41,9 @@
 .album-details-header-playicon {
   width: 50px;
   height: 50px;
-  margin: 0 0 0 
-  5px;
+  margin: 0 0 0 5px;
 }
+
 .album-details-header-playicon:hover {
   cursor: pointer;
 }
@@ -51,6 +53,7 @@
   height: 20px;
   margin: 0 10px;
 }
+
 .album-details-update:hover {
   cursor: pointer;
 }
@@ -59,6 +62,7 @@
   width: 20px;
   height: 20px;
 }
+
 .album-details-delete:hover {
   cursor: pointer;
 }

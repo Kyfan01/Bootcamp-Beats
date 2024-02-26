@@ -20,16 +20,14 @@ export function TracksIndex() {
     }, [dispatch])
 
     return (
-        <div>
-            <div className='track-index-container'>
-                <h1>Tracks</h1>
+        <div className='track-index-container'>
+            <h1>Tracks</h1>
 
-                <div>
-                    <div className='track-index-cards-container'>
-                        {tracks.map(track => <TrackCard numTrack={numTrack += 1} track={track} key={track?.id} />)}
-                    </div>
-                    {/* <Footer playingTrack={playingTrack}/> */}
+            <div>
+                <div className='track-index-cards-container'>
+                    {tracks.map(track => <TrackCard numTrack={numTrack += 1} track={track} key={track?.id} />)}
                 </div>
+                {/* <Footer playingTrack={playingTrack}/> */}
             </div>
         </div>
     )

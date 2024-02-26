@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import './AlbumDetailsPage.css'
+import default_upload_image from '../../../../../images/default_upload_image.jpg'
 
 import { useParams, useNavigate } from 'react-router-dom'
 import { thunkFetchAlbumById, thunkDeleteAlbum } from '../../../redux/album'
@@ -45,6 +46,8 @@ export function AlbumDetailsPage() {
     e.preventDefault()
     dispatch(thunkFetchPlayingTrack(sortedAlbumTracks[0]?.id))
   }
+
+  if (album && !(album.albumCoverUrl)) album.albumCoverUrl = default_upload_image
 
   return (
     <div id='album-details-body'>

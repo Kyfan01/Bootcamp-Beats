@@ -1,4 +1,5 @@
 import './TrackCard.css'
+import default_upload_image from '../../../../../images/default_upload_image.jpg'
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { thunkToggleLikeTrack } from '../../../redux/track'
@@ -62,6 +63,8 @@ export function TrackCard({ numTrack, track }) {
     e.preventDefault()
     dispatch(thunkFetchPlayingTrack(track?.id))
   }
+
+  if (track && !(track.previewImageUrl)) track.previewImageUrl = default_upload_image
 
   return (
     <div title={track?.title} className='track-card-container'>

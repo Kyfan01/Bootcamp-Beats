@@ -1,4 +1,6 @@
 .album-form-container {
     display: flex;
     flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
 }
