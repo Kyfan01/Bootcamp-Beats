@@ -1,131 +1,837 @@
-# Flask React Project
+# Bootcamp Beats
 
-This is the starter for the Flask React project.
+## Database Schema Design
+![bootcamp-beats-schema]
 
-## Getting started
+[bootcamp-beats-schema]: ./images/Bootcamp-Beats.png
 
-1. Clone this repository (only this branch).
+## API Documentation
 
-2. Install dependencies.
+## USER AUTHENTICATION/AUTHORIZATION (WIP)
 
-   ```bash
-   pipenv install -r requirements.txt
-   ```
+### All endpoints that require authentication (WIP)
 
-3. Create a __.env__ file based on the example with proper settings for your
-   development environment.
+## TRACKS
 
-4. Make sure the SQLite3 database connection URL is in the __.env__ file.
+### Get all Tracks
 
-5. This starter organizes all tables inside the `flask_schema` schema, defined
-   by the `SCHEMA` environment variable.  Replace the value for
-   `SCHEMA` with a unique name, **making sure you use the snake_case
-   convention.**
+Returns all the tracks.
 
-6. Get into your pipenv, migrate your database, seed your database, and run your
-   Flask app:
+* Require Authentication: False
+* Request
+  * Method: GET
+  * URL: /api/tracks
+  * Body: none
 
-   ```bash
-   pipenv shell
-   ```
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-   ```bash
-   flask db upgrade
-   ```
+    ```json
+    {
+        "tracks": [
+            {
+                "id": 1,
+                "artist_id": 1,
+                "album_id": 1,
+                "title": "Dragon Night",
+                "artist_name": "Sekai no Owari",
+                "duration": 230,
+                "album_title": "Tree",
+                "track_likes": 20000,
+                "liked": true,
+                "url": "song url",
+                "preview_image_url": "preview image url"
+            }
+        ]
+    }
+    ```
 
-   ```bash
-   flask seed all
-   ```
+### Get all Tracks uploaded by User Id
 
-   ```bash
-   flask run
-   ```
+Returns all the tracks uploaded by a specified user
 
-7. The React frontend has no styling applied. Copy the __.css__ files from your
-   Authenticate Me project into the corresponding locations in the
-   __react-vite__ folder to give your project a unique look.
+* Require Authentication: True
+* Request
+  * Method: GET
+  * URL: /api/tracks/current
+  * Body: none
 
-8. To run the React frontend in development, `cd` into the __react-vite__
-   directory and run `npm i` to install dependencies. Next, run `npm run build`
-   to create the `dist` folder. The starter has modified the `npm run build`
-   command to include the `--watch` flag. This flag will rebuild the __dist__
-   folder whenever you change your code, keeping the production version up to
-   date.
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-## Deployment through Render.com
+    ```json
+    {
+        "tracks": [
+            {
+                "id": 1,
+                "artist_id": 1,
+                "album_id": 1,
+                "track_num": 1,
+                "title": "Dragon Night",
+                "artist_name": "Sekai no Owari",
+                "duration": 230,
+                "album_title": "Tree",
+                "total_likes": 20000,
+                "liked": true,
+                "url": "song url",
+                "preview_image_url": "preview image url"
+            }
+        ]
+    }
+    ```
 
-First, recall that Vite is a development dependency, so it will not be used in
-production. This means that you must already have the __dist__ folder located in
-the root of your __react-vite__ folder when you push to GitHub. This __dist__
-folder contains your React code and all necessary dependencies minified and
-bundled into a smaller footprint, ready to be served from your Python API.
+### Get details of a Track by id
 
-Begin deployment by running `npm run build` in your __react-vite__ folder and
-pushing any changes to GitHub.
+Returns the details of a track specified by its id.
 
-Refer to your Render.com deployment articles for more detailed instructions
-about getting started with [Render.com], creating a production database, and
-deployment debugging tips.
+* Require Authentication: true
+* Request
+  * Method: GET
+  * URL: /api/tracks/:track_id
+  * Body: none
 
-From the Render [Dashboard], click on the "New +" button in the navigation bar,
-and click on "Web Service" to create the application that will be deployed.
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-Select that you want to "Build and deploy from a Git repository" and click
-"Next". On the next page, find the name of the application repo you want to
-deploy and click the "Connect" button to the right of the name.
+    ```json
+    {
+        "id": 1,
+        "artist_id": 1,
+        "album_id": 1,
+        "track_num": 1,
+        "title": "Dragon Night",
+        "artist_name": "Sekai no Owari",
+        "duration": 230,
+        "genre": "Pop",
+        "track_likes": 20000,
+        "liked": true,
+        "url": "song url",
+        "preview_image_url": "preview image url",
+        "num_playlists": 3
+    }
 
-Now you need to fill out the form to configure your app. Most of the setup will
-be handled by the __Dockerfile__, but you do need to fill in a few fields.
+    ```
 
-Start by giving your application a name.
+### Create a track
 
-Make sure the Region is set to the location closest to you, the Branch is set to
-"main", and Runtime is set to "Docker". You can leave the Root Directory field
-blank. (By default, Render will run commands from the root directory.)
+Creates and returns a new track.
 
-Select "Free" as your Instance Type.
+* Require Authentication: True
+* Request
+  * Method: POST
+  * URL: /api/tracks/
+  * Body:
 
-### Add environment variables
+   ```json
+    {
+      "title": "Sweet Child o' Mine",
+      "genre": "Rock",
+      "url": "song url",
+      "preview_image_url": "preview image url",
+      "album_id": 1
+    }
+    ```
 
-In the development environment, you have been securing your environment
-variables in a __.env__ file, which has been removed from source control (i.e.,
-the file is gitignored). In this step, you will need to input the keys and
-values for the environment variables you need for production into the Render
-GUI.
+* Successful Response
+  * Status Code: 201
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-Add the following keys and values in the Render GUI form:
+    ```json
+    {
+        "id": 1,
+        "artist_id": 1,
+        "title": "Sweet Child o' Mine",
+        "artist_name": "Guns n' Roses",
+        "duration": 356,
+        "genre": "Rock",
+        "url": "song url",
+        "preview_image_url": "preview image url",
+        "album_id": 1,
+        "track_num": 1
+    }
 
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
+    ```
 
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
+* Error Response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-Add the following keys and values:
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "title": "Title must be 50 characters or less",
+        "genre": "Genre must be 20 characters or less",
+        "url": "Url must be a valid url",
+        "preview_image_url": "Preview Image Url must be a valid url"
+      }
+    }
+    ```
 
-- DATABASE_URL (copy value from the **External Database URL** field)
+### Edit a Track
 
-**Note:** Add any other keys and values that may be present in your local
-__.env__ file. As you work to further develop your project, you may need to add
-more environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment.
+Updates and returns an existing track.
 
-### Deploy
+* Require Authentication: True
+* Require proper authorization: Track must belong to the current user
+* Request
+  * Method: PUT
+  * URL: /api/tracks/:trackId
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-Now you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your Dockerfile
-commands being executed and any errors that occur.
+    ```json
+    {
+      "title": "Sweet Child o' Mine",
+      "genre": "Rock",
+      "url": "song url",
+      "preview_image_url": "preview image url",
+      "album_id": 1
+    }
+    ```
 
-When deployment is complete, open your deployed site and check to see that you
-have successfully deployed your Flask application to Render! You can find the
-URL for your site just below the name of the Web Service at the top of the page.
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-**Note:** By default, Render will set Auto-Deploy for your project to true. This
-setting will cause Render to re-deploy your application every time you push to
-main, always keeping it up to date.
+    ```json
+    {
+        "id": 1,
+        "artist_id": 1,
+        "title": "Sweet Child o' Mine",
+        "artist_name": "Guns n' Roses",
+        "duration": 356,
+        "genre": "Rock",
+        "url": "song url",
+        "preview_image_url": "preview image url",
+        "album_id": 1,
+        "track_num": 1
+    }
+    ```
 
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+* Error Response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "title": "Title must be 50 characters or less",
+        "genre": "Genre must be 20 characters or less",
+        "url": "Url must be a valid url",
+        "preview_image_url": "Preview Image Url must be a valid url"
+      }
+    }
+    ```
+* Error response: Couldn't find a track with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Track couldn't be found"
+    }
+    ```
+
+### Delete a Track
+
+Deletes an existing track.
+
+* Require Authentication: True
+* Require proper authorization: Track must belong to the current user
+* Request
+  * Method: DELETE
+  * URL: /api/tracks/:track_Id
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Successfully deleted"
+    }
+    ```
+
+* Error response: Couldn't find a Track with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Track couldn't be found"
+    }
+    ```
+
+## ALBUMS
+
+### Get all Albums
+
+Returns all the albums.
+
+* Require Authentication: False
+* Request
+  * Method: GET
+  * URL: /api/albums
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+        "Albums": [
+            {
+                "id": 1,
+                "artist_id": 1,
+                "title": "Tree",
+                "release_date": "2021-11-19",
+                "genre": "Pop",
+                "album_cover_url": "album cover url",
+                "single": false
+            }
+        ]
+    }
+    ```
+
+### Get all Albums uploaded by User Id
+
+Returns all the albums uploaded by a specified user
+
+* Require Authentication: True
+* Request
+  * Method: GET
+  * URL: /api/albums/current
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+        "Albums": [
+            {
+                "id": 1,
+                "artist_id": 1,
+                "title": "Tree",
+                "release_date": "2021-11-19",
+                "genre": "Pop",
+                "album_cover_url": "album cover url",
+                "single": false
+            }
+        ]
+    }
+    ```
+
+### Get details of an Album by id
+
+Returns the details of an album specified by its id.
+
+* Require Authentication: true
+* Request
+  * Method: GET
+  * URL: /api/albums/:albumId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "id": 1,
+      "artist_id": 1,
+      "title": "Tree",
+      "release_date": "2021-11-19",
+      "genre": "Pop",
+      "album_cover_url": "album cover url",
+      "single": false,
+      "num_tracks": 6,
+      "duration": 1500
+    }
+
+    ```
+
+### Create an Album
+
+Creates and returns a new album.
+
+* Require Authentication: True
+* Request
+  * Method: POST
+  * URL: /api/albums/
+  * Body:
+
+   ```json
+    {
+      "title": "Tree",
+      "release_date": "2021-11-19",
+      "genre": "Pop",
+      "album_cover_url": "album cover url",
+      "single": false
+    }
+    ```
+
+* Successful Response
+  * Status Code: 201
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "id": 1,
+      "artist_id": 1,
+      "title": "Tree",
+      "release_date": "2021-11-19",
+      "genre": "Pop",
+      "album_cover_url": "album cover url",
+      "single": false
+    }
+
+    ```
+
+* Error Response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "title": "Title must be 50 characters or less",
+        "genre": "Genre must be 20 characters or less",
+        "preview_image_url": "Preview Image Url must be a valid url",
+        "release_date": "Release Date cannot be in the future"
+      }
+    }
+    ```
+
+### Edit an Album
+
+Updates and returns an existing album.
+
+* Require Authentication: True
+* Require proper authorization: Album must belong to the current user
+* Request
+  * Method: PUT
+  * URL: /api/albums/:albumId
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "title": "Tree",
+      "release_date": "2021-11-19",
+      "genre": "Pop",
+      "album_cover_url": "album cover url",
+      "single": false,
+      "tracks": [
+        {
+          "id": 1,
+          "artist_id": 1,
+          "album_id": 1,
+          "album_title": "Tree",
+          "title": "Dragon Night",
+          "artist_name": "Sekai no Owari",
+          "duration": 230,
+          "url": "song url",
+          "preview_image_url": "preview image url"
+        }
+      ]
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "id": 1,
+      "artist_id": 1,
+      "title": "Tree",
+      "release_date": "2021-11-19",
+      "genre": "Pop",
+      "album_cover_url": "album cover url",
+      "single": false,
+      "tracks": [
+        {
+          "id": 1,
+          "artist_id": 1,
+          "album_id": 1,
+          "album_title": "Tree",
+          "title": "Dragon Night",
+          "artist_name": "Sekai no Owari",
+          "duration": 230,
+          "url": "song url",
+          "preview_image_url": "preview image url"
+        }
+      ]
+    }
+    ```
+
+* Error Response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "title": "Title must be 50 characters or less",
+        "genre": "Genre must be 20 characters or less",
+        "preview_image_url": "Preview Image Url must be a valid url",
+        "release_date": "Release Date cannot be in the future"
+      }
+    }
+    ```
+* Error response: Couldn't find an album with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Album couldn't be found"
+    }
+    ```
+
+### Delete an Album
+
+Deletes an existing album.
+
+* Require Authentication: True
+* Require proper authorization: Album must belong to the current user
+* Request
+  * Method: DELETE
+  * URL: /api/albums/:albumId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Successfully deleted"
+    }
+    ```
+
+* Error response: Couldn't find an Album with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Album couldn't be found"
+    }
+    ```
+
+### LIKES
+
+## Toggle Likes on a Track
+
+Likes/unlikes a track by its id
+
+* Require Authentication: True
+* Request
+  * Method: POST
+  * URL: /api/tracks/:trackId/like
+  * Body:
+    ```json
+    {
+      "user_id": 1,
+      "track_id": 1
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+  ```json
+  {
+    "message": "Successfully liked!"
+  }
+  ```
+
+### PLAYLISTS (All playlist functionality is for future development)
+
+### Get all Playlists created by the Current User
+
+Returns all the playlists created by the current user
+
+* Require Authentication: True
+* Request
+  * Method: GET
+  * URL: /api/playlists/current
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+        "Playlists": [
+            {
+                "name": "Awesome Mix",
+                "preview_image": "preview image url"
+            }
+        ]
+    }
+    ```
+
+### Get details of a Playlist by id
+
+Returns the details of a playlist specified by its id.
+
+* Require Authentication: True
+* Request
+  * Method: GET
+  * URL: /api/playlists/:playlistId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "name": "Awesome Mix",
+      "preview_image": "preview image url",
+      "tracks": [
+        {
+            "id": 1,
+            "artist_id": 1,
+            "album_id": 1,
+            "album_title": "Tree",
+            "title": "Dragon Night",
+            "artist_name": "Sekai no Owari",
+            "duration": 230,
+            "url": "song url",
+            "preview_image_url": "preview image url"
+        }
+      ],
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36",
+    }
+
+    ```
+
+### Create a playlist
+
+Creates and returns a new playlist.
+
+* Require Authentication: True
+* Request
+  * Method: POST
+  * URL: /api/playlists/
+  * Body:
+
+   ```json
+    {
+      "name": "Awesome Mix"
+    }
+    ```
+
+* Successful Response
+  * Status Code: 201
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "name": "Awesome Mix",
+      "preview_image": "preview image url"
+    }
+
+    ```
+
+* Error Response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "name": "Name must be less than 50 characters"
+      }
+    }
+    ```
+
+### Edit a Playlist
+
+Updates and returns an existing playlist.
+
+* Require Authentication: True
+* Require proper authorization: Playlist must belong to the current user
+* Request
+  * Method: PUT
+  * URL: /api/playlists/:playlistId
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "name": "Awesome Mix",
+      "preview_image": "preview image url",
+      "tracks": [
+        {
+          "id": 1,
+          "artist_id": 1,
+          "album_id": 1,
+          "album_title": "Tree",
+          "title": "Dragon Night",
+          "artist_name": "Sekai no Owari",
+          "duration": 230,
+          "url": "song url",
+          "preview_image_url": "preview image url"
+        }
+      ]
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "name": "Awesome Mix",
+      "tracks": [
+        {
+          "id": 1,
+          "artist_id": 1,
+          "album_id": 1,
+          "album_title": "Tree",
+          "title": "Dragon Night",
+          "artist_name": "Sekai no Owari",
+          "duration": 230,
+          "url": "song url",
+          "preview_image_url": "preview image url"
+        }
+      ]
+    }
+    ```
+
+* Error Response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "name": "Name is required"
+      }
+    }
+    ```
+* Error response: Couldn't find a playlist with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Playlist couldn't be found"
+    }
+    ```
+
+### Delete a Playlist
+
+Deletes an existing playlist.
+
+* Require Authentication: True
+* Require proper authorization: Playlist must belong to the current user
+* Request
+  * Method: DELETE
+  * URL: /api/playlists/:playlistId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Successfully deleted"
+    }
+    ```
+
+* Error response: Couldn't find a Playlist with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Pllaylist couldn't be found"
+    }
+    ```
