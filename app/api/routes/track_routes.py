@@ -129,7 +129,10 @@ def delete_track(trackId):
 
 
     file_to_delete = remove_file_from_s3(track.url) if '/' in track.url else None
-    image_to_delete = remove_file_from_s3(track.preview_image_url) if '/' in track.preview_image_url else None
+
+    # Needed because preview image is nullable, can't remove null
+    if track.preview_image_url:
+        image_to_delete = remove_file_from_s3(track.preview_image_url) if '/' in track.preview_image_url else None
 
     db.session.delete(track)
     db.session.commit()

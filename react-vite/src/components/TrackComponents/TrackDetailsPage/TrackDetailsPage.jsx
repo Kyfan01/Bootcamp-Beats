@@ -3,7 +3,7 @@ import './TrackDetailsPage.css'
 import default_upload_image from '../../../../../images/default_upload_image.jpg'
 
 import { useParams, useNavigate } from 'react-router-dom'
-import { thunkDeleteTrack, thunkFetchTrackById } from '../../../redux/track'
+import { clearTracks, thunkDeleteTrack, thunkFetchTrackById } from '../../../redux/track'
 import { useDispatch, useSelector } from 'react-redux'
 import { thunkFetchPlayingTrack } from '../../../redux/playingTrack'
 
@@ -27,7 +27,10 @@ export function TrackDetailsPage() {
 
   const handleDelete = (e) => {
     e.preventDefault()
-    dispatch(thunkDeleteTrack(trackId)).then(() => navigate('/tracks'))
+    dispatch(thunkDeleteTrack(trackId)).then(() => {
+      dispatch(clearTracks())
+      navigate('/tracks')
+    })
   }
 
   const handleUpdate = (e) => {
