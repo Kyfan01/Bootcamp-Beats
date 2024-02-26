@@ -28,12 +28,15 @@ export function UserTracksAlbums() {
         window.scrollTo(0, 0)
     }, [dispatch, userId])
 
+    let artistName = artist?.artistName
+    if (!artistName && tracks) artistName = tracks[0]?.artistName
+
     return (
         <div className='user-page-container'>
             {console.log('user tracks ', userTracks)}
             {console.log('user albums ', userAlbums)}
             {console.log('artist is ', artist)}
-            <h1>{artist?.artistName}&apos;s Albums and Tracks</h1>
+            <h1>{artistName}&apos;s Albums and Tracks</h1>
 
             <h2>Albums</h2>
             <div className='user-details-albums-div'>
