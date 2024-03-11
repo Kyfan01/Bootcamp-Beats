@@ -20,13 +20,14 @@
 
 #modal-content {
   position: absolute;
-  background-color:black;
+  background-color: black;
 }
 
 .login-header-div {
   display: flex;
   justify-content: center;
 }
+
 .signup-header-div {
   display: flex;
   justify-content: center;
@@ -37,32 +38,53 @@
   margin: 5px 5px;
   display: flex;
   justify-content: start;
+  align-items: center;
 }
-.login-form-input input{
+
+.login-form-input input {
   width: 100%;
   margin: 0 5px;
+  border-radius: 4px;
+  height: 20px;
 }
 
 .signup-form-input {
   width: 100%;
-  margin: 5px 5px;
+  margin: 8px 5px;
   display: flex;
   justify-content: start;
+  align-items: center;
 }
-.signup-form-input input{
+
+.signup-form-input input {
   width: 100%;
   margin: 0 5px;
+  border-radius: 4px;
+  height: 20px;
 }
 
 .login-form-submit-button-div {
   display: flex;
-  margin: 0 0 5px 0;
   justify-content: center;
 }
+
+.login-form-submit-button-div button {
+  border: none;
+  border-radius: 4px;
+  height: 25px;
+  margin-top: 10px;
+}
+
 .signup-form-submit-button-div {
   display: flex;
-  margin: 0 0 5px 0;
   justify-content: center;
+}
+
+.signup-form-submit-button-div button {
+  border: none;
+  border-radius: 4px;
+  height: 25px;
+  margin-top: 10px;
 }
 
 #modal-content {
@@ -75,6 +97,7 @@
   flex-direction: column;
   margin: 0 10px 20px 0;
 }
+
 .signup-form {
   display: flex;
   flex-direction: column;
