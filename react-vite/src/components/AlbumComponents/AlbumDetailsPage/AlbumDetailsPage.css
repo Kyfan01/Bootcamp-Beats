@@ -78,3 +78,14 @@
   align-items: center;
   margin: 1vh 0 0 3vh;
 }
+
+.album-details-artist-navlink {
+  text-decoration: none;
+  transition: all 500ms ease;
+  color: white;
+}
+
+.album-details-artist-navlink:hover {
+  color: white;
+  text-decoration: underline;
+}

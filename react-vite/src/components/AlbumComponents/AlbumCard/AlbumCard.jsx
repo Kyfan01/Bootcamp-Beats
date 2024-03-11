@@ -15,12 +15,14 @@ export function AlbumCard({ album }) {
           </div>
           <div>
             <p className='album-card-title'>{album?.title.length < 13 ? album?.title : album?.title.substring(0, 13) + '...'}</p>
-            <p className='album-card-artist'>{album?.artistName}</p>
+            <NavLink to={`/users/${album.artistId}`} className="album-card-artist-navlink">
+              <p className='album-card-artist'>{album?.artistName}</p>
+            </NavLink>
           </div>
 
         </div>
-      </NavLink>
-    </div>
+      </NavLink >
+    </div >
 
   )
 }

@@ -25,7 +25,7 @@ export function UserTracksAlbums() {
         dispatch(thunkFetchUserAlbums(userId))
         dispatch(thunkFetchTracksByUserId(userId))
         dispatch(thunkFetchArtist(userId))
-        window.scrollTo(0, 0)
+
     }, [dispatch, userId])
 
     let artistName = artist?.artistName

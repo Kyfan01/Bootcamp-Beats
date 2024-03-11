@@ -13,8 +13,10 @@
   margin: 20px;
   transition: background-color 0.25s ease;
 }
+
 .album-card-container:hover {
-  background-color: #4f5356
+  background-color: #4f5356;
+  transform: scale(1.1);
 }
 
 .album-card-img-container {
@@ -27,7 +29,7 @@
 }
 
 .album-card-title {
-  color:white;
+  color: white;
   font-weight: 600;
   font-size: x-large;
   margin: 0 0 15px 0;
@@ -35,4 +37,20 @@
 
 .album-card-artist {
   color: gray;
+  transition: all 500ms ease;
+}
+
+.album-card-artist:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+.album-card-artist-navlink {
+  text-decoration: none;
+  transition: all 500ms ease;
+}
+
+.album-card-artist-navlink:hover {
+  color: white;
+  text-decoration: underline;
 }

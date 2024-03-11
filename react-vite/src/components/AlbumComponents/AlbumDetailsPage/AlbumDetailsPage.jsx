@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import './AlbumDetailsPage.css'
 import default_upload_image from '../../../../../images/default_upload_image.jpg'
 
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, NavLink } from 'react-router-dom'
 import { thunkFetchAlbumById, thunkDeleteAlbum, clearAlbums } from '../../../redux/album'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearTracks, thunkFetchAlbumTracks } from '../../../redux/track'
@@ -53,6 +53,8 @@ export function AlbumDetailsPage() {
 
   if (album && !(album.albumCoverUrl)) album.albumCoverUrl = default_upload_image
 
+  if (!album) return
+
   return (
     <div id='album-details-body'>
       <div className='album-details-header-div'>
@@ -63,7 +65,7 @@ export function AlbumDetailsPage() {
           <p className='album-details-album-word'>Album</p>
           <p className='album-details-album-name'>{album?.title}</p>
           <div className='album-details-artist-year-length-div'>
-            <p className='album-details-artist-year-length'>{album?.artistName} • {album?.releaseDate.split(' ')[3]} • {sortedAlbumTracks.length} songs</p>
+            <p className='album-details-artist-year-length'><NavLink className="album-details-artist-navlink" to={`/users/${album.artistId}`}>{album?.artistName}</NavLink> • {album?.releaseDate.split(' ')[3]} • {sortedAlbumTracks.length} songs</p>
           </div>
         </div>
       </div>

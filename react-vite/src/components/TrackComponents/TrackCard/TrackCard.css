@@ -115,8 +115,20 @@ body {
     align-items: center;
 }
 
+.likes-div>p {
+    font-size: 16px;
+}
+
+.like-heart-icon {
+    transition: all ease 500ms;
+    height: 22px;
+    width: 22px;
+    margin-right: 10px;
+}
+
 .like-heart-icon:hover {
     cursor: pointer;
+    transform: scale(1.4);
 }
 
 .isPlaying {
