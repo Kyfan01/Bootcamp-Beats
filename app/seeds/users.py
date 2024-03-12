@@ -21,14 +21,18 @@ def seed_users():
         name='Collin Ullmann', username='collinullmann', email='collinullmann@aa.io', password='password', artist_name='DJ ByteBeat', date_of_birth=date(1943, 12, 4))
     demo = User(
         name='Demo User', username='demo', email='demo@aa.io', password='password', artist_name='DJ-Demo', date_of_birth=date(1000, 12, 4))
+    kevinMacLeod = User(
+        name='Kevin MacLeod', username='kmacleod', email='kmacleod@aa.io', password='password', artist_name='Kevin MacLeod', date_of_birth=date(1972, 9, 28))
+    
 
     db.session.add(hun)
     db.session.add(kevin)
     db.session.add(collin)
     db.session.add(demo)
+    db.session.add(kevinMacLeod)
     db.session.commit()
 
-    return [hun, kevin, collin, demo]
+    return [hun, kevin, collin, demo, kevinMacLeod]
 
 
 
