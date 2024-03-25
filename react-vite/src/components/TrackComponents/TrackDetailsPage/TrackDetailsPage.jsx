@@ -3,13 +3,15 @@ import './TrackDetailsPage.css'
 import default_upload_image from '../../../../../images/default_upload_image.jpg'
 
 import { useParams, useNavigate } from 'react-router-dom'
-import { clearTracks, thunkDeleteTrack, thunkFetchTrackById } from '../../../redux/track'
+import { clearTracks, thunkDeleteTrack, thunkFetchTrackById, thunkToggleLikeTrack } from '../../../redux/track'
 import { useDispatch, useSelector } from 'react-redux'
 import { thunkFetchPlayingTrack } from '../../../redux/playingTrack'
 
 import { IoPlayCircle } from "react-icons/io5";
 import { TbArrowsExchange2 } from "react-icons/tb";
 import { MdDelete } from "react-icons/md";
+import { IoIosHeart } from "react-icons/io";
+import { IoIosHeartEmpty } from "react-icons/io";
 
 export function TrackDetailsPage() {
   const { trackId } = useParams()
@@ -18,6 +20,7 @@ export function TrackDetailsPage() {
 
   const user = useSelector(state => state.session.user)
   const track = useSelector(state => state.tracks[trackId])
+  const isLiked = useSelector(state => state.tracks[trackId]?.liked)
 
   const isOwner = (parseInt(user?.id) === track?.artistId)
 
@@ -43,6 +46,12 @@ export function TrackDetailsPage() {
     dispatch(thunkFetchPlayingTrack(track?.id))
   }
 
+  const toggleLike = e => {
+    e.preventDefault()
+    dispatch(thunkToggleLikeTrack(trackId))
+  }
+
+
   if (track && !(track.previewImageUrl)) track.previewImageUrl = default_upload_image
 
   return (
@@ -61,14 +70,11 @@ export function TrackDetailsPage() {
       </div>
       <div className='play-update-delete-div'>
         <IoPlayCircle className='track-details-header-playicon' onClick={handleTrackSelect} title='Select for player' />
-        {isOwner && <TbArrowsExchange2 className='track-details-update' onClick={handleUpdate} title='Update' />}
-        {isOwner && <MdDelete className='track-details-delete' onClick={handleDelete} title='Delete' />}
+        {isLiked ? <IoIosHeart onClick={toggleLike} className='track-details-button' /> : <IoIosHeartEmpty onClick={toggleLike} className='track-details-button' />}
+        {isOwner && <TbArrowsExchange2 className='track-details-button' onClick={handleUpdate} title='Update' />}
+        {isOwner && <MdDelete className='track-details-button' onClick={handleDelete} title='Delete' />}
 
       </div>
-
-
-
-
 
 
       {/* <h1>{track?.title} Track Details</h1>
