@@ -54,12 +54,12 @@ function LoginFormModal() {
             required
           />
         </label>
-        <div className="login-form-submit-button-div">
+        <div className="login-form-submit-button-div modal-button">
           {errors.password && <p>{errors.password}</p>}
           <button type="submit">Log In</button>
         </div>
         <div className="login-form-submit-button-div">
-          <button className='login-modal-button'
+          <button className='login-modal-button modal-button'
             onClick={() => {
               setEmail('demo@aa.io')
               setPassword('password')
