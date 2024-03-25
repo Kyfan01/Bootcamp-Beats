@@ -34,7 +34,6 @@ export function Footer() {
 
   const audioElement = useRef();
 
-  console.log('isPlaying STATE', isPlaying)
 
   useEffect(() => {
     if(!audioElement) return;
@@ -52,15 +51,12 @@ export function Footer() {
         autoPlay
         onPlay={(e) => {
           dispatch(setIsPlayingTrack(true))
-          console.log('onPlay!', e)
         }}
         onPause={(e) => {
           dispatch(setIsPlayingTrack(false))
-          console.log('onPause!', e)
         }}
         onEnded={(e) => {
           dispatch(setIsPlayingTrack(false))
-          console.log('onEnded!', e)
         }}
         ref={audioElement}
         src={src}
