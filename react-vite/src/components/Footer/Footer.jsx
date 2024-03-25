@@ -49,13 +49,13 @@ export function Footer() {
     <div className='track-player'>
       <AudioPlayer
         autoPlay
-        onPlay={(e) => {
+        onPlay={() => {
           dispatch(setIsPlayingTrack(true))
         }}
-        onPause={(e) => {
+        onPause={() => {
           dispatch(setIsPlayingTrack(false))
         }}
-        onEnded={(e) => {
+        onEnded={() => {
           dispatch(setIsPlayingTrack(false))
         }}
         ref={audioElement}
