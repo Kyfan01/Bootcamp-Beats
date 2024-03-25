@@ -62,7 +62,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        
+
         <label className="signup-form-input">
           Username
           <input
@@ -103,7 +103,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        
+
         <label className="signup-form-input">
           Confirm Password
           <input
@@ -114,8 +114,8 @@ function SignupFormModal() {
           />
         </label>
         <div className="signup-form-submit-button-div">
-          
-          <button type="submit">Sign Up</button>
+
+          <button type="submit" className="modal-button">Sign Up</button>
         </div>
       </form>
     </>
