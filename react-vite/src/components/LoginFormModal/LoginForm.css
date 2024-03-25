@@ -1,0 +1,7 @@
+.modal-button {
+    transition: all ease 250ms;
+}
+
+.modal-button:hover {
+    transform: scale(1.1);
+}
