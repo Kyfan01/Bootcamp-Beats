@@ -9,10 +9,12 @@ import { clearTracks, thunkFetchAlbumTracks } from '../../../redux/track'
 import { TrackCard } from '../../TrackComponents/TrackCard/TrackCard'
 
 import { IoPlayCircle } from "react-icons/io5";
+import { IoPauseCircle } from "react-icons/io5";
 import { TbArrowsExchange2 } from "react-icons/tb";
 import { MdDelete } from "react-icons/md";
 
-import { thunkFetchPlayingTrack } from '../../../redux/playingTrack'
+
+import { setIsPlayingTrack, thunkFetchPlayingTrack } from '../../../redux/playingTrack'
 
 export function AlbumDetailsPage() {
   const { albumId } = useParams()
@@ -23,6 +25,8 @@ export function AlbumDetailsPage() {
   const album = useSelector(state => state.albums[albumId])
   const albumTracks = useSelector(state => Object.values(state.tracks).filter(track => parseInt(albumId) === track.albumId))
   const sortedAlbumTracks = albumTracks.sort((a, b) => a.trackNumber - b.trackNumber)
+  const playingTrack = useSelector(state => state.playingTrack.selected)
+  const isPlaying = useSelector(state => state.playingTrack.isPlaying);
 
   const isOwner = (user?.id === album?.artistId)
   let numTrack = 0;
@@ -70,7 +74,8 @@ export function AlbumDetailsPage() {
         </div>
       </div>
       <div className='play-update-delete-div'>
-        <IoPlayCircle className='album-details-header-playicon' onClick={handleTrackSelect} title='Select first track' />
+        {isPlaying && playingTrack.albumId == albumId ? <IoPauseCircle onClick={() => dispatch(setIsPlayingTrack(false))}  className='album-details-header-playicon' title='Select for player' /> : <IoPlayCircle className='album-details-header-playicon' onClick={handleTrackSelect} title='Select for player' />}
+        {/* <IoPlayCircle className='album-details-header-playicon' onClick={handleTrackSelect} title='Select first track' /> */}
         {isOwner && <TbArrowsExchange2 className='album-details-update' onClick={handleUpdate} title='Update' />}
         {isOwner && <MdDelete className='album-details-delete' onClick={handleDelete} title='Delete' />}
       </div>
