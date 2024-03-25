@@ -57,8 +57,6 @@ export function TrackDetailsPage() {
 
   if (track && !(track.previewImageUrl)) track.previewImageUrl = default_upload_image
 
-  console.log('playingTrack State: ', playingTrack)
-  console.log('isPlaying: ', isPlaying)
 
   return (
     <div id='track-details-body'>
