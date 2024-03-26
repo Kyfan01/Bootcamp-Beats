@@ -113,7 +113,7 @@ function AlbumFormPage() {
           </div>
         </div> }
       {!isLoading && 
-        <div>
+        <>
           <h1>Album Form</h1>
           {Object.values(valErrors).length > 0 && hasSubmitted == true &&
             Object.values(valErrors).map((message) => <p key={message} className="validation-error">{message}</p>)}
@@ -184,7 +184,7 @@ function AlbumFormPage() {
               />}
             </div>
           </form>
-        </div>
+        </>
       }
       
     </div>
