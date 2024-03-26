@@ -71,6 +71,7 @@ function TrackFormPage() {
 
       setValErrors(errObj)
     } else {
+      setIsLoading(true)
       let albumIdTemp = albumId;
       if (!albumId) {
         const albumFormData = new FormData()
@@ -80,7 +81,6 @@ function TrackFormPage() {
         if (previewImage) {
           albumFormData.append('albumCoverUrl', previewImage)
         }
-        setIsLoading(true)
         const responseAlbum = await dispatch(thunkCreateAlbum(albumFormData))
         setAlbumId(responseAlbum.id)
         albumIdTemp = responseAlbum.id
@@ -94,7 +94,6 @@ function TrackFormPage() {
       formData.append('previewImage', previewImage)
 
       if (trackId) {
-        setIsLoading(true)
         dispatch(thunkUpdateTrack(trackId, formData)).then(() => navigate(`/tracks/${trackId}`)).then(() => setIsLoading(false))
       } else {
         dispatch(thunkCreateTrack(formData)).then(newTrack => navigate(`/tracks/${newTrack.id}`)).then(() => setIsLoading(false))
