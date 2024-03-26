@@ -67,6 +67,7 @@ function AlbumFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setHasSubmitted(true)
+    
 
     const errObj = {}
     if (Date.parse(releaseDate) >= Date.parse(new Date())) errObj.releaseDate = "Release date cannot be in the future"
@@ -76,7 +77,7 @@ function AlbumFormPage() {
     if (Object.values(errObj).length) {
       setValErrors(errObj)
     } else {
-
+      setIsLoading(true)
       const formData = new FormData()
       formData.append('title', title)
       formData.append('releaseDate', releaseDate)
@@ -87,7 +88,7 @@ function AlbumFormPage() {
 
 
       if (albumId) {
-        setIsLoading(true)
+        
         await dispatch(thunkUpdateAlbum(albumId, formData)).then(() => navigate(`/albums/${albumId}`)).then(() => setIsLoading(false))
       } else {
         await dispatch(thunkCreateAlbum(formData)).then(newAlbum => navigate(`/albums/${newAlbum.id}`)).then(() => setIsLoading(false))
@@ -98,7 +99,7 @@ function AlbumFormPage() {
   return (
     <div className="album-form-container">
       {isLoading && 
-        <div className="loading-wheel-bg-div">
+        <div className="loading-wheel-bg-div" style={{display:'flex', justifyContent:'center', alignItems:'center', height: '84vh', width:'100%'}}>
         <div className="loading-wheel-div">
           <Oval
             visible={true}
