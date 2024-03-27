@@ -36,16 +36,14 @@ export function Footer() {
 
 
   useEffect(() => {
-    if(!audioElement) return;
+    if (!audioElement) return;
 
-    if(isPlaying) {
+    if (isPlaying) {
       audioElement.current.audio.current.play();
     } else {
       audioElement.current.audio.current.pause();
     }
   }, [isPlaying])
-
-  console.log(playingTrack?.title)
 
   return (
     <div className='track-player'>

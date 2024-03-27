@@ -113,118 +113,10 @@ function TrackFormPage() {
 
   return (
     <div className="track-form-container">
-      {isLoading && 
-        <div className="loading-wheel-bg-div" style={{display:'flex', justifyContent:'center', alignItems:'center', height: '84vh', width:'100%'}}>
-        <div className="loading-wheel-div">
-          <Oval
-            visible={true}
-            height="100%"
-            width="100%"
-            color="#4fa94d"
-            ariaLabel="oval-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-          />
-          </div>
-        </div> }
-      {!isLoading && 
-        <>
-        <h1>Track Form</h1>
-        {Object.values(valErrors).length > 0 && hasSubmitted == true &&
-          Object.values(valErrors).map((message) => <p key={message} className="validation-error">{message}</p>)}
-        <form className="track-form" onSubmit={handleSubmit} encType="multipart/form-data">
-          <div className="form-input title">
-            <label className="track-form-input">
-              Title
-              <input
-                type="text"
-                name="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
-              />
-            </label>
-          </div>
-
-          <div className="form-input album">
-            <label className="track-form-input-file">
-              Album
-              <select
-                name="album"
-                value={albumId}
-                onChange={(e) => setAlbumId(e.target.value)}
-              >
-                <option value="">(Single)</option>
-                {albums.map(album => (
-                  <option key={album.id} value={album.id}>
-                    {album.title}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
-
-          <div className="form-input genre">
-            <label className="track-form-input">
-              Genre
-              <input
-                type="text"
-                name="genre"
-                value={genre}
-                onChange={(e) => setGenre(e.target.value)}
-                required
-              />
-            </label>
-
-          </div>
-
-          <div className="form-input track-number">
-            <label className="track-form-input">
-              Track Number
-              {/* {valErrors.trackNumber && hasSubmitted == true && <span className="validation-error">{valErrors.trackNumber}</span>} */}
-              <input
-                type="number"
-                name="track_number"
-                value={trackNumber}
-                onChange={(e) => setTrackNumber(e.target.value)}
-                required
-              />
-            </label>
-
-          </div>
-
-          <div className="form-input track-file">
-            <label className="track-form-input-file">
-              Track File
-              {/* {valErrors.trackFile && hasSubmitted == true && <span className="validation-error">{valErrors.trackFile}</span>} */}
-              <input
-                type="file"
-                name="track_file"
-                onChange={(e) => setTrackFile(e.target.files[0])}
-                accept="audio/*"
-              />
-            </label>
-
-          </div>
-
-          <div className="form-input album-cover">
-            <label className="track-form-input-file">
-              Album Cover
-              <input
-                type="file"
-                name="album_cover"
-                onChange={(e) => setPreviewImage(e.target.files[0])}
-                accept="image/*"
-              />
-            </label>
-
-          </div>
-
-
-          <div className="submitButtonWithLoadingIcon">
-            <button type="submit">Submit</button>
-
-            {isLoading && <Oval
+      {isLoading &&
+        <div className="loading-wheel-bg-div" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '84vh', width: '100%' }}>
+          <div className="loading-wheel-div">
+            <Oval
               visible={true}
               height="100%"
               width="100%"
@@ -232,11 +124,122 @@ function TrackFormPage() {
               ariaLabel="oval-loading"
               wrapperStyle={{}}
               wrapperClass=""
-            />}
+            />
           </div>
-        </form>
+        </div>}
+      {!isLoading &&
+        <>
+          <h1>Track Form</h1>
+          {Object.values(valErrors).length > 0 && hasSubmitted == true &&
+            Object.values(valErrors).map((message) => <p key={message} className="validation-error">{message}</p>)}
+          <form className="track-form" onSubmit={handleSubmit} encType="multipart/form-data">
+            <div className="form-input title">
+              <label className="track-form-input">
+                Title
+                <input
+                  type="text"
+                  placeholder="Title"
+                  name="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  required
+                />
+              </label>
+            </div>
+
+            <div className="form-input album">
+              <label className="track-form-input-dropdown">
+                Album
+                <select
+                  name="album"
+                  placeholder="Album"
+                  value={albumId}
+                  onChange={(e) => setAlbumId(e.target.value)}
+                >
+                  <option value="">(Single)</option>
+                  {albums.map(album => (
+                    <option key={album.id} value={album.id}>
+                      {album.title}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+
+            <div className="form-input genre">
+              <label className="track-form-input">
+                Genre
+                <input
+                  type="text"
+                  placeholder="Genre"
+                  name="genre"
+                  value={genre}
+                  onChange={(e) => setGenre(e.target.value)}
+                  required
+                />
+              </label>
+
+            </div>
+
+            <div className="form-input track-number">
+              <label className="track-form-input">
+                Track Number
+                {/* {valErrors.trackNumber && hasSubmitted == true && <span className="validation-error">{valErrors.trackNumber}</span>} */}
+                <input
+                  type="number"
+                  name="track_number"
+                  value={trackNumber}
+                  onChange={(e) => setTrackNumber(e.target.value)}
+                  required
+                />
+              </label>
+
+            </div>
+
+            <div className="form-input track-file">
+              <label className="track-form-input-file">
+                Track File
+                {/* {valErrors.trackFile && hasSubmitted == true && <span className="validation-error">{valErrors.trackFile}</span>} */}
+                <input
+                  type="file"
+                  name="track_file"
+                  onChange={(e) => setTrackFile(e.target.files[0])}
+                  accept="audio/*"
+                />
+              </label>
+
+            </div>
+
+            <div className="form-input album-cover">
+              <label className="track-form-input-file">
+                Album Cover
+                <input
+                  type="file"
+                  name="album_cover"
+                  onChange={(e) => setPreviewImage(e.target.files[0])}
+                  accept="image/*"
+                />
+              </label>
+
+            </div>
+
+
+            <div className="submitButtonWithLoadingIcon">
+              <button type="submit">Submit</button>
+
+              {isLoading && <Oval
+                visible={true}
+                height="100%"
+                width="100%"
+                color="#4fa94d"
+                ariaLabel="oval-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+              />}
+            </div>
+          </form>
         </>
-      
+
       }
     </div>
   );

@@ -67,7 +67,7 @@ function AlbumFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setHasSubmitted(true)
-    
+
 
     const errObj = {}
     if (Date.parse(releaseDate) >= Date.parse(new Date())) errObj.releaseDate = "Release date cannot be in the future"
@@ -88,7 +88,7 @@ function AlbumFormPage() {
 
 
       if (albumId) {
-        
+
         await dispatch(thunkUpdateAlbum(albumId, formData)).then(() => navigate(`/albums/${albumId}`)).then(() => setIsLoading(false))
       } else {
         await dispatch(thunkCreateAlbum(formData)).then(newAlbum => navigate(`/albums/${newAlbum.id}`)).then(() => setIsLoading(false))
@@ -98,21 +98,21 @@ function AlbumFormPage() {
 
   return (
     <div className="album-form-container">
-      {isLoading && 
-        <div className="loading-wheel-bg-div" style={{display:'flex', justifyContent:'center', alignItems:'center', height: '84vh', width:'100%'}}>
-        <div className="loading-wheel-div">
-          <Oval
-            visible={true}
-            height="100%"
-            width="100%"
-            color="#4fa94d"
-            ariaLabel="oval-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-          />
+      {isLoading &&
+        <div className="loading-wheel-bg-div" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '84vh', width: '100%' }}>
+          <div className="loading-wheel-div">
+            <Oval
+              visible={true}
+              height="100%"
+              width="100%"
+              color="#4fa94d"
+              ariaLabel="oval-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
           </div>
-        </div> }
-      {!isLoading && 
+        </div>}
+      {!isLoading &&
         <>
           <h1>Album Form</h1>
           {Object.values(valErrors).length > 0 && hasSubmitted == true &&
@@ -123,6 +123,7 @@ function AlbumFormPage() {
                 Title
                 <input
                   type="text"
+                  placeholder="Title"
                   name="title"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
@@ -149,6 +150,7 @@ function AlbumFormPage() {
                 Genre
                 <input
                   type="text"
+                  placeholder="Genre"
                   name="genre"
                   value={genre}
                   onChange={(e) => setGenre(e.target.value)}
@@ -186,7 +188,7 @@ function AlbumFormPage() {
           </form>
         </>
       }
-      
+
     </div>
   );
 }
