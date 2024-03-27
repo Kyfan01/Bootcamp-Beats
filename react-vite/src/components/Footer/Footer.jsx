@@ -45,10 +45,13 @@ export function Footer() {
     }
   }, [isPlaying])
 
+  console.log(playingTrack?.title)
+
   return (
     <div className='track-player'>
       <AudioPlayer
         autoPlay
+        header={playingTrack?.title}
         onPlay={() => {
           dispatch(setIsPlayingTrack(true))
         }}
