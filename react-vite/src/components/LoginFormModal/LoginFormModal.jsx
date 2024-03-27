@@ -38,6 +38,7 @@ function LoginFormModal() {
         <label className="login-form-input">
           Email
           <input
+            placeholder="Email@aa.io"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -48,6 +49,7 @@ function LoginFormModal() {
         <label className="login-form-input">
           Password
           <input
+            placeholder="Password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

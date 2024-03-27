@@ -11,7 +11,7 @@
   padding: 25px;
   background-color: #2b2d2e;
   margin: 20px;
-  transition: background-color 0.25s ease;
+  transition: all 0.25s ease;
 }
 
 .album-card-container:hover {
