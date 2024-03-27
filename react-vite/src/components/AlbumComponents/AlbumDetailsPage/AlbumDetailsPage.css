@@ -2,7 +2,7 @@
   background-image: linear-gradient(to bottom, rgb(43, 181, 43) 30%, rgba(255, 0, 0, 0));
   background-size: 100% 40vh;
   background-repeat: no-repeat;
-  min-height: 84vh;
+  min-height: 100%;
 }
 
 .album-details-header-image-div {

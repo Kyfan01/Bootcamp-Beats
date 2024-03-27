@@ -3,9 +3,9 @@ import './AlbumDetailsPage.css'
 import default_upload_image from '../../../../../images/default_upload_image.jpg'
 
 import { useParams, useNavigate, NavLink } from 'react-router-dom'
-import { thunkFetchAlbumById, thunkDeleteAlbum, clearAlbums } from '../../../redux/album'
+import { thunkFetchAlbumById } from '../../../redux/album'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearTracks, thunkFetchAlbumTracks } from '../../../redux/track'
+import { thunkFetchAlbumTracks } from '../../../redux/track'
 import { TrackCard } from '../../TrackComponents/TrackCard/TrackCard'
 
 import { IoPlayCircle } from "react-icons/io5";
@@ -38,14 +38,14 @@ export function AlbumDetailsPage() {
     dispatch(thunkFetchAlbumTracks(albumId))
   }, [dispatch, albumId])
 
-  const handleDelete = (e) => {
-    e.preventDefault()
-    dispatch(thunkDeleteAlbum(albumId)).then(() => {
-      dispatch(clearAlbums())
-      dispatch(clearTracks())
-      navigate('/albums')
-    })
-  }
+  // const handleDelete = (e) => {
+  //   e.preventDefault()
+  //   dispatch(thunkDeleteAlbum(albumId)).then(() => {
+  //     dispatch(clearAlbums())
+  //     dispatch(clearTracks())
+  //     navigate('/albums')
+  //   })
+  // }
 
   const handleUpdate = (e) => {
     e.preventDefault()

@@ -3,7 +3,8 @@ import { useModal } from "../context/Modal";
 import { useNavigate } from "react-router-dom";
 import { thunkDeleteAlbum } from "../redux/album";
 import { thunkDeleteTrack } from "../redux/track";
-
+import { clearAlbums } from "../redux/album";
+import { clearTracks } from "../redux/track";
 
 
 
@@ -15,9 +16,9 @@ export function DeleteConfirmationModal({ deleteType, id }) {
 
   function handleDelete() {
     if (deleteType == 'album') {
-      dispatch(thunkDeleteAlbum(id)).then(() => navigate(`/albums`)).then(() => closeModal())
+      dispatch(thunkDeleteAlbum(id)).then(() => dispatch(clearTracks())).then(() => dispatch(clearAlbums())).then(() => navigate(`/albums`)).then(() => closeModal())
     } else if (deleteType == 'track') {
-      dispatch(thunkDeleteTrack(id)).then(() => navigate(`/tracks`)).then(() => closeModal())
+      dispatch(thunkDeleteTrack(id)).then(() => dispatch(clearTracks())).then(() => navigate(`/tracks`)).then(() => closeModal())
     }
   }
 
