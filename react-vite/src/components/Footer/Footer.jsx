@@ -49,7 +49,7 @@ export function Footer() {
     <div className='track-player'>
       <AudioPlayer
         autoPlay
-        header={playingTrack?.title}
+        header={playingTrack ? playingTrack.title : 'title'}
         onPlay={() => {
           dispatch(setIsPlayingTrack(true))
         }}

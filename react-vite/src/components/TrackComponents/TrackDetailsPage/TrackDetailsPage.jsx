@@ -13,6 +13,8 @@ import { MdDelete } from "react-icons/md";
 import { IoIosHeart } from "react-icons/io";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { IoPauseCircle } from "react-icons/io5";
+import OpenModalIcon from '../../OpenModalIcon'
+import { DeleteConfirmationModal } from '../../DeleteConfirmationModal'
 
 export function TrackDetailsPage() {
   const { trackId } = useParams()
@@ -77,6 +79,7 @@ export function TrackDetailsPage() {
         {isLiked ? <IoIosHeart onClick={toggleLike} className='track-details-button' /> : <IoIosHeartEmpty onClick={toggleLike} className='track-details-button' />}
         {isOwner && <TbArrowsExchange2 className='track-details-button' onClick={handleUpdate} title='Update' />}
         {isOwner && <MdDelete className='track-details-button' onClick={handleDelete} title='Delete' />}
+        {isOwner && <OpenModalIcon icon={<MdDelete className='track-details-button' />} modalComponent={<DeleteConfirmationModal deleteType={'track'} id={trackId} />} title='Delete'/>}
       </div>
 
 
