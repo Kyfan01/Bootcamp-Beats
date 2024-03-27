@@ -15,6 +15,8 @@ import { MdDelete } from "react-icons/md";
 
 
 import { setIsPlayingTrack, thunkFetchPlayingTrack } from '../../../redux/playingTrack'
+import OpenModalIcon from '../../OpenModalIcon'
+import { DeleteConfirmationModal } from '../../DeleteConfirmationModal'
 
 export function AlbumDetailsPage() {
   const { albumId } = useParams()
@@ -77,7 +79,7 @@ export function AlbumDetailsPage() {
         {isPlaying && playingTrack.albumId == albumId ? <IoPauseCircle onClick={() => dispatch(setIsPlayingTrack(false))}  className='album-details-header-playicon' title='Select for player' /> : <IoPlayCircle className='album-details-header-playicon' onClick={handleTrackSelect} title='Select for player' />}
         {/* <IoPlayCircle className='album-details-header-playicon' onClick={handleTrackSelect} title='Select first track' /> */}
         {isOwner && <TbArrowsExchange2 className='album-details-update' onClick={handleUpdate} title='Update' />}
-        {isOwner && <MdDelete className='album-details-delete' onClick={handleDelete} title='Delete' />}
+        {isOwner && <OpenModalIcon icon={<MdDelete className='album-details-delete' />} modalComponent={<DeleteConfirmationModal deleteType={'album'} id={albumId} />} title='Delete'/>}
       </div>
 
 

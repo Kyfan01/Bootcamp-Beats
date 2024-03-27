@@ -78,7 +78,6 @@ export function TrackDetailsPage() {
         {isPlaying && trackId == playingTrack.id ? <IoPauseCircle onClick={() => dispatch(setIsPlayingTrack(false))}  className='track-details-header-playicon' title='Select for player' /> : <IoPlayCircle className='track-details-header-playicon' onClick={handleTrackSelect} title='Select for player' />}
         {isLiked ? <IoIosHeart onClick={toggleLike} className='track-details-button' /> : <IoIosHeartEmpty onClick={toggleLike} className='track-details-button' />}
         {isOwner && <TbArrowsExchange2 className='track-details-button' onClick={handleUpdate} title='Update' />}
-        {isOwner && <MdDelete className='track-details-button' onClick={handleDelete} title='Delete' />}
         {isOwner && <OpenModalIcon icon={<MdDelete className='track-details-button' />} modalComponent={<DeleteConfirmationModal deleteType={'track'} id={trackId} />} title='Delete'/>}
       </div>
 
