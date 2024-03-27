@@ -15,6 +15,7 @@ import { IoIosHeartEmpty } from "react-icons/io";
 import { IoPauseCircle } from "react-icons/io5";
 import OpenModalIcon from '../../OpenModalIcon'
 import { DeleteConfirmationModal } from '../../DeleteConfirmationModal'
+import LoginFormModal from '../../LoginFormModal/LoginFormModal'
 
 export function TrackDetailsPage() {
   const { trackId } = useParams()
@@ -75,10 +76,11 @@ export function TrackDetailsPage() {
         </div>
       </div>
       <div className='play-update-delete-div'>
-        {isPlaying && trackId == playingTrack.id ? <IoPauseCircle onClick={() => dispatch(setIsPlayingTrack(false))}  className='track-details-header-playicon' title='Select for player' /> : <IoPlayCircle className='track-details-header-playicon' onClick={handleTrackSelect} title='Select for player' />}
-        {isLiked ? <IoIosHeart onClick={toggleLike} className='track-details-button' /> : <IoIosHeartEmpty onClick={toggleLike} className='track-details-button' />}
+        {isPlaying && trackId == playingTrack.id ? <IoPauseCircle onClick={() => dispatch(setIsPlayingTrack(false))} className='track-details-header-playicon' title='Select for player' /> : <IoPlayCircle className='track-details-header-playicon' onClick={handleTrackSelect} title='Select for player' />}
+        {user && (isLiked ? <IoIosHeart onClick={toggleLike} className='track-details-button' title="Like" /> : <IoIosHeartEmpty onClick={toggleLike} className='track-details-button' title="Like" />)}
+        {!user && <OpenModalIcon icon={<IoIosHeartEmpty className='track-details-button' />} modalComponent={<LoginFormModal />} title="Like" />}
         {isOwner && <TbArrowsExchange2 className='track-details-button' onClick={handleUpdate} title='Update' />}
-        {isOwner && <OpenModalIcon icon={<MdDelete className='track-details-button' />} modalComponent={<DeleteConfirmationModal deleteType={'track'} id={trackId} />} title='Delete'/>}
+        {isOwner && <OpenModalIcon icon={<MdDelete className='track-details-button' />} modalComponent={<DeleteConfirmationModal deleteType={'track'} id={trackId} />} title='Delete' />}
       </div>
 
 
