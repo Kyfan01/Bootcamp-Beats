@@ -10,8 +10,8 @@ import { IoPlay } from "react-icons/io5";
 import { IoIosHeart } from "react-icons/io";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { Audio } from 'react-loader-spinner'
-
-
+import OpenModalIcon from '../../OpenModalIcon'
+import LoginFormModal from '../../LoginFormModal/LoginFormModal'
 
 export function TrackCard({ numTrack, track }) {
   const dispatch = useDispatch()
@@ -19,8 +19,6 @@ export function TrackCard({ numTrack, track }) {
   const user = useSelector(state => state.session.user)
   // const [liked, setLiked] = useState('')
   const isLiked = useSelector(state => state.tracks[track?.id]?.liked)
-  let pointer
-  if (!user) pointer = "no-pointer"
 
   // audio player stuff
   // const [play] = useState(false)
@@ -105,7 +103,8 @@ export function TrackCard({ numTrack, track }) {
         </NavLink>
       </div>
       <div className='likes-div'>
-        {isLiked ? <IoIosHeart className={`like-heart-icon ${pointer}`} onClick={handleSubmit} /> : <IoIosHeartEmpty className={`like-heart-icon ${pointer}`} onClick={handleSubmit} />}
+        {user && (isLiked ? <IoIosHeart className={`like-heart-icon`} onClick={handleSubmit} /> : <IoIosHeartEmpty className={`like-heart-icon`} onClick={handleSubmit} />)}
+        {!user && <OpenModalIcon icon={<IoIosHeartEmpty className='like-heart-icon' />} modalComponent={<LoginFormModal />} title="Like" />}
         <p>{track?.trackLikes}</p>
       </div>
 
