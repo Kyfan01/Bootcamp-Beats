@@ -23,12 +23,12 @@ export function DeleteConfirmationModal({ deleteType, id }) {
   }
 
   return (
-    <div style={{display:'flex', flexDirection:'column', alignItems:'center', margin:'20px'}}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '20px' }}>
       <h1>Deleting {deleteType == 'track' ? 'Track' : 'Album'}</h1>
-      <p style={{marginBottom:40}}>Are you sure?</p>
-      <div style={{display:'flex', columnGap:'12px'}}>
-        <button onClick={handleDelete}>Yes</button>
-        <button onClick={closeModal}>Cancel</button>
+      <p style={{ marginBottom: 40 }}>Are you sure?</p>
+      <div style={{ display: 'flex', columnGap: '12px' }}>
+        <button className="modal-button" onClick={handleDelete}>Yes</button>
+        <button className="modal-button" onClick={closeModal}>Cancel</button>
       </div>
     </div>
   )
