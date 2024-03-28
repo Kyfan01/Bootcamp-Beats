@@ -33,7 +33,7 @@ export function UserTracksAlbums() {
 
     return (
         <div className='user-page-container'>
-            <h1>{artistName}&apos;s Albums and Tracks</h1>
+            <h1>{artistName}</h1>
 
             <h2>Albums</h2>
             <div style={{display:'flex',justifyContent:'center'}}>
