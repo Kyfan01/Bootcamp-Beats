@@ -77,3 +77,15 @@
   background: #eee;
   padding: .25em;
 }
+
+@media screen and (max-width: 600px) {
+  .track-details-track-title {
+    font-size: 8vw;
+  }
+
+
+  .track-details-header-image-div {
+    width: 100%;
+    margin: 5vh 0 0 3vh;
+  }
+}
