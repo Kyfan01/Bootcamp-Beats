@@ -30,7 +30,7 @@ body {
     height: 20%;
     max-height: 20%;
     /* border-bottom: white 1px solid; */
-    padding: 20px 0;
+    padding: 20px 8px;
     box-sizing: border-box;
     justify-content: space-between;
     align-items: center;
