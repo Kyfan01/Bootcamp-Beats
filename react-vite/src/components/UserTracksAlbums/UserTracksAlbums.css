@@ -1,6 +1,8 @@
 .user-details-albums-div {
   display: flex;
-  justify-content: center;
+  white-space: nowrap;
+  overflow: auto;
+  padding: 0 20px;
 }
 
 .user-page-container {
