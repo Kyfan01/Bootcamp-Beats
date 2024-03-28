@@ -35,6 +35,13 @@
   align-items: flex-end;
 }
 
+@media (max-width: 750px) {
+  .track-details-header-div {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .track-details-header-details-div {
   margin: 0 0 0 10px;
   width: 100%;
