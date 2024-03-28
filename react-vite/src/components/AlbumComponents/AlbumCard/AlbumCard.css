@@ -6,12 +6,13 @@
 .album-card-container {
   display: flex;
   width: 200px;
-  height: 300px;
+  height: 270px;
   border-radius: 10px;
   padding: 25px;
   background-color: #2b2d2e;
   margin: 20px;
   transition: all 0.25s ease;
+  flex-direction: column;
 }
 
 .album-card-container:hover {
@@ -33,6 +34,12 @@
   font-weight: 600;
   font-size: x-large;
   margin: 0 0 15px 0;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  display: block;
+  overflow: hidden
 }
 
 .album-card-artist {
@@ -53,4 +60,33 @@
 .album-card-artist-navlink:hover {
   color: white;
   text-decoration: underline;
+}
+
+@media screen and (max-width: 600px) {
+  .album-card-container {
+    height: 120px;
+    width: 100px;
+    padding: 5px;
+    margin: 10px;
+  }
+
+  .album-card-img-container {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .album-card-image {
+    height: 80px;
+    width: 80px;
+  }
+
+  .album-card-title {
+    font-size: 16px;
+    margin: 5px 0 5px 0;
+  }
+
+  .album-card-artist {
+    font-size: 12px;
+  }
 }
