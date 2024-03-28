@@ -81,6 +81,7 @@ body {
     align-items: center;
     height: 50px;
     width: 5%;
+    margin: 0 8px 0 0;
 }
 
 .track-card-container:hover .track-id {
@@ -106,6 +107,18 @@ body {
 @media (max-width: 750px) {
     .album-name-div {
         display: none;
+    }
+    .track-title {
+        width: 150px;
+    }
+    .track-artist {
+        width: 150px;
+    }
+    .track-id {
+        display: none;
+    }
+    .track-play-button {
+        display: flex;
     }
 }
 
