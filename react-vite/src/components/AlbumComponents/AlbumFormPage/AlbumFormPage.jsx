@@ -68,6 +68,7 @@ function AlbumFormPage() {
     e.preventDefault();
     setHasSubmitted(true)
 
+
     const errObj = {}
     if (Date.parse(releaseDate) >= Date.parse(new Date())) errObj.releaseDate = "Release date cannot be in the future"
     if (title.length >= 50) errObj.title = "Title must be less than 50 characters"
@@ -76,7 +77,7 @@ function AlbumFormPage() {
     if (Object.values(errObj).length) {
       setValErrors(errObj)
     } else {
-
+      setIsLoading(true)
       const formData = new FormData()
       formData.append('title', title)
       formData.append('releaseDate', releaseDate)
@@ -87,7 +88,7 @@ function AlbumFormPage() {
 
 
       if (albumId) {
-        setIsLoading(true)
+
         await dispatch(thunkUpdateAlbum(albumId, formData)).then(() => navigate(`/albums/${albumId}`)).then(() => setIsLoading(false))
       } else {
         await dispatch(thunkCreateAlbum(formData)).then(newAlbum => navigate(`/albums/${newAlbum.id}`)).then(() => setIsLoading(false))
@@ -97,76 +98,97 @@ function AlbumFormPage() {
 
   return (
     <div className="album-form-container">
-      <h1>Album Form</h1>
-      {Object.values(valErrors).length > 0 && hasSubmitted == true &&
-        Object.values(valErrors).map((message) => <p key={message} className="validation-error">{message}</p>)}
-      <form className="track-form" onSubmit={handleSubmit} encType="multipart/form-data">
-        <div className="form-input title">
-          <label className="track-form-input">
-            Title
-            <input
-              type="text"
-              name="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
+      {isLoading &&
+        <div className="loading-wheel-bg-div" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '84vh', width: '100%' }}>
+          <div className="loading-wheel-div">
+            <Oval
+              visible={true}
+              height="100%"
+              width="100%"
+              color="#4fa94d"
+              ariaLabel="oval-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
             />
-          </label>
-        </div>
+          </div>
+        </div>}
+      {!isLoading &&
+        <>
+          <h1>Album Form</h1>
+          {Object.values(valErrors).length > 0 && hasSubmitted == true &&
+            Object.values(valErrors).map((message) => <p key={message} className="validation-error">{message}</p>)}
+          <form className="track-form" onSubmit={handleSubmit} encType="multipart/form-data">
+            <div className="form-input title">
+              <label className="track-form-input">
+                Title
+                <input
+                  type="text"
+                  placeholder="Title"
+                  name="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  required
+                />
+              </label>
+            </div>
 
-        <div className="form-input release-date">
-          <label className="track-form-input">
-            Release Date
-            <input
-              type="date"
-              name="releaseDate"
-              value={releaseDate}
-              onChange={(e) => setReleaseDate(e.target.value)}
-              required
-            />
-          </label>
-        </div>
+            <div className="form-input release-date">
+              <label className="track-form-input">
+                Release Date
+                <input
+                  type="date"
+                  name="releaseDate"
+                  value={releaseDate}
+                  onChange={(e) => setReleaseDate(e.target.value)}
+                  required
+                />
+              </label>
+            </div>
 
-        <div className="form-input genre">
-          <label className="track-form-input">
-            Genre
-            <input
-              type="text"
-              name="genre"
-              value={genre}
-              onChange={(e) => setGenre(e.target.value)}
-              required
-            />
-          </label>
+            <div className="form-input genre">
+              <label className="track-form-input">
+                Genre
+                <input
+                  type="text"
+                  placeholder="Genre"
+                  name="genre"
+                  value={genre}
+                  onChange={(e) => setGenre(e.target.value)}
+                  required
+                />
+              </label>
 
-        </div>
+            </div>
 
-        <div className="form-input">
-          <label className="track-form-input-file">
-            Preview Image
-            <input
-              type="file"
-              name="previewImage"
-              onChange={(e) => setPreviewImage(e.target.files[0])}
-              accept="image/*"
-            />
-          </label>
-        </div>
+            <div className="form-input">
+              <label className="track-form-input-file">
+                Preview Image
+                <input
+                  type="file"
+                  name="previewImage"
+                  onChange={(e) => setPreviewImage(e.target.files[0])}
+                  accept="image/*"
+                />
+              </label>
+            </div>
 
-        <div className="submitButtonWithLoadingIcon">
-          <button type="submit">Submit</button>
+            <div className="submitButtonWithLoadingIcon">
+              <button type="submit">Submit</button>
 
-          {isLoading && <Oval
-            visible={true}
-            height="100%"
-            width="100%"
-            color="#4fa94d"
-            ariaLabel="oval-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-          />}
-        </div>
-      </form>
+              {isLoading && <Oval
+                visible={true}
+                height="100%"
+                width="100%"
+                color="#4fa94d"
+                ariaLabel="oval-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+              />}
+            </div>
+          </form>
+        </>
+      }
+
     </div>
   );
 }

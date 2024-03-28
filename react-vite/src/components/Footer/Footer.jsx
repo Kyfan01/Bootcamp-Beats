@@ -1,14 +1,17 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import './Footer.css'
 // import { useState } from 'react'
 
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+import { useEffect, useRef } from 'react';
+import { setIsPlayingTrack } from '../../redux/playingTrack';
 
 export function Footer() {
-
+  const dispatch = useDispatch();
 
   const playingTrack = useSelector(state => state.playingTrack['selected'])
+  const isPlaying = useSelector(state => state.playingTrack.isPlaying);
 
   // const [isPlaying, setIsPlaying] = useState(false)
 
@@ -29,15 +32,40 @@ export function Footer() {
   //   }
   // }
 
+  const audioElement = useRef();
+
+
+  useEffect(() => {
+    if (!audioElement) return;
+
+    if (isPlaying) {
+      audioElement.current.audio.current.play();
+    } else {
+      audioElement.current.audio.current.pause();
+    }
+  }, [isPlaying])
+
   return (
-    <div className='track-player'>
+    <>
       <AudioPlayer
+        className='track-player'
         autoPlay
+        header={playingTrack ? playingTrack.title : 'No track selected'}
+        onPlay={() => {
+          dispatch(setIsPlayingTrack(true))
+        }}
+        onPause={() => {
+          dispatch(setIsPlayingTrack(false))
+        }}
+        onEnded={() => {
+          dispatch(setIsPlayingTrack(false))
+        }}
+        ref={audioElement}
         src={src}
       // onPlay={e => console.log("onPlay")}
       // other props here
       />
-    </div>
+    </>
 
 
     // <div className='track-player'>

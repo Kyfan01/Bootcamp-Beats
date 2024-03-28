@@ -1,0 +1,13 @@
+.modal-button {
+    transition: all ease 250ms;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 5px;
+    font-weight: 500;
+}
+
+.modal-button:hover {
+    transform: scale(1.1) translateZ(0);
+    backface-visibility: hidden;
+}

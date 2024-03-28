@@ -14,7 +14,7 @@ export function AlbumCard({ album }) {
             <img className='album-card-image' src={album?.albumCoverUrl} alt="Album Preview Image" />
           </div>
           <div>
-            <p className='album-card-title'>{album?.title.length < 13 ? album?.title : album?.title.substring(0, 13) + '...'}</p>
+            <span className='album-card-title'>{album?.title}</span>
             <NavLink to={`/users/${album.artistId}`} className="album-card-artist-navlink">
               <p className='album-card-artist'>{album?.artistName}</p>
             </NavLink>

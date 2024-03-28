@@ -72,6 +72,7 @@
 
 .track-form {
     width: 30%;
+    min-width: 315px;
     display: flex;
     flex-direction: column;
 }

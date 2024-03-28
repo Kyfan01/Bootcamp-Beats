@@ -3,16 +3,20 @@ import './AlbumDetailsPage.css'
 import default_upload_image from '../../../../../images/default_upload_image.jpg'
 
 import { useParams, useNavigate, NavLink } from 'react-router-dom'
-import { thunkFetchAlbumById, thunkDeleteAlbum, clearAlbums } from '../../../redux/album'
+import { thunkFetchAlbumById } from '../../../redux/album'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearTracks, thunkFetchAlbumTracks } from '../../../redux/track'
+import { thunkFetchAlbumTracks } from '../../../redux/track'
 import { TrackCard } from '../../TrackComponents/TrackCard/TrackCard'
 
 import { IoPlayCircle } from "react-icons/io5";
+import { IoPauseCircle } from "react-icons/io5";
 import { TbArrowsExchange2 } from "react-icons/tb";
 import { MdDelete } from "react-icons/md";
 
-import { thunkFetchPlayingTrack } from '../../../redux/playingTrack'
+
+import { setIsPlayingTrack, thunkFetchPlayingTrack } from '../../../redux/playingTrack'
+import OpenModalIcon from '../../OpenModalIcon'
+import { DeleteConfirmationModal } from '../../DeleteConfirmationModal'
 
 export function AlbumDetailsPage() {
   const { albumId } = useParams()
@@ -23,6 +27,8 @@ export function AlbumDetailsPage() {
   const album = useSelector(state => state.albums[albumId])
   const albumTracks = useSelector(state => Object.values(state.tracks).filter(track => parseInt(albumId) === track.albumId))
   const sortedAlbumTracks = albumTracks.sort((a, b) => a.trackNumber - b.trackNumber)
+  const playingTrack = useSelector(state => state.playingTrack.selected)
+  const isPlaying = useSelector(state => state.playingTrack.isPlaying);
 
   const isOwner = (user?.id === album?.artistId)
   let numTrack = 0;
@@ -32,14 +38,14 @@ export function AlbumDetailsPage() {
     dispatch(thunkFetchAlbumTracks(albumId))
   }, [dispatch, albumId])
 
-  const handleDelete = (e) => {
-    e.preventDefault()
-    dispatch(thunkDeleteAlbum(albumId)).then(() => {
-      dispatch(clearAlbums())
-      dispatch(clearTracks())
-      navigate('/albums')
-    })
-  }
+  // const handleDelete = (e) => {
+  //   e.preventDefault()
+  //   dispatch(thunkDeleteAlbum(albumId)).then(() => {
+  //     dispatch(clearAlbums())
+  //     dispatch(clearTracks())
+  //     navigate('/albums')
+  //   })
+  // }
 
   const handleUpdate = (e) => {
     e.preventDefault()
@@ -70,9 +76,10 @@ export function AlbumDetailsPage() {
         </div>
       </div>
       <div className='play-update-delete-div'>
-        <IoPlayCircle className='album-details-header-playicon' onClick={handleTrackSelect} title='Select first track' />
-        {isOwner && <TbArrowsExchange2 className='album-details-update' onClick={handleUpdate} title='Update' />}
-        {isOwner && <MdDelete className='album-details-delete' onClick={handleDelete} title='Delete' />}
+        {isPlaying && playingTrack.albumId == albumId ? <IoPauseCircle onClick={() => dispatch(setIsPlayingTrack(false))} className='track-details-button' title='Select for player' style={{height: '50px', width: '50px'}}/> : <IoPlayCircle className='track-details-button' onClick={handleTrackSelect} title='Select for player' style={{height: '50px', width: '50px'}}/>}
+        {/* <IoPlayCircle className='album-details-header-playicon' onClick={handleTrackSelect} title='Select first track' /> */}
+        {isOwner && <TbArrowsExchange2 className='track-details-button' onClick={handleUpdate} title='Update' />}
+        {isOwner && <OpenModalIcon icon={<MdDelete className='track-details-button' />} modalComponent={<DeleteConfirmationModal deleteType={'album'} id={albumId} />} title='Delete' />}
       </div>
 
 

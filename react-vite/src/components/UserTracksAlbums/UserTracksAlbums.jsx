@@ -33,11 +33,16 @@ export function UserTracksAlbums() {
 
     return (
         <div className='user-page-container'>
-            <h1>{artistName}&apos;s Albums and Tracks</h1>
+            <h1>{artistName}</h1>
 
             <h2>Albums</h2>
-            <div className='user-details-albums-div'>
-                {userAlbums.map(album => <AlbumCard album={album} key={album.id} />)}
+            <div style={{display:'flex',justifyContent:'center'}}>
+                <div className='user-details-albums-div'>
+                    <div style={{display: 'flex', padding: '20px'}}>
+                        {userAlbums.map(album => <AlbumCard album={album} key={album.id} />)}
+
+                    </div>
+                </div>
             </div>
             <h2>Tracks</h2>
             <div className='user-details-tracks-div'>

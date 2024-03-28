@@ -1,6 +1,16 @@
 .user-details-albums-div {
   display: flex;
-  justify-content: center;
+  white-space: nowrap;
+  overflow: auto;
+  padding: 0 20px;
+}
+.user-details-albums-div::-webkit-scrollbar {
+  width: 5px;
+  height: 15px;
+  background-color: #2b2d2e;
+}
+.user-details-albums-div::-webkit-scrollbar-thumb {
+  background: #000;
 }
 
 .user-page-container {
