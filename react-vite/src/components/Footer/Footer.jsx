@@ -46,8 +46,9 @@ export function Footer() {
   }, [isPlaying])
 
   return (
-    <div className='track-player'>
+    <>
       <AudioPlayer
+        className='track-player'
         autoPlay
         header={playingTrack ? playingTrack.title : 'No track selected'}
         onPlay={() => {
@@ -64,7 +65,7 @@ export function Footer() {
       // onPlay={e => console.log("onPlay")}
       // other props here
       />
-    </div>
+    </>
 
 
     // <div className='track-player'>
