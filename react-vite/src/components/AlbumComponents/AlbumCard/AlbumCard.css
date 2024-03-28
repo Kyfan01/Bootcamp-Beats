@@ -64,9 +64,9 @@
 
 @media screen and (max-width: 600px) {
   .album-card-container {
-    height: 120px;
+    height: 140px;
     width: 100px;
-    padding: 5px;
+    padding: 15px;
     margin: 10px;
   }
 
@@ -77,8 +77,8 @@
   }
 
   .album-card-image {
-    height: 80px;
-    width: 80px;
+    height: 100px;
+    width: 100px;
   }
 
   .album-card-title {
