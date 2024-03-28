@@ -103,6 +103,12 @@ body {
     height: 50px;
 }
 
+@media (max-width: 750px) {
+    .album-name-div {
+        display: none;
+    }
+}
+
 .track-album {
     font-size: small;
     color: gray;

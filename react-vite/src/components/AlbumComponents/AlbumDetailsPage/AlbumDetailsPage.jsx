@@ -76,7 +76,7 @@ export function AlbumDetailsPage() {
         </div>
       </div>
       <div className='play-update-delete-div'>
-        {isPlaying && playingTrack.albumId == albumId ? <IoPauseCircle onClick={() => dispatch(setIsPlayingTrack(false))} className='album-details-header-playicon' title='Select for player' style={{height: '50px', width: '50px'}}/> : <IoPlayCircle className='album-details-header-playicon' onClick={handleTrackSelect} title='Select for player' style={{height: '50px', width: '50px'}}/>}
+        {isPlaying && playingTrack.albumId == albumId ? <IoPauseCircle onClick={() => dispatch(setIsPlayingTrack(false))} className='track-details-button' title='Select for player' style={{height: '50px', width: '50px'}}/> : <IoPlayCircle className='track-details-button' onClick={handleTrackSelect} title='Select for player' style={{height: '50px', width: '50px'}}/>}
         {/* <IoPlayCircle className='album-details-header-playicon' onClick={handleTrackSelect} title='Select first track' /> */}
         {isOwner && <TbArrowsExchange2 className='track-details-button' onClick={handleUpdate} title='Update' />}
         {isOwner && <OpenModalIcon icon={<MdDelete className='track-details-button' />} modalComponent={<DeleteConfirmationModal deleteType={'album'} id={albumId} />} title='Delete' />}
