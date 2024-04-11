@@ -61,7 +61,7 @@ function LoginFormModal() {
           <button type="submit">Log In</button>
         </div>
 
-        <a href={`${window.origin}/api/auth/oauth_login`}><button>OAUTH</button></a>
+        <a href={`${window.origin}/api/auth/oauth_login`}><button type="button">OAUTH</button></a>
 
         <div className="login-form-submit-button-div">
           <button className='login-modal-button modal-button'
