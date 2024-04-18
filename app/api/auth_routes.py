@@ -27,7 +27,6 @@ import json
 # Import our credentials from the .env file
 CLIENT_SECRET = os.getenv('GOOGLE_OAUTH_CLIENT_SECRET')
 CLIENT_ID = os.getenv('GOOGLE_OAUTH_CLIENT_ID')
-BASE_URL = os.getenv('BASE_URL')
 
 client_secrets = {
   "web": {
@@ -149,7 +148,6 @@ def oauth_login():
 def callback():
     flow.fetch_token(authorization_response=request.url) # This method is sending the request depicted on line 6 of our flow chart! The response is depicted on line 7 of our flow chart.
     # I find it odd that the author of this code is verifying the 'state' AFTER requesting a token, but to each their own!!
-
     # This is our CSRF protection for the Oauth Flow!
     if not session["state"] == request.args["state"]:
         abort(500)  # State does not match!
@@ -179,7 +177,9 @@ def callback():
         user_exists = User(
             username=id_info.get("name"),
             email=temp_email,
-            password='OAUTH'
+            password='OAUTH',
+            artist_name=id_info.get("name"),
+            name=id_info.get("name")
         )
 
         db.session.add(user_exists)
