@@ -27,6 +27,9 @@ import json
 # Import our credentials from the .env file
 CLIENT_SECRET = os.getenv('GOOGLE_OAUTH_CLIENT_SECRET')
 CLIENT_ID = os.getenv('GOOGLE_OAUTH_CLIENT_ID')
+environment = os.environ.get('FLASK_ENV')
+
+redirect_uri = "https://bootcamp-beats.onrender.com/api/auth/callback" if environment == "production" else "http://localhost:8000/api/auth/callback"
 
 client_secrets = {
   "web": {
@@ -36,8 +39,7 @@ client_secrets = {
     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
     "client_secret": CLIENT_SECRET,
     "redirect_uris": [
-      "http://localhost:8000/api/auth/callback",
-      "https://bootcamp-beats.onrender.com/api/auth/callback"
+      redirect_uri
     ]
   }
 }
@@ -54,7 +56,7 @@ os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1" # to allow Http traffic for loca
 flow = Flow.from_client_secrets_file(
     client_secrets_file=secrets.name,
     scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="http://localhost:8000/api/auth/callback"
+    redirect_uri=redirect_uri
 )
 
 secrets.close() # This method call deletes our temporary file from the /tmp folder! We no longer need it as our flow object has been configured!
