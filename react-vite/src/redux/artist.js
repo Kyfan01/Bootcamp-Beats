@@ -23,10 +23,10 @@ export const thunkFetchArtist = userId => async dispatch => {
     } else return 'fetch artist thunk error'
 }
 
-export const thunkFetchUpdateArtist = (artistId, artist) => async dispatch => {
+export const thunkFetchUpdateArtistInfo = (artistId, artistInfo) => async dispatch => {
     const res = await fetch(`api/users/${artistId}`, {
         method: 'PUT',
-        body: artist
+        body: artistInfo
     })
 
     if (res.ok) {
