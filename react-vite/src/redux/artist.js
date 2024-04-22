@@ -1,6 +1,7 @@
 // action types
 export const LOAD_ARTIST = 'artists/loadArtist'
 export const UPDATE_ARTIST = 'artists/updateArtist'
+export const DELETE_ARTIST = 'artists/deleteArtist'
 
 // action creators
 
@@ -11,6 +12,10 @@ export const loadArtist = user => ({
 export const updateArtist = artist => ({
     type: UPDATE_ARTIST,
     artist
+})
+export const deleteArtist = artistId => ({
+    type: DELETE_ARTIST,
+    artistId
 })
 
 
@@ -34,6 +39,21 @@ export const thunkFetchUpdateArtistInfo = (artistId, artistInfo) => async dispat
         dispatch(updateArtist(updatedArtist))
         return updatedArtist
     } else return 'artist update thunk error'
+}
+
+export const thunkDeleteArtist = (artistId) => async dispatch => {
+    const res = await fetch(`api/users/${artistId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+
+    if (res.ok) {
+        const deleteConfirm = await res.json()
+        dispatch(deleteArtist(artistId))
+        return deleteConfirm
+    } else return 'artist delete thunk error'
 }
 
 
