@@ -5,6 +5,7 @@ import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import ArtistFormModal from "../ArtistFormModal/ArtistFormModal"
 
 import './Navigation'
 
@@ -53,6 +54,20 @@ function ProfileButton() {
               <li className='profile-dropdown-item'>{user.username}</li>
               <li className='profile-dropdown-item'>{user.email}</li>
               <div className='profile-logout-button-container'>
+                <div className="profile-dropdown-guest-item">
+                  <OpenModalMenuItem
+                    itemText="Edit Profile"
+                    onItemClick={closeMenu}
+                    modalComponent={<ArtistFormModal />}
+                  />
+                </div>
+                <div className="profile-dropdown-guest-item">
+                  <OpenModalMenuItem
+                    itemText="Change Password"
+                    onItemClick={closeMenu}
+                    modalComponent={<LoginFormModal />}
+                  />
+                </div>
                 <button onClick={logout} className='profile-logout-button modal-button'>Log Out</button>
               </div>
             </div>

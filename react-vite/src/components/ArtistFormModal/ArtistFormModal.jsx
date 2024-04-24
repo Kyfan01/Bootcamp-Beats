@@ -1,39 +1,41 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
-import "./SignupForm.css";
-import { thunkFetchUpdateArtistInfo } from "../../redux/artist";
+import "./ArtistFormModal.css";
+import { thunkFetchUpdateArtistInfo, thunkFetchArtist } from "../../redux/artist";
 
 function ArtistFormModal(artistId) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [artistName, setArtistName] = useState("")
   const [fullName, setFullName] = useState("")
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
+  const currentUser = useSelector(state => state.session['user'])
+
+  useEffect(() => {
+    setUsername(currentUser.username)
+    setArtistName(currentUser.artistName)
+    setEmail(currentUser.email)
+    setFullName(currentUser.name)
+  }, [currentUser])
+
+  useEffect(() => {
+    dispatch(thunkFetchArtist(artistId))
+  }, [dispatch, artistId])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      return setErrors({
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
-      });
-    }
 
-    useEffect(() => {
-      dispatch(thunkFetchArtist(artistId))
-    })
+    
 
     const serverResponse = await dispatch(
-      thunkFetchUpdateArtistInfo({
+      thunkFetchUpdateArtistInfo(currentUser.id, {
         email,
         username,
-        password,
         name: fullName,
         artist_name: artistName
       })
@@ -50,12 +52,10 @@ function ArtistFormModal(artistId) {
   return (
     <>
       <div className="signup-header-div">
-        <h1>Sign Up</h1>
+        <h1>Update Profile</h1>
       </div>
       {errors.server && <p className="modal-error">{errors.server}</p>}
       {errors.email && <p className="modal-error">{errors.email}</p>}
-      {errors.confirmPassword && <p className="modal-error">{errors.confirmPassword}</p>}
-      {errors.password && <p className="modal-error">{errors.password}</p>}
       <form className="signup-form" onSubmit={handleSubmit}>
         <label className="signup-form-input">
           Email
@@ -98,32 +98,16 @@ function ArtistFormModal(artistId) {
         </label>
 
         {errors.username && <p>{errors.username}</p>}
-        <label className="signup-form-input">
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
+        
 
-        <label className="signup-form-input">
-          Confirm Password
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </label>
+        
         <div className="signup-form-submit-button-div">
 
-          <button type="submit" className="modal-button">Sign Up</button>
+          <button type="submit" className="modal-button">Confirm</button>
         </div>
       </form>
     </>
   );
 }
 
-export default SignupFormModal;
+export default ArtistFormModal;
