@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import User, db
-from ..forms import SignUpForm
+from ..forms import EditUserForm
 
 user_routes = Blueprint('users', __name__)
 
@@ -25,7 +25,6 @@ def user(id):
     user = User.query.get(id)
     return user.to_dict()
 
-# WIP
 @user_routes.route('/<int:id>', methods = ['PUT'])
 @login_required
 def update_user(id):
@@ -34,13 +33,18 @@ def update_user(id):
     if not user:
         return {"message": "User not found"}
 
-    form = SignUpForm()
+    form = EditUserForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        user.username
-        user.artist_name
-        user.email
-        user.name
+        user.username = form.data['username']
+        user.artist_name = form.data['artist_name']
+        user.email = form.data['email']
+        user.name = form.data['name']
+
+        db.session.commit()
+        return user.to_dict()
+
+    return form.errors, 401
 
 @user_routes.route('/<int:id>', methods = ['DELETE'])
 @login_required
